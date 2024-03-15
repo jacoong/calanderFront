@@ -94,7 +94,7 @@ function Login({nextPopUpPage,requestType}:LoginPropsType) {
             const emailValue = emailRef.current!.value;
             
             axios.post(`${todoCtx.serverUrl}/api/auth/recreatePassword/${emailValue}`,
-              {encodedCheckCode : "test", checkCode : "test"})
+              {encodedCheckCode : "test", checkCode : "test"},{ withCredentials: true })
               .then(res => {
                 if(res.status===200){
                   alert('recreatePassword done')
@@ -118,7 +118,7 @@ function Login({nextPopUpPage,requestType}:LoginPropsType) {
             const emailValue = emailRef.current!.value;
             const passwordValue = passwordRef.current!.value;
             axios.post(`${todoCtx.serverUrl}/api/auth/signUp`,
-            {email:emailValue,password:passwordValue})
+            {email:emailValue,password:passwordValue},{ withCredentials: true })
             .then(res => {
               if(res.status===200){
                 alert('signup done')
@@ -133,7 +133,7 @@ function Login({nextPopUpPage,requestType}:LoginPropsType) {
 
       const LoginLogic = (emailValue:string,passwordValue:string)=>{
         axios.post(`${todoCtx.serverUrl}/api/auth/login`,
-        {email:emailValue,password:passwordValue})
+        {email:emailValue,password:passwordValue},{ withCredentials: true })
         .then(res => {
           if(res.status===200){
             // navigate('/main');
