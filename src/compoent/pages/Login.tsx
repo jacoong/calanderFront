@@ -51,7 +51,7 @@ function Login({nextPopUpPage,requestType}:LoginPropsType) {
             const emailRefValue = emailRef.current!.value;
 
             if (requestType === 'register') {
-              setEmailValidate(await emailValidator(emailRefValue,'register'));
+              setEmailValidate(await emailValidator(emailRefValue));  //register should add after
             } else {
               setEmailValidate(await emailValidator(emailRefValue));
             }
