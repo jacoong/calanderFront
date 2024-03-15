@@ -1,0 +1,17 @@
+.DefaultProfile{
+        display: block;
+        /* width: 40px; */
+        width: 100%;
+        height: 100%;
+        color: grey;
+        margin-bottom: 3px;
+        transition: color 0.4s ease-in-out;
+}
+
+.DefaultProfile svg{
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: grey;
+    transition: color 0.4s ease-in-out;
+}

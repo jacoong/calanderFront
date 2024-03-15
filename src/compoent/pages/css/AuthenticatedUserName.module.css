@@ -1,0 +1,16 @@
+.AuthenticatedUserName__container{
+display: flex;
+align-items: center;
+}
+
+
+.AuthenticatedUserName__container__username{
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.AuthenticatedUserName__container svg{
+    font-size: 17px;
+    color: #1B9BF0;
+    margin-left: 2px;
+}

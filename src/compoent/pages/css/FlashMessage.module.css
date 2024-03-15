@@ -1,0 +1,19 @@
+.container{
+    margin-top: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.container__msgBox{
+    border-radius: 3px;
+    width: 180px;
+    padding: 12px;
+    background-color: #1B9BF0;
+}
+
+.container p {
+    text-align: center;
+    font-weight: bold;
+    color: white;
+}

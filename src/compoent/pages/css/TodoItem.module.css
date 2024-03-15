@@ -1,0 +1,211 @@
+
+
+
+
+
+.TodoItem__body{
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color:black;
+}
+
+.TodoItem__body:visited{
+    color:black;
+}
+
+.TodoItem__body__container{
+    display: flex;
+    padding: 15px;
+    border-bottom: 0.5px solid #EFF3F4;
+    width: 100%;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.context{
+    border-bottom:none; 
+}
+
+.TodoItem__body__container:hover{
+    background-color: #F8F8F8
+}
+
+.TodoItem__body__container__post__Profile{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.TodoItem__body__container__post{
+    display: flex;
+    padding: 15px;
+    flex-direction: column;
+    border-bottom: 0.5px solid #EFF3F4;
+    width: 100%;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.TodoItem__body__img_container{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    z-index: 5;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.TodoItem__body__img_container img{
+    object-fit:cover;
+    width:40px;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.TodoItem__body__img_container__contextLine{
+    background-color: rgb(207,217,222);
+    width: 2px;
+    position: relative;
+    z-index: 1;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -4px;
+}
+
+.TodoItem__body__main_container{
+    width: 100%;
+    margin-left: 10px;
+}
+
+.TodoItem__body__main_container__post{
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+/* .TodoItem__body__main_container__post.ToReply{
+    flex-direction: column;
+} */
+
+
+.TodoItem__body__main_container__username__Container{
+    display: flex;
+    align-items: center;
+}
+
+.TodoItem__body__main_container__title{
+    font-weight: 700;
+    font-size: 17px;
+    text-decoration: none;
+    color:black;
+}
+
+
+
+
+.TodoItem__body__main_container__title:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.TodoItem__body__main_container__title.ToReply:hover{
+
+}
+
+
+
+
+
+.TodoItem__body__main_container__detail{
+    margin: 6px 0;
+    line-height: 1.2;
+    white-space: pre-wrap;
+}
+
+.TodoItem__body__main_container__detail__post{
+    margin: 22px 0;
+    line-height: 1.2;
+    white-space: pre-wrap;
+}
+
+
+.TodoItem__body__main_container__commentsAndEdit{
+    display: flex;
+    height: 20%;
+    color:#536471;
+    width: 100%;
+    margin-top: 12px;
+    justify-content: space-between;
+    margin-right: 11px;
+
+}
+
+
+.TodoItem__body__main_container__commentsAndEdit__tool__For__number {
+    display: flex;
+    height: 35px;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.TodoItem__body__main_container__commentsAndEdit__tool__For__number.blue:hover .TodoItem__body__main_container__commentsAndEdit__tool{
+    background-color: rgb(5, 136, 209,0.2);
+}
+
+.TodoItem__body__main_container__commentsAndEdit__tool__For__number.red:hover .TodoItem__body__main_container__commentsAndEdit__tool{
+    background-color: rgb(249, 25, 128,0.2);
+}
+
+.TodoItem__body__main_container__commentsAndEdit__tool.yellow:hover{
+    background-color: rgb(0, 186, 124, 0.2);
+    color: rgb(0, 186, 124);
+}
+
+.TodoItem__body__main_container__commentsAndEdit__tool.purple:hover{
+    background-color: rgb(147, 112, 219, 0.2);
+    color: rgb(147, 112, 219);
+}
+
+.TodoItem__body__main_container__commentsAndEdit__tool{
+    cursor:pointer;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.TodoItem__body__main_container__commentsAndEdit__tool__For__number:hover .TodoItem__body__main_container__commentsAndEdit__tool,
+.TodoItem__body__main_container__commentsAndEdit__tool__For__number:hover .TodoItem__body__main_container__commentsAndEdit__tool__num {
+  color: rgb(5, 136, 209);
+}
+
+.TodoItem__body__main_container__commentsAndEdit__tool__For__number.red:hover .TodoItem__body__main_container__commentsAndEdit__tool,
+.TodoItem__body__main_container__commentsAndEdit__tool__For__number.red:hover .TodoItem__body__main_container__commentsAndEdit__tool__num {
+  color: rgb(249, 25, 128);
+}
+
+.TodoItem__body__main_container__commentsAndEdit__tool:hover{
+    background-color: #EFF3F4;
+}
+
+
+
+.TodoItem__body__main_container__commentsAndEdit__tool__num{
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+
+
+.TodoItem__body__main_container__commentsAndEdit__tool.liked svg{
+    color: red;
+}
+
+.TodoItem__body__main_container__mail{
+    color:#7F8A93;
+    font-weight: 700;
+}

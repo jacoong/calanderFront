@@ -1,0 +1,98 @@
+
+
+
+
+
+.NewTodos__body{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    min-width: 400px;
+    display: flex;
+}
+
+.NewTodos__body__container{
+    display: flex;
+    padding-bottom: 0px;
+    width: 100%;
+}
+
+.NewTodos__body__img_container{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.NewTodos__body__main_container{
+    width: 90%;
+    margin-left: 10px;
+}
+
+.NewTodos__body__img_container img{
+    object-fit:cover;
+    width:40px;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.NewTodos__body__main_container__title{
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.NewTodos__body__main_container__detail{
+    line-height: 1.2;
+}
+.NewTodos__body__main_container__detail textarea{
+    width: 100%;
+    height: 7rem;
+    overflow: hidden;
+    padding: 2px 0;
+    font-size: 23px;
+    border: none;
+    border-bottom: 0.5px solid #EFF3F4;
+    outline: none;
+    resize: none;
+}
+
+.NewTodos__body__main_container__detail textarea::placeholder{
+    font-weight: 400;
+    font-size: 23px;
+}
+
+
+
+.NewTodos__body__main_container__commentsAndEdit{
+    display: flex;
+    height: 20%;
+    width: 100%;
+    margin-top: 12px;
+}
+
+.NewTodos__body__main_container__commentsAndEdit svg{
+    margin-right: 110px;
+}  
+
+.NewTodos__body__main_container__commentsAndEdit__delete{
+    cursor:pointer;
+}
+
+
+
+.NewTodos__body__main_container__detail__button__container{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.NewTodos__body__main_container__detail__button{
+    padding: 14px 0;
+    width: 90px;
+    margin: 10px 0;
+    background-color: #1B9BF0;
+    border-radius: 25px;
+    border: none;
+    color: white;
+    font-weight: 800;
+    font-size: 18px;
+}
