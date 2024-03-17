@@ -26,7 +26,7 @@ interface typeReplyArea {
 
 function ReplyArea({commentId,userinfo,arrayOfComment}:typeReplyArea) {
     const todoCtx = useContext(TodosContext)
-    const [isLoading,setIsLoading] = useState<boolean>(true)
+    const isLoading = useState<boolean>(true)
 
 
     // const getCommentInfo = async() =>{
@@ -80,8 +80,6 @@ function ReplyArea({commentId,userinfo,arrayOfComment}:typeReplyArea) {
     // }
 
 
-    useEffect(()=>{
-    },[isLoading ===false])
 
     // useEffect(()=>{  
     //     checkLoading();

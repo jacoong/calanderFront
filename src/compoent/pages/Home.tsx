@@ -1,5 +1,5 @@
 
-import {useContext,useState} from 'react';
+import {useContext} from 'react';
 import {TodosContext} from '../../store/todo_context'
 import style from './css/Home.module.css';
 import FlexBox from '../compoentItem/FlexBox'
@@ -7,10 +7,10 @@ import JoinForm from '../compoentItem/JoinForm';
 function Home() {
   const todoCtx = useContext(TodosContext);
 
-      interface typeAction {
-        isOpen:boolean;
-        type:string|null
-      }
+      // interface typeAction {
+      //   isOpen:boolean;
+      //   type:string|null
+      // }
 
 
       // const [openAndType,setOpenAndType] = useState<typeAction>({isOpen:false,type:null});

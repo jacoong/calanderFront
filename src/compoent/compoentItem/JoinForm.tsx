@@ -2,7 +2,6 @@ import Button from '../compoentItem/Button'
 
 
 import style from '../pages/css/Home.module.css';
-import { useNavigate } from 'react-router-dom';
 
 
 interface TypeOfFunction {

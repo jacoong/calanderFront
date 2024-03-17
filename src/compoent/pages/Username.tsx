@@ -14,7 +14,7 @@ interface UsernameProps {
 }
 
 function Username({ handleUNsubmit }: UsernameProps) {
-    const todoCtx = useContext(TodosContext);
+    // const todoCtx = useContext(TodosContext);
     const navigate = useNavigate();
     const usernameRef = useRef<HTMLInputElement>(null);
     const fileRef = useRef<HTMLInputElement>(null);

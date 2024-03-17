@@ -182,7 +182,7 @@ function PageKit() {
                         
                       <div className={style.main_body__banner__items__logo}>
                           <Link className={style.main_body__banner__items__logo__container} to={`/`}>
-                          <img alt={'dd'} src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
+                          <img alt={'dd'}src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
                         </Link>
                       </div>
 

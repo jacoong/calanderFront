@@ -44,13 +44,13 @@ const getUserInfo = async() =>{
 
 // }
 
-useEffect(() => {
+
     const fetchData = async () => {
         await checkIsAdmin();
         getUserInfo();
     };
     fetchData();
-}, []);
+
 
 useEffect(()=>{
     console.log('thistie',userList)

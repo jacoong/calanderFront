@@ -190,7 +190,7 @@ function PostPage() {
 };
 
 
-  useEffect(() => {
+
     if(commentId){
         const url = "https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/checkDb";
         (async () => {
@@ -204,24 +204,23 @@ function PostPage() {
           }
         })();
       }
-    }, [commentId]);
 
 
-    useEffect(()=>{
+
+
     if(commentInfo){
         if(typeOfId === "reply"){
             getParentInfo();
         }
         fetchComments();
     }
-    },[commentInfo])
 
 
-  useEffect(() => {
+
     if (commentId) {
       checkCommentId("https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/checkDb", commentId);
     }
-  }, [todoCtx.RsgLogMsg]);
+
 
   useEffect(() => {
     console.log('gmast2',todoCtx.ReplyList)
@@ -229,7 +228,7 @@ function PostPage() {
     setIsloading(true)
   }, [todoCtx.ReplyList]);
 
-  useEffect(() => {
+
     if (skip) {
       setIsloading(false);
       setTimeout(async () => {
@@ -237,7 +236,7 @@ function PostPage() {
       },2000); // need to delete in real project.
 
     }
-  }, [skip]);
+
 
 
   useEffect(()=>{

@@ -8,13 +8,13 @@ const ErrorPage = () => {
   const { state } = useLocation();
   console.log("sfes",state);
 
-  useEffect(() => {
+ 
     console.log('watch this!',todoCtx.ErrorMsg);
     if (todoCtx.ErrorMsg) {
       todoCtx.ErrorMsg = ""
       console.log("this too!",todoCtx.ErrorMsg);
     }
-  }, []); 
+
 
   return(
   

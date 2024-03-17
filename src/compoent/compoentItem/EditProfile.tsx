@@ -16,7 +16,6 @@ interface typeOfEditProfile {
 function EditProfile({sendTargetReply,onFileChange}:typeOfEditProfile) {
 
     const todoCtx = useContext(TodosContext);
-    const savedData:any = localStorage.getItem('userDataKey'); 
     const navigate = useNavigate();
 
     const [previewImages, setPreviewImages] = useState<(string | null)[]>([null, null]);
@@ -92,20 +91,20 @@ function EditProfile({sendTargetReply,onFileChange}:typeOfEditProfile) {
       //     }
 
 
-          const axiosPost= async(data:any) =>{
-            axios.post('https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/user/edit/editData',data ,{ withCredentials: true })
-              .then((res) => {
-                  if(res.status === 201){
-                      alert('need to use username!')
-                  }else if(res.status === 200){
-                    return 
-                  }
-              })
-              .catch((err:Error) => {
-                alert(err);
-                navigate('/')
-              });
-          }
+          // const axiosPost= async(data:any) =>{
+          //   axios.post('https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/user/edit/editData',data ,{ withCredentials: true })
+          //     .then((res) => {
+          //         if(res.status === 201){
+          //             alert('need to use username!')
+          //         }else if(res.status === 200){
+          //           return 
+          //         }
+          //     })
+          //     .catch((err:Error) => {
+          //       alert(err);
+          //       navigate('/')
+          //     });
+          // }
 
           useEffect(()=>{
             if(todoCtx.userInfo){

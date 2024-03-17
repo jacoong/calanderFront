@@ -108,9 +108,9 @@ const TodosContextProvider = ({ children }: {children: ReactNode}) => {
   const navigate = useNavigate();
 
 
-  useEffect(()=>{
-    reLoadUserInfo();
-  },[]);
+  // useEffect(()=>{
+  //   reLoadUserInfo();
+  // },[]);
 
   const reLoadUserInfo =async()=>{
     console.log('reLoadUserInfo 실행');

@@ -99,17 +99,16 @@ function UserPage() {
 
 
     
-    useEffect(()=>{
-        if(userInfo){
-            getUserPage();
-        }
-    },[userInfo,todoCtx.RsgLogMsg])
 
-    useEffect(()=>{
         if(userInfo){
             getUserPage();
         }
-    },[stateOfMenu])
+
+
+        if(userInfo){
+            getUserPage();
+        }
+
 
     // useEffect(()=>{
     //     if(userInfo){
@@ -153,14 +152,12 @@ function UserPage() {
              })
     }
 
-    useEffect(()=>{
-        getUpdatedApi(username);
-    },[todoCtx.callApi])
 
-    useEffect(()=>{
+        getUpdatedApi(username);
+
+
         
-    },
-    [todoCtx.userInfo])
+
 
     // useEffect(()=>{
     //     getUpdatedApi(username);
