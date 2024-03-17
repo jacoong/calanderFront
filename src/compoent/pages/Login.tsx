@@ -1,6 +1,6 @@
 import {TodosContext} from '../../store/todo_context'
 import {useContext,useEffect,useState,useRef} from 'react';
-import { useNavigate,Link } from 'react-router-dom'; // If yo
+import { useNavigate } from 'react-router-dom'; // If yo
 import style from './css/Login.module.css';
 import {useSendIdPwInfo} from '../customHook'
 import Button from '../compoentItem/Button';
@@ -32,11 +32,11 @@ function Login({nextPopUpPage,requestType}:LoginPropsType) {
         const [emailValidate,setEmailValidate] = useState<typeVaildation>({touched: false, error: false, message: ''})
         const [passwordValidate,setPasswordValidate] = useState<typeVaildation>({touched: false, error: false, message: ''})
         const [passwordConfirmValidate,setPasswordConfirmValidate] = useState<typeVaildation>({touched: false, error: false, message: ''})
-        const [isLoadingConfirm,setIsLoadingConfirm] = useState(false);
+        // const [isLoadingConfirm,setIsLoadingConfirm] = useState(false);
         
         const navigate = useNavigate();
 
-        const {handleInputSubmit,passwordRef,emailRef} = useSendIdPwInfo();
+        const {passwordRef,emailRef} = useSendIdPwInfo();
 
 
         useEffect(() => {
@@ -89,7 +89,7 @@ function Login({nextPopUpPage,requestType}:LoginPropsType) {
           // let emailRefValue = null
           if(requestType === 'recreatePassword'){
             
-            setIsLoadingConfirm(true);  // loading activated
+            // setIsLoadingConfirm(true);  // loading activated
 
             const emailValue = emailRef.current!.value;
             
@@ -98,7 +98,7 @@ function Login({nextPopUpPage,requestType}:LoginPropsType) {
               .then(res => {
                 if(res.status===200){
                   alert('recreatePassword done')
-                  setIsLoadingConfirm(false); // loading disactivated
+                  // setIsLoadingConfirm(false); // loading disactivated
                           nextPopUpPage!();
                 }
             })

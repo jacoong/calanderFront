@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+
 import { PiSealCheckFill } from "react-icons/pi";
 import style from '../pages/css/AuthenticatedUserName.module.css'
 type typeOfAuthenticated = {

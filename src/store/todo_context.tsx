@@ -2,7 +2,7 @@ import React, { ReactNode,useState,createContext } from 'react';
 import axios, { AxiosResponse }  from "axios";
 import Todo from '../model/Todo';
 import {useEffect} from 'react'
-import { useNavigate,useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {typeOfSendTargetReply} from '../compoent/compoentItem/FlexBox'
 
 
@@ -17,13 +17,13 @@ export interface UserType {
 }
 
 
-type typeUserInfo = {
-    _id: string,
-    email: string,
-    password: string,
-    username: null|string,
-    __v: number
-}
+// type typeUserInfo = {
+//     _id: string,
+//     email: string,
+//     password: string,
+//     username: null|string,
+//     __v: number
+// }
 
 interface typeCommentInfo {
   author:string;
@@ -190,7 +190,7 @@ const TodosContextProvider = ({ children }: {children: ReactNode}) => {
           const replyInfo = data.comments;
           console.log(replyInfo,'오마에와')
           if(skip){
-            return setReplyList(preArray => [...preArray, ... replyInfo]);
+            return setReplyList(preArray => [...preArray,...replyInfo]);
           }else{
           return setReplyList(replyInfo);
         }
@@ -199,7 +199,7 @@ const TodosContextProvider = ({ children }: {children: ReactNode}) => {
           const replyInfo = data.replies;
           console.log('replyInfo')
           if(skip){
-          return setReplyList(preArray => [...preArray, ... replyInfo]);
+          return setReplyList(preArray => [...preArray,...replyInfo]);
         }else{
           return setReplyList(replyInfo);
         }
@@ -224,7 +224,7 @@ const TodosContextProvider = ({ children }: {children: ReactNode}) => {
         console.log('check1',res.data); //[....]
         const infoarray:Todo[]= res.data;
         if(skip){
-          return setTodos(preArray => [...preArray, ... infoarray].map((item:Todo) => new Todo(item._id)));
+          return setTodos(preArray => [...preArray,...infoarray].map((item:Todo) => new Todo(item._id)));
         }else{
           return setTodos(infoarray.map((item:Todo) => new Todo(item._id)));
         }

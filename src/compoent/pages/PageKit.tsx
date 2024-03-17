@@ -1,17 +1,16 @@
-import Todos from '../Todos'
-import NewTodos from '../NewTodos'
-import {TodosContext,UserType,typeAction} from '../../store/todo_context'
-import {useContext,useEffect,useState,ReactNode} from 'react';
+// import Todos from '../Todos'
+// import NewTodos from '../NewTodos'
+import {TodosContext,UserType} from '../../store/todo_context'
+import {useContext,useEffect,useState} from 'react';
 import { useNavigate, Outlet, Link } from 'react-router-dom'; // If yo
 import axios from 'axios'
 import style from '../pages/css/Main.module.css'
 import FlexBox from '../compoentItem/FlexBox';
 import { BiSolidHomeCircle } from "react-icons/bi";
 import { AiOutlineUser } from "react-icons/ai";
-import { BiSolidUser } from "react-icons/bi";
 import LoadingPage from '../pages/LoadingPage';
-import StateTitle from '../pages/StateTitle'
-import MainPage from '../compoentItem/MainPage';
+// import StateTitle from '../pages/StateTitle'
+// import MainPage from '../compoentItem/MainPage';
 import FlashMessage from '../compoentItem/FlashMessage';
 import UserFileItem from '../compoentItem/UserFileItem';
 // export interface typeAction {
@@ -99,24 +98,24 @@ function PageKit() {
         }
 
           
-        const axiosPost = async () => {
-          // const userId = todoCtx.userInfo._id;
-          console.log('eeee',userId);
-          try {
-            const res = await axios.get('https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/isLogin', { withCredentials: true });
-            if (res.status === 201) {
-                localStorage.removeItem('userDataKey');
-               navigate(res.data.redirect);
-          } else if (res.status === 200) {
-              if (userId) {
-                todoCtx.callApi(0);
+        // const axiosPost = async () => {
+        //   // const userId = todoCtx.userInfo._id;
+        //   console.log('eeee',userId);
+        //   try {
+        //     const res = await axios.get('https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/isLogin', { withCredentials: true });
+        //     if (res.status === 201) {
+        //         localStorage.removeItem('userDataKey');
+        //        navigate(res.data.redirect);
+        //   } else if (res.status === 200) {
+        //       if (userId) {
+        //         todoCtx.callApi(0);
               
-              }
-            }
-          }catch (err: any) {
-            console.error(err);
-           } 
-         }
+        //       }
+        //     }
+        //   }catch (err: any) {
+        //     console.error(err);
+        //    } 
+        //  }
          
          const logOutpopup = (e:React.MouseEvent) =>{
           e.preventDefault();
@@ -173,7 +172,7 @@ function PageKit() {
                     null
                   }
 
-                  <div className={`${style.main_body} ${todoCtx.openAndType.type=== 'NewTodos'||'reply'||'edit' && todoCtx.openAndType.isOpen === true ? style.newTodo : ''}`}>
+                  <div className={`${style.main_body} ${(todoCtx.openAndType.type === 'NewTodos' || todoCtx.openAndType.type === 'reply' || todoCtx.openAndType.type === 'edit') && todoCtx.openAndType.isOpen === true ? style.newTodo : ''}`}>
                       <div className={style.main_body__banner}>
 
  
@@ -183,7 +182,7 @@ function PageKit() {
                         
                       <div className={style.main_body__banner__items__logo}>
                           <Link className={style.main_body__banner__items__logo__container} to={`/`}>
-                          <img src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
+                          <img alt={'dd'} src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
                         </Link>
                       </div>
 

@@ -69,7 +69,7 @@ function UserPage() {
                             setNumberOfPost(numberOfArray)
                             return setArrayOfPost(result)
                         }
-                        setArrayOfPost(preArray => [...preArray, ... result]);
+                        setArrayOfPost(preArray => [...preArray,...result]);
                         setNumberOfPost(numberOfArray)
                     }else{
                         console.log('what happend?',result)
@@ -82,7 +82,7 @@ function UserPage() {
                             setNumberOfPost(numberOfArray)
                             return setArrayOfReplies(result)
                         }
-                        setArrayOfReplies(preArray => [...preArray, ... result]);
+                        setArrayOfReplies(preArray => [...preArray,...result]);
                         setNumberOfPost(numberOfArray)
                     }else{
                         console.log(result)
@@ -180,9 +180,9 @@ function UserPage() {
         await getUserPage();
     }
 
-    const editTodo =async()=>{
-        await getUserPage();
-    }
+    // const editTodo =async()=>{
+    //     await getUserPage();
+    // }
 
     const handleFollow = async() =>{
         console.log('handleFollow excecuted')
@@ -259,7 +259,7 @@ return(
             {
                  userInfo.userData.backgroundImg
                  ?
-                 <img src={`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/public/backgroundImg/${userInfo.userData.backgroundImg}`}/>
+                 <img alt={'dd'} src={`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/public/backgroundImg/${userInfo.userData.backgroundImg}`}/>
                  :
                 null
             }
@@ -273,7 +273,7 @@ return(
                             {
                             userInfo.userData.profileImg
                             ?
-                            <img src={`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/public/profileImg/${userInfo.userData.profileImg}`}/>
+                            <img alt={'dd'} src={`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/public/profileImg/${userInfo.userData.profileImg}`}/>
                             :
                             <DefaultProfile/>
                             }

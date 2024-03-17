@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+
 import style from '../pages/css/Loading.module.css'
 
 

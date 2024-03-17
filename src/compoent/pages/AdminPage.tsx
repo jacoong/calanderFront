@@ -2,7 +2,7 @@
 // import style from '../pages/css/Button.module.css'
 import axios from "axios";
 import {useEffect,useState} from 'react';
-import { useNavigate,useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import UserItem from '../compoentItem/UserItem';
 
 
@@ -40,9 +40,9 @@ const getUserInfo = async() =>{
     })
 }
 
-const handleisAuthenticated = async() =>{
+// const handleisAuthenticated = async() =>{
 
-}
+// }
 
 useEffect(() => {
     const fetchData = async () => {

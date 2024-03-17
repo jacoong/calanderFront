@@ -9,7 +9,7 @@ function LoadingPage() {
            
 
               <div className={style.body}>
-                <img src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
+                <img alt={'dd'} src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
             </div>
         );
        };

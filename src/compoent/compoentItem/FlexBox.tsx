@@ -4,14 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import Button from './Button';
 import Login from '../pages/Login'
-import Register from '../pages/Register'
 import EditProfile from '../compoentItem/EditProfile'
 import {useState,useContext, useEffect} from 'react';
 import {TodosContext,UserType} from '../../store/todo_context'
 import axios from 'axios';
 import Username from '../pages/Username'
 import NewTodos from '../NewTodos';
-import TodoItem from '../TodoItem';
+
 import ToReply from '../compoentItem/ToReply';
 import { BiArrowBack } from "react-icons/bi";
 
@@ -56,11 +55,11 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
     const todoCtx = useContext(TodosContext);
     const navigate = useNavigate();
 
-    const { username, commentId } = useParams();
+    const { commentId } = useParams();
     // const [, setLoading] = useState(true);
 
     const savedData:any = localStorage.getItem('userDataKey'); 
-    const userId = JSON.parse(savedData);
+    // const userId = JSON.parse(savedData);
 
     const handleDeleteTodo = () =>{
         todoCtx.sendFlexbox({isOpen:false, type:'null'})
@@ -197,7 +196,7 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
                             :
                             <>
                             <div className={style.openMain__flexBox__popUp__header__logo}>
-                                <img src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
+                                <img alt={'dd'} src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
                             </div>
                             <div className={style.openMain__flexBox__popUp__header__nothing}>
 
@@ -225,7 +224,7 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
                                         </div>
                                     </div>
                                     <div className={style.openMain__flexBox__popUp__header__logo}>
-                                        <img src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
+                                        <img alt={'dd'} src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
                                     </div>
                                     <div className={style.openMain__flexBox__popUp__header__nothing}>
 

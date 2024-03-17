@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {TodosContext,UserType} from '../../store/todo_context'
+import {TodosContext} from '../../store/todo_context'
 import { useRef,useContext,useState } from 'react';
 import style from '../pages/css/Login.module.css'
 import Button from '../compoentItem/Button';
@@ -18,7 +18,7 @@ function Username({ handleUNsubmit }: UsernameProps) {
     const navigate = useNavigate();
     const usernameRef = useRef<HTMLInputElement>(null);
     const fileRef = useRef<HTMLInputElement>(null);
-    const userInfo = todoCtx.userInfo
+    // const userInfo = todoCtx.userInfo
 
     const savedData:any = localStorage.getItem('userDataKey'); 
 

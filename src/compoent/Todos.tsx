@@ -1,7 +1,6 @@
 import TodoItem from './TodoItem'
 import {useContext} from 'react';
 import {TodosContext} from '../store/todo_context'
-import Loading from './compoentItem/Loading';
 
 type userIdtype = {
   userId:string;

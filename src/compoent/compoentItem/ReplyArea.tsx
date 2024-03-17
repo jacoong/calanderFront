@@ -1,4 +1,4 @@
-import axios from 'axios';
+
 import { useEffect,useState,useContext } from 'react';
 import TodoItem from '../TodoItem';
 import {TodosContext} from '../../store/todo_context'
@@ -12,15 +12,15 @@ interface typeReplyArea {
 }
 
 
-interface  typereplycomment {
-    _id:string,
-    content:string,
-    writer:string,
-    author:string,
-    profileImg:string,
-    parentId?:string,
-    replies:string[];
-}
+// interface  typereplycomment {
+//     _id:string,
+//     content:string,
+//     writer:string,
+//     author:string,
+//     profileImg:string,
+//     parentId?:string,
+//     replies:string[];
+// }
 
 
 
@@ -61,23 +61,23 @@ function ReplyArea({commentId,userinfo,arrayOfComment}:typeReplyArea) {
     //     }
     // }
     
-    const checkLoading = async()=>{
-        let checkseed = todoCtx.ReplyList[todoCtx.ReplyList.length-1]?._id;
-        if (checkseed=== undefined){
-            if(arrayOfComment){
-                const isLoad:boolean = arrayOfComment.length === 0;
-                setIsLoading(isLoad);
-                return
-            }
-        }
-        console.log('check this!',todoCtx,arrayOfComment)
-        if(arrayOfComment){
-            setIsLoading(arrayOfComment.includes(checkseed))
-        }else{
-            return
-        }
+    // const checkLoading = async()=>{
+    //     let checkseed = todoCtx.ReplyList[todoCtx.ReplyList.length-1]?._id;
+    //     if (checkseed=== undefined){
+    //         if(arrayOfComment){
+    //             const isLoad:boolean = arrayOfComment.length === 0;
+    //             setIsLoading(isLoad);
+    //             return
+    //         }
+    //     }
+    //     console.log('check this!',todoCtx,arrayOfComment)
+    //     if(arrayOfComment){
+    //         setIsLoading(arrayOfComment.includes(checkseed))
+    //     }else{
+    //         return
+    //     }
         
-    }
+    // }
 
 
     useEffect(()=>{

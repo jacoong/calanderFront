@@ -1,7 +1,5 @@
 import {useRef,useContext,useState} from 'react';
 import {TodosContext} from '../store/todo_context'
-import axios from "axios";
-import Todo from '../model/Todo';
 import style from './pages/css/NewTodos.module.css';
 import DefaultProfile from './compoentItem/DefaultProfile';
 import {typeOfSendTargetReply} from './compoentItem/FlexBox'
@@ -76,7 +74,7 @@ import Button from './compoentItem/Button';
       <div className={style.NewTodos__body__container}>
       <div className={style.NewTodos__body__img_container}>
         {userImg
-        ?        <img src={`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/public/profileImg/${userImg}`}/>
+        ?        <img src={`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/public/profileImg/${userImg}`} alt={'err'}/>
         :
 
         <DefaultProfile/>

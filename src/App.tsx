@@ -4,15 +4,10 @@ import ErrorPage from './ErrorPage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import  TodosContextProvider from './store/todo_context'
 import Home from './compoent/pages/Home'
-import Login from './compoent/pages/Login'
 import MainPage from './compoent/compoentItem/MainPage'
-import Main from './compoent/pages/Main'
 import RegisterUsername from './compoent/pages/Username'
-import { useEffect } from 'react';
 import UserPage from './compoent/pages/UserPage';
 import PostPage from './compoent/pages/PostPage';
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
 import PageKit from './compoent/pages/PageKit'
 import Admin from './compoent/pages/AdminPage'
 

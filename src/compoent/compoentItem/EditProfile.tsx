@@ -1,12 +1,10 @@
 import style from '../pages/css/FlexBox.module.css';
 import { TbCameraUp } from "react-icons/tb";
-import DefaultProfile from './DefaultProfile';
 import {typeOfSendTargetReply} from './FlexBox';
 import { useRef,useContext,useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {TodosContext,UserType} from '../../store/todo_context'
-import { userInfo } from 'os';
+import {TodosContext} from '../../store/todo_context'
 
 interface typeOfEditProfile {
     sendTargetReply:typeOfSendTargetReply;
@@ -64,34 +62,34 @@ function EditProfile({sendTargetReply,onFileChange}:typeOfEditProfile) {
   
       }
   
-      const handleUserName = async(e:React.FormEvent<HTMLFormElement>) =>{
-          e.preventDefault();        
+      // const handleUserName = async(e:React.FormEvent<HTMLFormElement>) =>{
+      //     e.preventDefault();        
   
-          const backgroundFile = backgroundRef.current?.files?.[0];
-          const ProfileFile = ProfileRef.current?.files?.[0];
-          const formData = new FormData();
-          const userId = JSON.parse(savedData);
+      //     const backgroundFile = backgroundRef.current?.files?.[0];
+      //     const ProfileFile = ProfileRef.current?.files?.[0];
+      //     const formData = new FormData();
+      //     const userId = JSON.parse(savedData);
   
-          if (backgroundFile){
-            formData.append('backgroundImage', backgroundFile);
-          } else {
-            formData.append('backgroundImage', 'default');
-          }
+      //     if (backgroundFile){
+      //       formData.append('backgroundImage', backgroundFile);
+      //     } else {
+      //       formData.append('backgroundImage', 'default');
+      //     }
           
-          if (ProfileFile){
-            formData.append('profileImage', ProfileFile);
-          } else {
-            formData.append('profileImage', 'default');
-          }
-          formData.append('id',userId)
+      //     if (ProfileFile){
+      //       formData.append('profileImage', ProfileFile);
+      //     } else {
+      //       formData.append('profileImage', 'default');
+      //     }
+      //     formData.append('id',userId)
           
-            try{
-              axiosPost(formData)
-              }
-              catch{
-                navigate('/')
-              }
-          }
+      //       try{
+      //         axiosPost(formData)
+      //         }
+      //         catch{
+      //           navigate('/')
+      //         }
+      //     }
 
 
           const axiosPost= async(data:any) =>{

@@ -1,8 +1,10 @@
 import Button from '../compoentItem/Button'
-import {useContext,useReducer,useState} from 'react';
+
+
 import style from '../pages/css/Home.module.css';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+
+
 interface TypeOfFunction {
     handleMakeAcount():void;
     handleLogin():void;
@@ -20,7 +22,7 @@ const popupY= (window.screen.height / 2) - (popupHeight / 2);
 
 function JoinForm({handleMakeAcount,handleLogin,handleClosed}:TypeOfFunction) {
 
-    const navigate = useNavigate();
+
 
     const handleClick = () =>{
         console.log('not yeT!')

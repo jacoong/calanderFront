@@ -1,6 +1,5 @@
 import style from '../pages/css/TodoItem.module.css';
 import DefaultProfile from '../compoentItem/DefaultProfile';
-import { PiSealCheckFill } from "react-icons/pi";
 import AuthenticatedUserName from './AuthenticatedUserName';
 
 interface typeOfUserFileItem {
@@ -23,7 +22,7 @@ return (
   {
   profileImg
   ?
-  <img src={`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/public/profileImg/${profileImg}`}/>
+  <img alt={'dd'} src={`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/public/profileImg/${profileImg}`}/>
   :
   <DefaultProfile/>
   }

@@ -5,10 +5,8 @@ import { useEffect, useContext, useState } from "react";
 import StateTitle from "./StateTitle";
 import style from "./css/PostPage.module.css";
 import TodoItem from "../../compoent/TodoItem";
-import Todo from "../../model/Todo";
 import NewTodos from "../NewTodos";
 import ReplyArea from "../compoentItem/ReplyArea";
-import { userInfo } from "os";
 import Loading from "../compoentItem/Loading";
 
 interface typeCommentInfo {
@@ -126,26 +124,26 @@ function PostPage() {
 // }, 3000); // 3초 뒤에 실행
   };
 
-  const reNewComment = async (url: string, commentId: string) => {
-    const data = { input: commentId, type: ["commentId", "replyId"] };
-    axios.post(url, data, { withCredentials: true }).then((res) => {
-      if (res.status === 200 && res) {
-        const result = res.data.result;
-        const info = res.data.info;
-        const type = res.data.type;
-        console.log("왜?", info);
-        if (result) {
-          setCommentInfo(info);
-          setTypeOfId(type);
-          return;
-        } else {
-          navigate("/userNotFound404");
-        }
-      } else {
-        navigate("/userNotFound404");
-      }
-    });
-  };
+  // const reNewComment = async (url: string, commentId: string) => {
+  //   const data = { input: commentId, type: ["commentId", "replyId"] };
+  //   axios.post(url, data, { withCredentials: true }).then((res) => {
+  //     if (res.status === 200 && res) {
+  //       const result = res.data.result;
+  //       const info = res.data.info;
+  //       const type = res.data.type;
+  //       console.log("왜?", info);
+  //       if (result) {
+  //         setCommentInfo(info);
+  //         setTypeOfId(type);
+  //         return;
+  //       } else {
+  //         navigate("/userNotFound404");
+  //       }
+  //     } else {
+  //       navigate("/userNotFound404");
+  //     }
+  //   });
+  // };
 
   const saveLoginUserInfo = async (userId: string) => {
     try {

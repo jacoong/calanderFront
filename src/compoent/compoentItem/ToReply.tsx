@@ -1,7 +1,6 @@
-import React, {useContext } from 'react';
+
 import style from '../pages/css/TodoItem.module.css'
-import {TodosContext,UserType} from '../../store/todo_context';
-import { Link } from 'react-router-dom';
+import {UserType} from '../../store/todo_context';
 import DefaultProfile from './DefaultProfile';
 import {typeOfSendTargetReply} from './FlexBox'
 
@@ -23,7 +22,7 @@ return (
         {
           userInfo?.profileImg
           ?
-          <img src={`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/public/profileImg/${userInfo?.profileImg}`}/>
+          <img  alt={'dd'} src={`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/public/profileImg/${userInfo?.profileImg}`}/>
           :
           <DefaultProfile/>
           }

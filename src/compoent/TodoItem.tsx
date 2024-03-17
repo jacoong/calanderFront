@@ -3,7 +3,6 @@ import style from './pages/css/TodoItem.module.css'
 import { FaRegComment } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import {TodosContext} from '../store/todo_context';
-import { FaUserCircle } from "react-icons/fa";
 import DefaultProfile from './compoentItem/DefaultProfile';
 import axios from 'axios'
 import { FiEdit3 } from "react-icons/fi";
@@ -144,7 +143,7 @@ return (
         {
         commentInfo.userData.profileImg
         ?
-        <img src={`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/public/profileImg/${commentInfo.userData.profileImg}`}/>
+        <img alt={'err'} src={`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/public/profileImg/${commentInfo.userData.profileImg}`}/>
         :
         <DefaultProfile/>
         }
@@ -221,7 +220,7 @@ return (
               {
               commentInfo.userData.profileImg
               ?
-              <img src={`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/public/profileImg/${commentInfo.userData.profileImg}`}/>
+              <img alt={'err'} src={`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/public/profileImg/${commentInfo.userData.profileImg}`}/>
               :
               <DefaultProfile/>
               }

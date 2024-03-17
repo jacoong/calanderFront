@@ -1,5 +1,4 @@
 import style from '../pages/css/UserItem.module.css'
-import {useState} from 'react';
 import axios from "axios";
 
 interface typeOfuserList {

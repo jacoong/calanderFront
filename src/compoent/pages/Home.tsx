@@ -1,7 +1,6 @@
-import { useNavigate } from 'react-router-dom';
-import {useContext,useEffect,useReducer,useState} from 'react';
+
+import {useContext,useState} from 'react';
 import {TodosContext} from '../../store/todo_context'
-import axios from 'axios'
 import style from './css/Home.module.css';
 import FlexBox from '../compoentItem/FlexBox'
 import JoinForm from '../compoentItem/JoinForm';
@@ -14,12 +13,12 @@ function Home() {
       }
 
 
-      const [openAndType,setOpenAndType] = useState<typeAction>({isOpen:false,type:null});
+      // const [openAndType,setOpenAndType] = useState<typeAction>({isOpen:false,type:null});
       // const [Login,setLogin] = useState(false);
       // const [closed,setClosed] = useState(false);
 
 
-      const savedData:any = localStorage.getItem('userDataKey'); 
+      // const savedData:any = localStorage.getItem('userDataKey'); 
       // function JoinOrLoginReducer(oldState:any,action:typeAction){
       //   if (action.isOpen){
       //     if(action.type==='MakeAcount'){
@@ -81,7 +80,7 @@ function Home() {
     
                     <div className={style.main__left}>
                       <div className={style.main__left__container}>
-                          <img src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
+                          <img alt={'dd'} src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
                       </div>
                     </div>
     
