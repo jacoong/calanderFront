@@ -50,9 +50,8 @@ function MainPage() {
           console.log('좋은술2');
           if(skip){
             setIsloading(false);
-            todoCtx.callApi(skip)
           }
-        },[skip,setIsloading,todoCtx.callApi])
+        },[skip])
 
         useEffect(()=>{
           console.log('좋은술3');

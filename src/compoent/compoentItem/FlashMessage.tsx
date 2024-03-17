@@ -1,4 +1,4 @@
-import {useContext,useState} from 'react';
+import {useContext} from 'react';
 import {TodosContext} from '../../store/todo_context'
 import style from '../pages/css/FlashMessage.module.css'
 
