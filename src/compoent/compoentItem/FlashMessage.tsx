@@ -12,32 +12,32 @@ const FlashMessage = ({handleOnclick}:aaaaa) => {
 
   const [isShowed,setIsShowed] = useState(false)
 
-  useEffect(()=>{
-    console.log('악착같은',todoCtx.RsgLogMsg);
-    if(todoCtx.RsgLogMsg === ''){
-        setIsShowed(false);
-        console.log('??')
-    }else{
-        setIsShowed(true)
-        console.log(todoCtx.RsgLogMsg)
-    }
+//   useEffect(()=>{
+//     console.log('악착같은',todoCtx.RsgLogMsg);
+//     if(todoCtx.RsgLogMsg === ''){
+//         setIsShowed(false);
+//         console.log('??')
+//     }else{
+//         setIsShowed(true)
+//         console.log(todoCtx.RsgLogMsg)
+//     }
 
-  },[todoCtx.RsgLogMsg])
+//   },[todoCtx.RsgLogMsg])
 
-  useEffect(() => {
-    if(isShowed){
-        if(todoCtx.RsgLogMsg){
-            if(handleOnclick){
-                handleOnclick!(todoCtx.RsgLogMsg);
-            }
-            else{
+//   useEffect(() => {
+//     if(isShowed){
+//         if(todoCtx.RsgLogMsg){
+//             if(handleOnclick){
+//                 handleOnclick!(todoCtx.RsgLogMsg);
+//             }
+//             else{
                 
-            }
-        }else{
-            return
-        }
-    }
-  }, [isShowed]);
+//             }
+//         }else{
+//             return
+//         }
+//     }
+//   }, [isShowed]);
 
 
   return(

@@ -38,7 +38,7 @@ function PageKit() {
             if (todoCtx.ErrorMsg) {
                 navigate('/error',{ state:todoCtx.ErrorMsg }); // If you're using React Router v6, use 'navigate("/error")'
             }
-          }, [todoCtx.ErrorMsg]); 
+          }, [todoCtx.ErrorMsg,navigate]); 
 
   
 
@@ -126,7 +126,6 @@ function PageKit() {
          useEffect(()=>{
           if(todoCtx.openAndType.type === 'popup'){
             setLogOutPopUp(true);
-            console.log(logOutPopUp);
           }else{
             return  setLogOutPopUp(false);
           }
@@ -134,7 +133,7 @@ function PageKit() {
 
          useEffect(()=>{
           checkUserName();
-         },[todoCtx.callApi])
+         },[todoCtx.callApi,checkUserName])
 
 
          useEffect(()=>{

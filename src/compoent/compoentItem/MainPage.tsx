@@ -33,10 +33,10 @@ function MainPage() {
           }
         }
       
-        useEffect(()=>{
+
           console.log('좋은술1');
           getUserInfo(userId);
-        },[])
+ 
 
         const handleScroll = (e:React.UIEvent<HTMLDivElement>) => {
           const target = e.target as HTMLElement;
@@ -46,13 +46,13 @@ function MainPage() {
           }
         }
 
-        useEffect(()=>{
-          console.log('좋은술2');
-          if(skip){
-            setIsloading(false);
-            todoCtx.callApi(skip)
-          }
-        },[skip])
+        // useEffect(()=>{
+        //   console.log('좋은술2');
+        //   if(skip){
+        //     setIsloading(false);
+        //     todoCtx.callApi(skip)
+        //   }
+        // },[skip])
 
         useEffect(()=>{
           console.log('좋은술3');

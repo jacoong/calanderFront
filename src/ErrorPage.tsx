@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from "react-router";
 import {TodosContext} from './store/todo_context'
-import {useContext,useEffect} from 'react';
+import {useContext} from 'react';
 const ErrorPage = () => {
   const todoCtx = useContext(TodosContext);
 

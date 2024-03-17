@@ -44,7 +44,7 @@ function Login({nextPopUpPage,requestType}:LoginPropsType) {
             if (todoCtx.ErrorMsg) {
                 navigate('/error',{ state:todoCtx.ErrorMsg }); // If you're using React Router v6, use 'navigate("/error")'
             }
-          }, [todoCtx.ErrorMsg]); 
+          }, [todoCtx.ErrorMsg,navigate]); 
 
 
           const handleEmail = async(e:React.ChangeEvent<HTMLInputElement>) =>{

@@ -234,7 +234,7 @@ function UserPage() {
             getUserPage();
             console.log(skip,'skip')
         }
-      },[skip])
+      },[skip,getUserPage])
 
 
 

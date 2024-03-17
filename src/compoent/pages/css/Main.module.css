@@ -135,7 +135,7 @@ width: 110%;
     display: flex;
     padding-right: 0px;
     padding-left: 10px;
-    justify-content: start;
+    justify-content: flex-start;
 }
 
 .main_body__banner__items__item__onClick:hover{

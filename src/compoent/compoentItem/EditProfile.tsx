@@ -2,8 +2,6 @@ import style from '../pages/css/FlexBox.module.css';
 import { TbCameraUp } from "react-icons/tb";
 import {typeOfSendTargetReply} from './FlexBox';
 import { useRef,useContext,useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import {TodosContext} from '../../store/todo_context'
 
 interface typeOfEditProfile {
@@ -16,7 +14,7 @@ interface typeOfEditProfile {
 function EditProfile({sendTargetReply,onFileChange}:typeOfEditProfile) {
 
     const todoCtx = useContext(TodosContext);
-    const navigate = useNavigate();
+
 
     const [previewImages, setPreviewImages] = useState<(string | null)[]>([null, null]);
     const [originalImages, setOriginalImages] = useState<( File|null)[]>([null, null]);
