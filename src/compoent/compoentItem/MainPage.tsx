@@ -46,13 +46,13 @@ function MainPage() {
           }
         }
 
-        // useEffect(()=>{
-        //   console.log('좋은술2');
-        //   if(skip){
-        //     setIsloading(false);
-        //     todoCtx.callApi(skip)
-        //   }
-        // },[skip])
+        useEffect(()=>{
+          console.log('좋은술2');
+          if(skip){
+            setIsloading(false);
+            todoCtx.callApi(skip)
+          }
+        },[skip,setIsloading,todoCtx.callApi])
 
         useEffect(()=>{
           console.log('좋은술3');

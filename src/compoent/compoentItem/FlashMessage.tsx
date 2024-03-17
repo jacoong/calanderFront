@@ -1,4 +1,4 @@
-import {useContext,useEffect,useState} from 'react';
+import {useContext,useState} from 'react';
 import {TodosContext} from '../../store/todo_context'
 import style from '../pages/css/FlashMessage.module.css'
 
@@ -10,7 +10,7 @@ interface aaaaa{
 const FlashMessage = ({handleOnclick}:aaaaa) => {
   const todoCtx = useContext(TodosContext)
 
-  const [isShowed,setIsShowed] = useState(false)
+  const isShowed =false
 
 //   useEffect(()=>{
 //     console.log('악착같은',todoCtx.RsgLogMsg);

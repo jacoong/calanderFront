@@ -17,7 +17,7 @@ import UserFileItem from '../compoentItem/UserFileItem';
 //   isOpen:boolean;
 //   type:string|null;
 // }
-
+import React, { useCallback } from 'react';
 
 
 function PageKit() {
@@ -77,25 +77,25 @@ function PageKit() {
         }
 
 
-        const checkUserName =async () =>{
+
+        const checkUserName = useCallback(async () => {
           try {
-            const res = await axios.get(`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/user/main/${userId}` ,{ withCredentials: true });
-            if(res.status === 201){
-              const userInfo = res.data.userInfo;
-              if(userInfo.username === null){
-                todoCtx.sendFlexbox({isOpen:true,type:'shouldUsername'})
-                setLoading(false);
-              }else{
-                setLoading(false);
-                localStorage.setItem('userDataKey', JSON.stringify(userInfo._id));
-                return setUserInfo(userInfo)
+              const res = await axios.get(`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/user/main/${userId}`, { withCredentials: true });
+              if (res.status === 201) {
+                  const userInfo = res.data.userInfo;
+                  if (userInfo.username === null) {
+                      todoCtx.sendFlexbox({ isOpen: true, type: 'shouldUsername' });
+                      setLoading(false);
+                  } else {
+                      setLoading(false);
+                      localStorage.setItem('userDataKey', JSON.stringify(userInfo._id));
+                      setUserInfo(userInfo);
+                  }
               }
-            }
+          } catch (err) {
+              console.error(err);
           }
-          catch(err:any){
-            console.error(err)
-          }
-        }
+      }, [todoCtx, setLoading, setUserInfo, userId]);
 
           
         // const axiosPost = async () => {

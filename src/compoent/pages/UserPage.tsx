@@ -231,10 +231,9 @@ function UserPage() {
 
       useEffect(()=>{
         if(skip){
-            getUserPage();
             console.log(skip,'skip')
         }
-      },[skip,getUserPage])
+      },[skip])
 
 
 

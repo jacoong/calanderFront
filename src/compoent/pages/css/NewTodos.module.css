@@ -82,7 +82,7 @@
 .NewTodos__body__main_container__detail__button__container{
     width: 100%;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .NewTodos__body__main_container__detail__button{
