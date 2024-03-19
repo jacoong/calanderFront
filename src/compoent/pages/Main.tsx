@@ -1,4 +1,4 @@
-import MainPage from '../compoentItem/MainPage'
+import MainPage from './MainPage'
 import PageKit from './PageKit';
 
 function Main() {

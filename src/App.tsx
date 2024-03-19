@@ -4,7 +4,7 @@ import ErrorPage from './ErrorPage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import  TodosContextProvider from './store/todo_context'
 import Home from './compoent/pages/Home'
-import MainPage from './compoent/compoentItem/MainPage'
+import MainPage from './compoent/pages/MainPage'
 import RegisterUsername from './compoent/pages/Username'
 import UserPage from './compoent/pages/UserPage';
 import PostPage from './compoent/pages/PostPage';

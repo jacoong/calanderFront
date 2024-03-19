@@ -136,8 +136,7 @@ function Login({nextPopUpPage,requestType}:LoginPropsType) {
         {email:emailValue,password:passwordValue},{ withCredentials: true })
         .then(res => {
           if(res.status===200){
-            // navigate('/main');
-            alert('login done')
+            navigate('/main');
           }
         })
         .catch(error => {
