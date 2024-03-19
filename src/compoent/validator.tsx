@@ -40,6 +40,15 @@ export const emailValidator = async(email:string,type?:string) => {
     })
   }
   
+  export const prepasswordValidator = (prepassword:string) => {
+    if (!prepassword) {
+      return {touched:false,error:false,message:""};
+    } else if (prepassword.length < 8) {
+      return {touched:true,error:true,message:"Password must have a minimum 8 characters!!"};
+    }
+    return {touched:true,error:false,message:"Success"};
+  };
+
   export const passwordValidator = (password:string) => {
     if (!password) {
       return {touched:false,error:false,message:""};

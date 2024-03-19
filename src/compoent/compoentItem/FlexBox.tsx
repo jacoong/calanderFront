@@ -346,14 +346,20 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
                                 :
                             (openAndType.type === 'NewTodos' ?
                             <div className={style.openMain__flexBox__popUp__NewTodos_body}>
-                            <NewTodos handleUNsubmit={handleUNsubmit} writer = {userInfo?.username} userImg={userInfo?.profileImg}></NewTodos>
+                        
+                            </div>
+                                :
+                            (openAndType.type === 'updatePassword' ?
+                            <div className={style.openMain__flexBox__popUp__Post_body}>
+                            <h1>update Password</h1>
+                            <Login requestType={'updatePassword'}></Login>
                             </div>
                                 :
                             (openAndType.type === 'Reply' ?
 
                             <div className={style.openMain__flexBox__popUp__Reply} >
                                 <ToReply sendTargetReply={sendTargetReply!} userInfo = {userInfo!}></ToReply>
-                                <NewTodos parentId={sendTargetReply?.commentId} reply={commentId} handleUNsubmit={handleUNsubmit} writer = {userInfo?.username} userImg={userInfo?.profileImg}></NewTodos>
+                            
                             </div>
                                 :
                             (openAndType.type === 'Edit' ?
@@ -383,6 +389,7 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
                             )
                             )
                             )        
+                            )
                             )
                             )
                             )

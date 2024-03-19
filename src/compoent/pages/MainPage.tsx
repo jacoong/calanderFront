@@ -3,6 +3,7 @@ import NewTodos from '../NewTodos'
 import Todos from '../Todos'
 import style from '../pages/css/Main.module.css'
 import Loading from '../compoentItem/Loading'
+import Button from '../compoentItem/Button'
 import {useContext,useEffect,useState} from 'react';
 import {TodosContext,UserType} from '../../store/todo_context'
 import axios from 'axios'
@@ -15,22 +16,10 @@ function MainPage() {
     // const userId = JSON.parse(savedData);
 
     const [userInfo,setUserInfo] = useState<any>()
-    const [isloaded,setIsloaded] = useState<boolean>(false)
+    const [isloaded,setIsloaded] = useState<boolean>(true)
 
     // const [skip, setSkip] = useState<number>(0)
 
-        const getUserInfo = async(userId:string) =>{
-          try {
-            const res = await axios.get(`${todoCtx.serverUrl}/api/get/userInformation` ,{ withCredentials: true });
-            if(res.status === 200){
-              const userInfo = res.data.userInfo;
-               return setUserInfo(userInfo)
-              }
-            }
-          catch(err:any){
-            console.error(err)
-          }
-        }
 
         // const  = async(userId:string) =>{
       
@@ -54,7 +43,7 @@ function MainPage() {
             console.log('userInfo',userInfo);
             
             if(userInfo.nickName === null){
-              todoCtx.sendFlexbox({isOpen:true,type:'Edit profile'})
+              todoCtx.sendFlexbox({isOpen:true,type:'username'})
             }
           }
         },[userInfo])
@@ -70,6 +59,9 @@ function MainPage() {
     //     },[todoCtx.items])
 
     
+    const handleClick = () =>{
+      todoCtx.sendFlexbox({isOpen:true,type:'updatePassword'})
+    }
 
 
 return(
@@ -77,6 +69,9 @@ return(
   ?
   <div>
     <h1>Main Page</h1>
+    <div className={style.main__right__container__button}>
+    <Button Background_color={'b-black'} font_color={'f-white'} handleClick={handleClick}>changePassword</Button>
+    </div>
   </div>
   :
   null

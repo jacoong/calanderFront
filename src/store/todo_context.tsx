@@ -10,7 +10,7 @@ import {typeOfSendTargetReply} from '../compoent/compoentItem/FlexBox'
 export interface UserType {
   email: string;
   password:string;
-  username: string|null;
+  nickName: string|null;
   profileImg: string;
   backgroundImg:string;
   isAuthenticated:boolean;

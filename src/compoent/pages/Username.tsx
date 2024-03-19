@@ -1,19 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useRef,useState } from 'react';
+import { useRef,useState,useContext } from 'react';
 import style from '../pages/css/Login.module.css'
 import Button from '../compoentItem/Button';
 import {userNameValidator} from '../validator'
 import { FaUserCircle } from "react-icons/fa";
-
+import {TodosContext} from '../../store/todo_context'
 
 interface UsernameProps {
   handleUNsubmit?: (data: string) => void;
 }
 
 function Username({ handleUNsubmit }: UsernameProps) {
-    // const todoCtx = useContext(TodosContext);
+    const todoCtx = useContext(TodosContext);
     const navigate = useNavigate();
     const usernameRef = useRef<HTMLInputElement>(null);
     const fileRef = useRef<HTMLInputElement>(null);
@@ -88,7 +88,23 @@ function Username({ handleUNsubmit }: UsernameProps) {
         }
         // const userId = todoCtx.userInfo._id;
     
+    const handleUsername =async(e:React.FormEvent<HTMLFormElement>)=> {
+      e.preventDefault();
 
+      const nickName = usernameRef.current!.value;
+
+      axios.patch(`${todoCtx.serverUrl}/api/update/nickName`,
+      {nickName:nickName},{ withCredentials: true })
+      .then(res => {
+        if(res.status===200){
+          console.log('pizzaaa')
+          navigate('/main');
+        }
+      })
+      .catch(error => {
+        console.log(`post response: test`, error);
+      })
+    }
 
     const axiosPost= async(data:any) =>{
         axios.post('https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/user/register/usernameImg',data ,{ withCredentials: true })
@@ -115,7 +131,8 @@ function Username({ handleUNsubmit }: UsernameProps) {
 
 
             <div className={style.loginbox}>
-              <form  onSubmit={(e) => handleUserName(e)} encType='multipart/form-data'>
+              {/* <form  onSubmit={(e) => handleUserName(e)} encType='multipart/form-data'> */}
+              <form  onSubmit={(e) => handleUsername(e)}>
                 <div  className={style.loginbox__imageUpload}>
                 <input id='imageFile' ref={fileRef} type="file" name="myFile" onChange={handleFileChange}/>
                   <div className={style.loginbox__imageUpload__imgfield}>

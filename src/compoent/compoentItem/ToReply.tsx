@@ -16,7 +16,7 @@ const ToReply =({sendTargetReply,userInfo}:ToReplyProps) => {
 
 return (
     <div className={style.TodoItem__body}>
-    <div className={`${style.TodoItem__body__container}`}>
+    {/* <div className={`${style.TodoItem__body__container}`}>
 
         <div className={style.TodoItem__body__img_container}>
         {
@@ -39,7 +39,7 @@ return (
           </div>
   
         </div>
-    </div>
+    </div> */}
     </div>   
 
   

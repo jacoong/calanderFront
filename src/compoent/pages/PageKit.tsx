@@ -23,7 +23,7 @@ import React, { useCallback } from 'react';
 function PageKit() {
         const todoCtx = useContext(TodosContext);
         const navigate = useNavigate();
-        const [loading, setLoading] = useState(true);
+        const [loading, setLoading] = useState(false);
         // const [shouldUsername, setShouldUsername] = useState(false);
         const [userInfo,setUserInfo] = useState<UserType>()
         const [logOutPopUp,setLogOutPopUp] = useState<boolean>(false)
@@ -78,26 +78,27 @@ function PageKit() {
 
 
 
-        const checkUserName = useCallback(async () => {
+        const checkUserName = async () => {
           try {
-              const res = await axios.get(`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/user/main/${userId}`, { withCredentials: true });
-              if (res.status === 201) {
-                  const userInfo = res.data.userInfo;
-                  if (userInfo.username === null) {
-                      todoCtx.sendFlexbox({ isOpen: true, type: 'shouldUsername' });
-                      setLoading(false);
-                  } else {
-                      setLoading(false);
-                      localStorage.setItem('userDataKey', JSON.stringify(userInfo._id));
-                      setUserInfo(userInfo);
-                  }
+            const res = await axios.get(`${todoCtx.serverUrl}/api/get/userInformation` ,{ withCredentials: true });
+              if (res.status === 20) {
+                const userInfo = res.data.userInfo;
+                return setUserInfo(userInfo)
               }
           } catch (err) {
               console.error(err);
           }
-      }, [todoCtx, setLoading, setUserInfo, userId]);
+      }
 
           
+
+    useEffect(()=>{
+      if(userInfo){
+        if(userInfo.nickName === null){
+          todoCtx.sendFlexbox({ isOpen: true, type: 'shouldUsername' });
+        }
+      }
+    },[userInfo])
         // const axiosPost = async () => {
         //   // const userId = todoCtx.userInfo._id;
         //   console.log('eeee',userId);
@@ -164,7 +165,7 @@ function PageKit() {
                   ( 
 
                   <>
-                    {todoCtx.openAndType.type && ['popup','NewTodos', 'Reply', 'Edit','Delete','Edit profile'].includes(todoCtx.openAndType.type) && todoCtx.openAndType.isOpen === true
+                    {todoCtx.openAndType.type !== null && todoCtx.openAndType.isOpen === true
                     ?
                     <FlexBox  deleteTodo={todoCtx.openAndType?.DeleteFunction} userInfo={userInfo} handleClosed={handleClosed} sendTargetReply={todoCtx.openAndType.value} handleUNsubmit={handleUNsubmit} openAndType={{isOpen:true,type:todoCtx.openAndType.type}} needClosedFlexBox={false}/>
                     :
@@ -286,12 +287,9 @@ function PageKit() {
                               {/* <div className={`${style.main_body__banner__items__item} ${style.userLogin}`}> */}
                                   <div className={`${style.main_body__banner__items__item__onClick} ${style.userLogin}`}>
                                   <div className={style.main_body__banner__items__item__onClick__container}>
-                                  {userInfo
-                                  ?
-                                  <UserFileItem profileImg={userInfo?.profileImg} username={userInfo?.username} mail={userInfo?.email} isAuthenticated={userInfo?.isAuthenticated}></UserFileItem>
-                                  :
-                                  null
-                                  }        
+                        
+                                
+                        
                                   {/* <div className={style.main_body__banner__items__item__onClick__container_user}>
                                     <p>@dgr</p>
                                     <p>@fescgwefdc</p>
@@ -322,7 +320,7 @@ function PageKit() {
                           <div className={`${style.main_body__banner__popup}`}>
                             <div className={`${style.main_body__banner__popup__container__LogOut}`}>
                             <div className={`${style.main_body__banner__popup__container__LogOut__item}`}>
-                                <Link to={`/${userInfo?.username}`} onClick={goToPage} > Go to My Page {userInfo?.username}</Link>
+                                {/* <Link to={`/${userInfo?.username}`} onClick={goToPage} > Go to My Page {userInfo?.username}</Link> */}
                             </div>
                             <div className={`${style.main_body__banner__popup__container__LogOut__item}`} onClick={todoCtx.handleLogOut}>
                                 <p>Log Out</p>
