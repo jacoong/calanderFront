@@ -28,8 +28,6 @@ function PageKit() {
         const [userInfo,setUserInfo] = useState<UserType>()
         const [logOutPopUp,setLogOutPopUp] = useState<boolean>(false)
 
-        const savedData:any = localStorage.getItem('userDataKey'); 
-        const userId = JSON.parse(savedData);
 
 
 
@@ -81,9 +79,14 @@ function PageKit() {
         const checkUserName = async () => {
           try {
             const res = await axios.get(`${todoCtx.serverUrl}/api/get/userInformation` ,{ withCredentials: true });
-              if (res.status === 20) {
-                const userInfo = res.data.userInfo;
-                return setUserInfo(userInfo)
+              if (res.status === 403) {
+                const userInfo = res.data.body;
+                if(userInfo){
+                  return setUserInfo(userInfo)
+                }else{
+                  navigate('/');
+                  todoCtx.sendFlexbox({isOpen:true,type:'Login'})
+                }
               }
           } catch (err) {
               console.error(err);
@@ -172,17 +175,14 @@ function PageKit() {
                     null
                   }
 
-                  <div className={`${style.main_body} ${(todoCtx.openAndType.type === 'NewTodos' || todoCtx.openAndType.type === 'reply' || todoCtx.openAndType.type === 'edit') && todoCtx.openAndType.isOpen === true ? style.newTodo : ''}`}>
+                  <div className={`${style.main_body}`}>
                       <div className={style.main_body__banner}>
-
- 
-
                       <div className={style.main_body__banner__items}>
                 
                         
                       <div className={style.main_body__banner__items__logo}>
                           <Link className={style.main_body__banner__items__logo__container} to={`/`}>
-                          <img alt={'dd'}src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
+                          <img alt={'dd'} src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
                         </Link>
                       </div>
 
@@ -314,7 +314,6 @@ function PageKit() {
 
 
                       </div>
-
                       {logOutPopUp
                           ?
                           <div className={`${style.main_body__banner__popup}`}>

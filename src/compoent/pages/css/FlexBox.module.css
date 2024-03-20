@@ -141,7 +141,7 @@ cursor: pointer;
 
 /*fefjasenfuieslnciusecehfucesi*/
 
-.openMain__flexBox__popUp__Login_body{
+.openMain__flexBox__popUp__body{
     margin: 0 auto;
     box-sizing: border-box;
     padding:10px;
@@ -155,7 +155,7 @@ cursor: pointer;
 }
 
 
-.openMain__flexBox__popUp__Login_body__container{
+.openMain__flexBox__popUp__body__container{
     width: 380px;
     margin: 0 auto;
 }
@@ -165,16 +165,16 @@ cursor: pointer;
 
 
 
-.openMain__flexBox__popUp__Login_body__container h1{
+.openMain__flexBox__popUp__body__container h1{
     font-weight: 900;
     font-size: 30px;   
     margin-bottom: 2.5rem; 
 }
-.openMain__flexBox__popUp__Login_body__container__button{
+.openMain__flexBox__popUp__body__container__button{
 width: 100%;
 margin-bottom: 20px;
 }
-.openMain__flexBox__popUp__Login_body__container__or{
+.openMain__flexBox__popUp__body__container__or{
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -182,30 +182,17 @@ margin-bottom: 20px;
     height: 15px;
     margin-bottom: 8px;
 }
-.openMain__flexBox__popUp__Login_body__container__or__line{
+.openMain__flexBox__popUp__body__container__or__line{
     width: 115px;
     height: 1px;
     background-color: rgb(239, 243, 244);
 }
-.openMain__flexBox__popUp__Login_body__container__or__text{
+.openMain__flexBox__popUp__body__container__or__text{
     font-weight: 400;
 }
 
-.openMain__flexBox__popUp__Register_body{
-    width: 330px;
-    margin: 0 auto;
-    justify-content: space-evenly;
-    flex-direction: column;
-    height: 450px;
-    display: flex;
-    align-items: flex-start;
-}
 
-.openMain__flexBox__popUp__Register_body h1{
-    font-weight: 900;
-    font-size: 30px;   
-    margin-bottom: 2.5rem; 
-}
+
 
 .openMain__flexBox__popUp__Post_body{
     max-height: 500px;

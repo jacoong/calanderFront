@@ -40,6 +40,13 @@ import { BiArrowBack } from "react-icons/bi";
         typeOfImg?:typeOfImg
     }
 
+
+    export interface TypeOfLoginValue {
+        email: string;
+        password: string;
+        encodedCheckCode:string;
+      }
+
     const popupWidth = 500;
     const popupHeight = 700;
     
@@ -50,6 +57,10 @@ import { BiArrowBack } from "react-icons/bi";
 
 
 function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,handleUNsubmit, handleClosed,needClosedFlexBox=false }:FlexBoxProps) {
+    
+    
+    const [emailPasswordValue,setEmailPasswordValue] = useState<TypeOfLoginValue>({email:'',password:'',encodedCheckCode:''})
+
     const [previewImages, setPreviewImages] = useState<(string |File| null)[]>([null, null]);
     const [currentPopupPage,setCurrentPopupPage] = useState<number>(1);
     const todoCtx = useContext(TodosContext);
@@ -121,6 +132,15 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
             }
         }
 
+        const savedUserLoginInfo = (userInfo: TypeOfLoginValue)=>{
+            console.log('why?')
+            if(userInfo){
+                console.log(userInfo,'why2')
+            setEmailPasswordValue(userInfo);
+            }else{
+                return
+            }
+        }
   
 
         const axiosPost= async(data:any) =>{
@@ -160,7 +180,7 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
                 <div className={`${style.openMain__flexBox} ${openAndType.type === 'NewTodos' ? style.post : ''}`}>
                         <div className={`${style.openMain__flexBox__popUp} ${openAndType.type === 'NewTodos' ? style.post : ''}` } onClick={prventEventBubling}>
 
-                            { ['NewTodos','MakeAcount', 'Reply',null,'Edit profile'].includes(openAndType.type)
+                            { ['NewTodos', 'Reply',null,'Edit profile'].includes(openAndType.type)
                             ?
                             <div className={`${style.openMain__flexBox__popUp__header} ${openAndType.type === 'NewTodos' ? style.post : ''}`}>
                             {needClosedFlexBox ?
@@ -214,7 +234,7 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
                         
                             {openAndType.type ==='Login' ?
                             <div className={style.openMain__flexBox__popUp__PopupSliderContainer}>
-                                <div style={currentPopupPage?{transform:`translate(${100-(100*currentPopupPage)}%)`}:{}} className={style.openMain__flexBox__popUp__Login_body}>
+                                <div style={currentPopupPage?{transform:`translate(${100-(100*currentPopupPage)}%)`}:{}} className={style.openMain__flexBox__popUp__body}>
 
 
                                     <div className={`${style.openMain__flexBox__popUp__header__popUppage}`}>
@@ -233,20 +253,14 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
 
 
 
-
-
-
-
-
-
-                                <div className={style.openMain__flexBox__popUp__Login_body__container}>
+                                <div className={style.openMain__flexBox__popUp__body__container}>
                                 <h1>Login AreA</h1>
     
-                                <div className={style.openMain__flexBox__popUp__Login_body__container__button}>
+                                <div className={style.openMain__flexBox__popUp__body__container__button}>
                                 <Button width={'large'} Background_color={'b-white'} handleClick={handleLoginGoogleClick} font_color={'f-black'}>Join with Google</Button>
                                 </div>
     
-                                <div className={style.openMain__flexBox__popUp__Login_body__container__button}>
+                                <div className={style.openMain__flexBox__popUp__body__container__button}>
                                 <Button width={'large'} Background_color={'b-black'} font_color={'f-white'}>Join with Apple</Button>
                                 </div>
     
@@ -254,14 +268,14 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
     
     
     
-                                <div className={style.openMain__flexBox__popUp__Login_body__container__or}>
-                                    <div className={style.openMain__flexBox__popUp__Login_body__container__or__line}></div>
+                                <div className={style.openMain__flexBox__popUp__body__container__or}>
+                                    <div className={style.openMain__flexBox__popUp__body__container__or__line}></div>
     
-                                    <div className={style.openMain__flexBox__popUp__Login_body__container__or__text}>
+                                    <div className={style.openMain__flexBox__popUp__body__container__or__text}>
                                     <p>Or</p>
                                     </div>
     
-                                    <div className={style.openMain__flexBox__popUp__Login_body__container__or__line}></div>
+                                    <div className={style.openMain__flexBox__popUp__body__container__or__line}></div>
                                 </div>
     
     
@@ -272,7 +286,7 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
                                 </div>
                                 </div>
 
-                                <div style={currentPopupPage?{transform:`translate(${100-(100*currentPopupPage)}%)`}:{}} className={style.openMain__flexBox__popUp__Login_body}>
+                                <div style={currentPopupPage?{transform:`translate(${100-(100*currentPopupPage)}%)`}:{}} className={style.openMain__flexBox__popUp__body}>
 
 
                                 <div className={`${style.openMain__flexBox__popUp__header__popUppage}`}>
@@ -290,9 +304,9 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
                                 </div>
 
 
-                                <div className={style.openMain__flexBox__popUp__Login_body__container}>
+                                <div className={style.openMain__flexBox__popUp__body__container}>
 
-                                <div className={style.openMain__flexBox__popUp__Login_body__container__paragraph}>
+                                <div className={style.openMain__flexBox__popUp__body__container__paragraph}>
                                     <p>you can recreate your password</p>
                                     <p>simply input your email</p>
                                 </div>
@@ -303,7 +317,7 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
 </div>
                                 </div>
 
-                                <div style={currentPopupPage?{transform:`translate(${100-(100*currentPopupPage)}%)`}:{}} className={style.openMain__flexBox__popUp__Login_body}>
+                                <div style={currentPopupPage?{transform:`translate(${100-(100*currentPopupPage)}%)`}:{}} className={style.openMain__flexBox__popUp__body}>
                                     <div className={`${style.openMain__flexBox__popUp__header__popUppage}`}>
                                     <div className={style.openMain__flexBox__popUp__header__circle} onClick={beforePopUppage}>
                                         <div className={style.openMain__flexBox__popUp__header__circle__container} >
@@ -319,9 +333,9 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
                                     </div>
 
 
-                                    <div className={style.openMain__flexBox__popUp__Login_body__container}>
+                                    <div className={style.openMain__flexBox__popUp__body__container}>
 
-                                    <div className={style.openMain__flexBox__popUp__Login_body__container__paragraph}>
+                                    <div className={style.openMain__flexBox__popUp__body__container__paragraph}>
                                         <p>Check your email.</p>
                                     </div>
                                     <Button>Done!</Button>
@@ -330,13 +344,59 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
 </div>
                             </div>
         
-                                :
+                                :                           
                             (openAndType.type ==='MakeAcount' ?
+                            <div className={style.openMain__flexBox__popUp__PopupSliderContainer}>
+                            <div style={currentPopupPage?{transform:`translate(${100-(100*currentPopupPage)}%)`}:{}} className={style.openMain__flexBox__popUp__body}>
+                                
+                            <div className={`${style.openMain__flexBox__popUp__header__popUppage}`}>
+                                    <div className={style.openMain__flexBox__popUp__header__circle} onClick={handleClosed}>
+                                        <div className={style.openMain__flexBox__popUp__header__circle__container} >
+                                            <IoCloseOutline/>   
+                                        </div>
+                                    </div>
+                                    <div className={style.openMain__flexBox__popUp__header__logo}>
+                                        <img alt={'dd'} src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
+                                    </div>
+                                    <div className={style.openMain__flexBox__popUp__header__nothing}>
 
-                            <div className={style.openMain__flexBox__popUp__Register_body}>
-                            <h1>Register Your Acount</h1>
-                            <Login requestType={'register'}></Login>
+                                    </div>
+                                    </div>
+
+                                    <div className={style.openMain__flexBox__popUp__body__container}>
+                                
+                                        <h1>Register Your Acount</h1>
+                                        <Login valueOfUserLoginInfo={emailPasswordValue} savedUserLoginInfo={savedUserLoginInfo} nextPopUpPage={nextPopUpPage} requestType={'register'}></Login>
+                                        </div>
+                                    </div>
+
+
+                             <div style={currentPopupPage?{transform:`translate(${100-(100*currentPopupPage)}%)`}:{}} className={style.openMain__flexBox__popUp__body}>
+                                
+                                <div className={`${style.openMain__flexBox__popUp__header__popUppage}`}>
+                                        <div className={style.openMain__flexBox__popUp__header__circle} onClick={handleClosed}>
+                                            <div className={style.openMain__flexBox__popUp__header__circle__container} >
+                                                <IoCloseOutline/>   
+                                            </div>
+                                        </div>
+                                        <div className={style.openMain__flexBox__popUp__header__logo}>
+                                            <img alt={'dd'} src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
+                                        </div>
+                                        <div className={style.openMain__flexBox__popUp__header__nothing}>
+    
+                                        </div>
+                                        </div>
+    
+                                        <div className={style.openMain__flexBox__popUp__body__container}>
+                                    
+                                          <h1>Input your mail code</h1>
+                                            <Login valueOfUserLoginInfo={emailPasswordValue} nextPopUpPage={nextPopUpPage} requestType={'encodedCheckCode'}></Login>
+                                            </div>
+                                        </div>
+
+            
                             </div>
+                            
                                 :
                             (openAndType.type === 'username' ?
                             <div className={style.openMain__flexBox__popUp__Post_body}>

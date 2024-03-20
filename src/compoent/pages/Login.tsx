@@ -4,18 +4,23 @@ import { useNavigate } from 'react-router-dom'; // If yo
 import style from './css/Login.module.css';
 import {useSendIdPwInfo} from '../customHook'
 import Button from '../compoentItem/Button';
-import {emailValidator,passwordValidator,prepasswordValidator,confirmPasswordValidator} from '../validator'
+import {emailValidator,passwordValidator,prepasswordValidator,confirmPasswordValidator,encodedCheckCodeValidator} from '../validator'
 import FlashMessage from '../compoentItem/FlashMessage';
 import axios from 'axios'
+import { TypeOfLoginValue } from '../compoentItem/FlexBox';
 
 type LoginPropsType = {
   nextPopUpPage?:()=>void;
-  requestType:'login' | 'register' | 'recreatePassword' | 'updatePassword';
+  requestType:'login' | 'register' | 'recreatePassword' | 'updatePassword' | 'encodedCheckCode';
+  savedUserLoginInfo?: (setEmailPasswordValue:TypeOfLoginValue)=> void;
+  valueOfUserLoginInfo?:TypeOfLoginValue;
 }
+
+
 
 type RequestTypeOnly = LoginPropsType['requestType'];
 
-function Login({nextPopUpPage,requestType}:LoginPropsType) {
+function Login({nextPopUpPage,requestType,savedUserLoginInfo,valueOfUserLoginInfo}:LoginPropsType) {
         const todoCtx = useContext(TodosContext);
  
         interface typeVaildation {
@@ -24,15 +29,22 @@ function Login({nextPopUpPage,requestType}:LoginPropsType) {
           message: string
         }
 
+
+        // const savedencodedCheckCode:any = localStorage.getItem('userDataKey');
+        // localStorage.clear();
+        // localStorage.setItem('userDataKey', );
         // const passwordRef = useRef<HTMLInputElement>(null);
         // const emailRef = useRef<HTMLInputElement>(null);
         const passwordConfirmRef = useRef<HTMLInputElement>(null)
         const prepasswordRef = useRef<HTMLInputElement>(null);
+        const encodedCheckCodeRef = useRef<HTMLInputElement>(null);
+
 
         const [emailValidate,setEmailValidate] = useState<typeVaildation>({touched: false, error: false, message: ''})
         const [prepasswordValidate,setPrepasswordValidate] = useState<typeVaildation>({touched: false, error: false, message: ''})
         const [passwordValidate,setPasswordValidate] = useState<typeVaildation>({touched: false, error: false, message: ''})
         const [passwordConfirmValidate,setPasswordConfirmValidate] = useState<typeVaildation>({touched: false, error: false, message: ''})
+        const [encodedCheckCodeValidate,setEncodedCheckCodeValidate] = useState<typeVaildation>({touched: false, error: false, message: ''})
         // const [isLoadingConfirm,setIsLoadingConfirm] = useState(false);
         
         const navigate = useNavigate();
@@ -79,7 +91,22 @@ function Login({nextPopUpPage,requestType}:LoginPropsType) {
             setPasswordConfirmValidate(result)
           }
 
+          const handleEncodedCheckCode = (e:React.ChangeEvent<HTMLInputElement>) =>{
+            const encodedCheckCode = encodedCheckCodeRef.current!.value;
+            const limitedEncodedCheckCode = limitNumberDigit(encodedCheckCode, 4); // 최대 길이를 4로 제한합니다.
+            encodedCheckCodeRef.current!.value = limitedEncodedCheckCode; // 입력 필드의 값을 업데이트합니다.
+            const result = encodedCheckCodeValidator(limitedEncodedCheckCode); // 제한된 값으로 유효성 검사를 수행합니다.
+            setEncodedCheckCodeValidate(result)
+          }
 
+
+            const limitNumberDigit = (el: string, maxlength: number): string => {
+              console.log('sefsef')
+              if (el.length > maxlength) {
+                return el.substring(0, maxlength);
+              }
+              return el; // 최대 길이를 초과하지 않으면 원래의 문자열을 반환합니다.
+            }
 
           const handleOnclick = (result:string) =>{
             if(result){
@@ -124,12 +151,21 @@ function Login({nextPopUpPage,requestType}:LoginPropsType) {
           else if(requestType === 'register'){
             const emailValue = emailRef.current!.value;
             const passwordValue = passwordRef.current!.value;
-            axios.post(`${todoCtx.serverUrl}/api/auth/signUp`,
-            {email:emailValue,password:passwordValue},{ withCredentials: true })
+
+            axios.post(`${todoCtx.serverUrl}/api/auth/send/check/emailCode/${emailValue}`,
+            {email:emailValue},{ withCredentials: true })
             .then(res => {
               if(res.status===200){
-                alert('signup done')
-                LoginLogic(emailValue,passwordValue)
+                const encodedCheckCode:string = res.data.body.encodedCheckCode;
+                console.log(encodedCheckCode);
+                if (savedUserLoginInfo) {
+                savedUserLoginInfo({email:emailValue,password:passwordValue,encodedCheckCode:encodedCheckCode})
+                nextPopUpPage!();
+                }else{
+                  throw Error
+                }
+                return;
+                // LoginLogic(emailValue,passwordValue)
               }
             })
             .catch(error => {
@@ -152,7 +188,29 @@ function Login({nextPopUpPage,requestType}:LoginPropsType) {
               console.log(`post response: test`, error);
             });
           }
+
+          else if(requestType === 'encodedCheckCode'){
+            console.log(valueOfUserLoginInfo,'??')
+            if(valueOfUserLoginInfo){
+            const encodedCheckCode = encodedCheckCodeRef.current!.value;
+            axios.post(`${todoCtx.serverUrl}/api/auth/check/email`,
+            {encodedCheckCode:valueOfUserLoginInfo.encodedCheckCode,checkCode:encodedCheckCode},{ withCredentials: true })
+            .then(res => {
+              if(res.status===200){
+                alert('validate done')
+                RegisterLogic(valueOfUserLoginInfo.email,valueOfUserLoginInfo.password)
+              }
+            })
+            .catch(error => {
+              console.log(`post response: test`, error);
+            });}else{
+              throw Error
+            }
+          }
       };
+
+
+
 
       const LoginLogic = (emailValue:string,passwordValue:string)=>{
         console.log('why?')
@@ -169,7 +227,19 @@ function Login({nextPopUpPage,requestType}:LoginPropsType) {
         });
       }
 
-
+      const RegisterLogic = (emailValue:string,passwordValue:string)=>{
+            axios.post(`${todoCtx.serverUrl}/api/auth/signUp`,
+            {email:emailValue,password:passwordValue},{ withCredentials: true })
+            .then(res => {
+              if(res.status===200){
+                alert('signup done')
+                LoginLogic(emailValue,passwordValue)
+              }
+            })
+            .catch(error => {
+              console.log(`post response: test`, error);
+            });
+      }
 
 
 
@@ -273,9 +343,37 @@ function Login({nextPopUpPage,requestType}:LoginPropsType) {
                   </form>
                   :
 
+                  (requestType ==='encodedCheckCode' ? 
+
+                  <form  onSubmit={(e) => handleSubmit(e,'encodedCheckCode')}>
+                  <div className={`${style.userbox}
+                      
+                                    ${encodedCheckCodeValidate.touched
+                                        ? (encodedCheckCodeValidate.error ? style.error : style.success)
+                                        : style.initial}`
+                                    }
+                  >
+                    <input type='text' onChange={handleEncodedCheckCode}  ref={encodedCheckCodeRef}  id="encodedCheckCode" name="encodedCheckCode"required={true}
+                    />
+                    <label htmlFor="encodedCheckCode" >Vaildate Code</label>
+                    
+                    <div style={{marginBottom:'0px'}} className={style.userbox__vaildateMsg}>
+                    <p>{encodedCheckCodeValidate.message}</p>
+                    </div>
+                  </div>
 
 
+                  {encodedCheckCodeValidate.touched && !encodedCheckCodeValidate.error
+                          ? <Button width={'large'} type="submit">Send</Button>
+                          : <Button width={'large'} Background_color={'b-gary'} disabled={true} type="submit">Send</Button>}
+      
 
+
+                  <FlashMessage handleOnclick={handleOnclick}/>
+                  {/* <Button width={'large'}type="submit">Send</Button>
+                  <Button width={'large'} Background_color={'b-gary'} disabled={true} type="submit">Send</Button> */}
+                  </form>
+                  :
 
 
 
@@ -355,6 +453,7 @@ function Login({nextPopUpPage,requestType}:LoginPropsType) {
                     <Button width={'large'} Background_color={'b-gary'} disabled={true} type="submit">Send</Button> */}
                   </form>
                   )
+                  )
                   }
 
 
@@ -364,6 +463,6 @@ function Login({nextPopUpPage,requestType}:LoginPropsType) {
             </div>
         );
        };
-       
+      
     
 export default Login;

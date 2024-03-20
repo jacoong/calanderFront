@@ -87,3 +87,18 @@ export const emailValidator = async(email:string,type?:string) => {
     }
     return {touched:true,error:false,message:"Success"};
   };
+
+  export const encodedCheckCodeValidator = (encodedCheckCode:string) => {
+    const digitRegex = /^\d+$/; // 숫자로만 이루어진 문자열을 확인하는 정규표현식
+    
+    if (!encodedCheckCode) {
+      return {touched:false,error:false,message:""};
+    } 
+    else if (!digitRegex.test(encodedCheckCode)) { // 숫자로만 이루어진지 검사
+      return { touched: true, error: true, message: "Only Number are allowed!" };
+    }
+    else if (encodedCheckCode.length < 4) {
+      return {touched:true,error:true,message:"Password must have a 4 digit!!"};
+    }
+    return {touched:true,error:false,message:"Success"};
+  };

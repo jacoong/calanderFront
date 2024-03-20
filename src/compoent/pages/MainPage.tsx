@@ -28,7 +28,7 @@ function MainPage() {
 
     //       console.log('좋은술1');
     //       getUserInfo(userId);
- 
+    
 
     //     const handleScroll = (e:React.UIEvent<HTMLDivElement>) => {
     //       const target = e.target as HTMLElement;
@@ -38,15 +38,16 @@ function MainPage() {
     //       }
     //     }
 
-        useEffect(()=>{
-          if(userInfo){
-            console.log('userInfo',userInfo);
+
+        // useEffect(()=>{
+        //   if(userInfo){
+        //     console.log('userInfo',userInfo);
             
-            if(userInfo.nickName === null){
-              todoCtx.sendFlexbox({isOpen:true,type:'username'})
-            }
-          }
-        },[userInfo])
+        //     if(userInfo.nickName === null){
+        //       todoCtx.sendFlexbox({isOpen:true,type:'username'})
+        //     }
+        //   }
+        // },[userInfo])
 
     //     useEffect(()=>{
     //       console.log('좋은술3');
@@ -58,7 +59,7 @@ function MainPage() {
     //       }
     //     },[todoCtx.items])
 
-    
+
     const handleClick = () =>{
       todoCtx.sendFlexbox({isOpen:true,type:'updatePassword'})
     }
