@@ -7,6 +7,7 @@ import Button from '../compoentItem/Button';
 import {userNameValidator} from '../validator'
 import { FaUserCircle } from "react-icons/fa";
 import {TodosContext} from '../../store/todo_context'
+import { instance } from '../../store/axios_context';
 
 interface UsernameProps {
   handleUNsubmit?: (data: string) => void;
@@ -93,12 +94,11 @@ function Username({ handleUNsubmit }: UsernameProps) {
 
       const nickName = usernameRef.current!.value;
 
-      axios.patch(`${todoCtx.serverUrl}/api/update/nickName`,
+      instance.patch(`${todoCtx.serverUrl}/api/update/nickName`,
       {nickName:nickName},{ withCredentials: true })
       .then(res => {
         if(res.status===200){
-          console.log('pizzaaa')
-          navigate('/main');
+          navigate('/');
         }
       })
       .catch(error => {

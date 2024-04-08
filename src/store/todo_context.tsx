@@ -41,6 +41,7 @@ export interface typeAction {
   type:string|null;
   DeleteFunction?():void;
   value?:typeOfSendTargetReply;
+  popupValue?:any;//need to change
 }
 
 type TodosContextObj = {
@@ -51,7 +52,7 @@ type TodosContextObj = {
   deleteTodo: (commentId:string,parentId?:string) => void;
   handleLogOut: () => void;
   ErrorMsg:any;
-  callApi: (skip:number,userId?:string) => any;
+  unAuthenticateUser: (referer:string) => any;
   userInfo:any;
   RsgLogMsg:string;
   sendFlexbox: (data:typeAction) => void;
@@ -80,7 +81,7 @@ export const TodosContext = createContext<TodosContextObj>(
         deleteTodo: ()=>{},
         handleLogOut: ()=>{},
         ErrorMsg:{},
-        callApi:() => {},
+        unAuthenticateUser:() => {},
         userInfo:initialUserInfo,
         RsgLogMsg:'',
         sendFlexbox: () => {},
@@ -159,14 +160,11 @@ const TodosContextProvider = ({ children }: {children: ReactNode}) => {
     setOpenAndType(typeOfpopUp);
   };
 
-  const callApi = async (skip:number,dataId?:string) => {
-    console.log('callApi executed')
-
-    if(dataId){
-      return await getCommentInfo(dataId,skip);
-    }
-    return await callCommentApi(skip);
-
+  const unAuthenticateUser = async (previousUrl:string) => {
+    console.log('unAuthenticateUser executed');
+    localStorage.setItem('previousUrl', previousUrl);
+    navigate('/');
+    sendFlexbox({isOpen:true,type:'Login'})
   };
 
   const getCommentInfo = async(Id:string,skip?:number,commentId?:string) => {
@@ -513,7 +511,7 @@ const TodosContextProvider = ({ children }: {children: ReactNode}) => {
         ErrorMsg: ErrorMsg,
         RegisterOrLogin:RegisterOrLogin,
         handleLogOut:handleLogOut,
-        callApi:callApi,
+        unAuthenticateUser:unAuthenticateUser,
         userInfo:userInfo,
         RsgLogMsg:RsgLogMsg,
         openAndType:openAndType,

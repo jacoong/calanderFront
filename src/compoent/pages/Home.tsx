@@ -1,12 +1,15 @@
 
-import {useContext} from 'react';
+import {useContext,useEffect} from 'react';
 import {TodosContext} from '../../store/todo_context'
 import style from './css/Home.module.css';
 import FlexBox from '../compoentItem/FlexBox'
 import JoinForm from '../compoentItem/JoinForm';
+import {getCookie} from '../../store/coockie'
+import { useNavigate } from 'react-router-dom';
+
 function Home() {
   const todoCtx = useContext(TodosContext);
-
+  const navigate = useNavigate();
       // interface typeAction {
       //   isOpen:boolean;
       //   type:string|null
@@ -38,22 +41,21 @@ function Home() {
       //     checkLogin(savedData);
       // },[])
 
-      // const checkLogin = async (savedData:string) => {
-      //   // const userId = todoCtx.userInfo._id;
-      //   try {
-      //     const res = await axios.get('https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/isLogin', { withCredentials: true });
-      //     if (res.status === 201) {
-      //       localStorage.removeItem('userDataKey');
-      //        navigate(res.data.redirect);
-      //   } else if (res.status === 200) {
-      //       navigate(res.data.redirect)
-      //       }
-      //     }
-      //   catch (err: any) {
-      //     console.error(err);
-      //    } 
-      //  }
+      const checkLogin = () => {
+        const refreshToken = getCookie('refreshToken'); 
+        if(refreshToken){
+          navigate('/main')
+        }else{
+          return
+        }
+       }
+
+       useEffect(()=>{
+        checkLogin();
+       },[])
       
+
+
 
       function handleMakeAcount(){
         todoCtx.sendFlexbox({isOpen:true,type:'MakeAcount'})

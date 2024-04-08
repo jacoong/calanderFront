@@ -182,7 +182,7 @@ function PostPage() {
     // setTimeout(async () => {
       if (commentInfo) {
         console.log("실행");
-        await todoCtx.callApi(skip, commentInfo!._id);
+        // await todoCtx.callApi(skip, commentInfo!._id);
       } else {
         return;
       }

@@ -10,6 +10,7 @@ import {TodosContext,UserType} from '../../store/todo_context'
 import axios from 'axios';
 import Username from '../pages/Username'
 import NewTodos from '../NewTodos';
+import MakeEvent from '../MakeEvent';
 
 import ToReply from '../compoentItem/ToReply';
 import { BiArrowBack } from "react-icons/bi";
@@ -37,7 +38,8 @@ import { BiArrowBack } from "react-icons/bi";
         userInfo?:UserType;
         deleteTodo?():void;
         sendTargetReply?:typeOfSendTargetReply;
-        typeOfImg?:typeOfImg
+        typeOfImg?:typeOfImg;
+        popupValue?:string[];
     }
 
 
@@ -56,7 +58,7 @@ import { BiArrowBack } from "react-icons/bi";
     const popupY= (window.screen.height / 2) - (popupHeight / 2);
 
 
-function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,handleUNsubmit, handleClosed,needClosedFlexBox=false }:FlexBoxProps) {
+function FlexBox({popupValue,typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,handleUNsubmit, handleClosed,needClosedFlexBox=false }:FlexBoxProps) {
     
     
     const [emailPasswordValue,setEmailPasswordValue] = useState<TypeOfLoginValue>({email:'',password:'',encodedCheckCode:''})
@@ -150,7 +152,7 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
                       alert('need to use username!')
                   }else if(res.status === 200){
                         console.log('success!')
-                        todoCtx.callApi(0);
+                        // todoCtx.callApi(0);
                     return
                   }
               })
@@ -174,9 +176,10 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
         openAndType.type === 'popup'
         ?
         <div className={`${style.popUpMain}`}  onClick={handleClickPopUp}>
+
         </div>
         :
-        <div className={`${style.openMain}`} onClick={['NewTodos', 'Reply','username','MakeAcount','Login',null,'Edit profile'].includes(openAndType.type) ?  undefined : handleClickPopUp}>
+        <div className={`${style.openMain}`} onClick={['NewTodos', 'MakeEvent','Reply','username','MakeAcount','updatePassword','Login',null,'Edit profile'].includes(openAndType.type) ?  undefined : handleClickPopUp}> 
                 <div className={`${style.openMain__flexBox} ${openAndType.type === 'NewTodos' ? style.post : ''}`}>
                         <div className={`${style.openMain__flexBox__popUp} ${openAndType.type === 'NewTodos' ? style.post : ''}` } onClick={prventEventBubling}>
 
@@ -206,7 +209,7 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
                                 ?
                                 <form  className={style.openMain__flexBox__popUp__form} onSubmit={(e) => handleEditProfile(e)} encType='multipart/form-data'>
                                 {/* <input value='send request' type='submit'/> */}
-                                <Button type={'submit'} Background_color={'b-black'} width={'small'}>Save</Button>
+                                <Button type={'submit'} background_color={'b-black'} width={'small'}>Save</Button>
                                 </form>
                                 :
                                 null
@@ -257,11 +260,11 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
                                 <h1>Login AreA</h1>
     
                                 <div className={style.openMain__flexBox__popUp__body__container__button}>
-                                <Button width={'large'} Background_color={'b-white'} handleClick={handleLoginGoogleClick} font_color={'f-black'}>Join with Google</Button>
+                                <Button width={'large'} background_color={'b-white'} handleClick={handleLoginGoogleClick} color={'black'}>Join with Google</Button>
                                 </div>
     
                                 <div className={style.openMain__flexBox__popUp__body__container__button}>
-                                <Button width={'large'} Background_color={'b-black'} font_color={'f-white'}>Join with Apple</Button>
+                                <Button width={'large'} background_color={'b-black'} color={'white'}>Join with Apple</Button>
                                 </div>
     
     
@@ -404,23 +407,59 @@ function FlexBox({typeOfImg,sendTargetReply,userInfo,openAndType,deleteTodo,hand
                             <Username handleUNsubmit={handleUNsubmit}></Username>
                             </div>
                                 :
-                            (openAndType.type === 'NewTodos' ?
+                            (openAndType.type === 'MakeEvent' ?
                             <div className={style.openMain__flexBox__popUp__NewTodos_body}>
-                        
+                            <div className={`${style.openMain__flexBox__popUp__header__popUppage}`}>
+                                   <div className={style.openMain__flexBox__popUp__header__circle} onClick={handleClosed}>
+                                       <div className={style.openMain__flexBox__popUp__header__circle__container} >
+                                           <IoCloseOutline/>   
+                                       </div>
+                                   </div>
+                                   <div className={style.openMain__flexBox__popUp__header__logo}>
+                                   </div>
+                                   <div className={style.openMain__flexBox__popUp__header__nothing}>
+
+                                   </div>
                             </div>
+                            <MakeEvent></MakeEvent>
+                           </div>
                                 :
                             (openAndType.type === 'updatePassword' ?
-                            <div className={style.openMain__flexBox__popUp__Post_body}>
-                            <h1>update Password</h1>
-                            <Login requestType={'updatePassword'}></Login>
-                            </div>
-                                :
-                            (openAndType.type === 'Reply' ?
+                            <div className={style.openMain__flexBox__popUp__NewTodos_body}>
+                            <div className={`${style.openMain__flexBox__popUp__header__popUppage}`}>
+                                   <div className={style.openMain__flexBox__popUp__header__circle} onClick={handleClosed}>
+                                       <div className={style.openMain__flexBox__popUp__header__circle__container} >
+                                           <IoCloseOutline/>   
+                                       </div>
+                                   </div>
+                                   <div className={style.openMain__flexBox__popUp__header__logo}>
+                                   <h1>update Password</h1>
+                                   </div>
+                                   <div className={style.openMain__flexBox__popUp__header__nothing}>
 
-                            <div className={style.openMain__flexBox__popUp__Reply} >
-                                <ToReply sendTargetReply={sendTargetReply!} userInfo = {userInfo!}></ToReply>
-                            
-                            </div>
+                                   </div>
+                                   </div>
+                            <Login requestType={'updatePassword'}></Login>
+                           </div>
+                                :
+                            (openAndType.type === "AIPlanMaker" ?
+
+                            <div className={style.openMain__flexBox__popUp__NewTodos_body}>
+                            <div className={`${style.openMain__flexBox__popUp__header__popUppage}`}>
+                                   <div className={style.openMain__flexBox__popUp__header__circle} onClick={handleClosed}>
+                                       <div className={style.openMain__flexBox__popUp__header__circle__container} >
+                                           <IoCloseOutline/>   
+                                       </div>
+                                   </div>
+                                   <div className={style.openMain__flexBox__popUp__header__logo}>
+                                   <h1>AI Plan Maker</h1>
+                                   </div>
+                                   <div className={style.openMain__flexBox__popUp__header__nothing}>
+
+                                   </div>
+                                   </div>
+                            {/* <MakeEvent requestType={'updatePassword'}></MakeEvent> */}
+                           </div>
                                 :
                             (openAndType.type === 'Edit' ?
                             <div className={style.openMain__flexBox__popUp__Edit_body}>

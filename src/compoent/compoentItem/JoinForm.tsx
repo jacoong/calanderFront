@@ -1,5 +1,7 @@
 import Button from '../compoentItem/Button'
-
+import SocialKakao from '../SocialKakao';
+import SocialGoogle from '../SocialGoogle';
+import SocialNaver from '../SocialNaver';
 
 import style from '../pages/css/Home.module.css';
 
@@ -28,17 +30,22 @@ function JoinForm({handleMakeAcount,handleLogin,handleClosed}:TypeOfFunction) {
     }
 
     const handleSignUpGoogleClick = () =>{
-        window.open('https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/user/auth/google', '_self', 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+        window.location.href = 'http://43.202.57.92/oauth2/authorization/google'
+        
     } 
 
 return(
             <>
             <div className={style.main__right__container__button}>
-            <Button handleClick={handleSignUpGoogleClick} Background_color={'b-white'} font_color={'f-black'}>Join with Google1</Button>
+            <SocialKakao></SocialKakao>
             </div>
 
             <div className={style.main__right__container__button}>
-            <Button Background_color={'b-black'} font_color={'f-white'} handleClick={handleClick}>Join with Apple</Button>
+            <SocialGoogle></SocialGoogle>
+            </div>
+
+            <div className={style.main__right__container__button}>
+            <SocialNaver></SocialNaver>
             </div>
 
                                 
@@ -54,7 +61,7 @@ return(
             </div>
 
             <div className={style.main__right__container__button}>
-            <Button handleClick={handleMakeAcount}>Make Account</Button>
+            <Button color={'white'} handleClick={handleMakeAcount}>Make Account</Button>
             </div>
 
             <div className={style.main__right__container__alreadyJoined}>
@@ -64,7 +71,7 @@ return(
                 </div>
 
                 <div className={style.main__right__container__button}>
-                <Button Background_color={'b-white'} font_color={'f-blue'} handleClick={handleLogin}>Log In</Button>
+                <Button background_color={'b-white'} color={'#1D9BF0'} handleClick={handleLogin}>Log In</Button>
                 </div>
             </div>
             </>

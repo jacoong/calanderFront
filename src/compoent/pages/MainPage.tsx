@@ -1,7 +1,6 @@
 import StateTitle from './StateTitle'
 import NewTodos from '../NewTodos'
 import Todos from '../Todos'
-import style from '../pages/css/Main.module.css'
 import Loading from '../compoentItem/Loading'
 import Button from '../compoentItem/Button'
 import {useContext,useEffect,useState} from 'react';
@@ -70,9 +69,6 @@ return(
   ?
   <div>
     <h1>Main Page</h1>
-    <div className={style.main__right__container__button}>
-    <Button Background_color={'b-black'} font_color={'f-white'} handleClick={handleClick}>changePassword</Button>
-    </div>
   </div>
   :
   null

@@ -1,13 +1,16 @@
 import {TodosContext} from '../../store/todo_context'
 import {useContext,useEffect,useState,useRef} from 'react';
-import { useNavigate } from 'react-router-dom'; // If yo
+import { useNavigate,useLocation } from 'react-router-dom'; // If yo
 import style from './css/Login.module.css';
 import {useSendIdPwInfo} from '../customHook'
 import Button from '../compoentItem/Button';
 import {emailValidator,passwordValidator,prepasswordValidator,confirmPasswordValidator,encodedCheckCodeValidator} from '../validator'
 import FlashMessage from '../compoentItem/FlashMessage';
 import axios from 'axios'
+import { refreshAxios, instance,addResponseInterceptor,addAccessTokenInterceptor,addAccessResponseIntoCookie } from '../../store/axios_context';
 import { TypeOfLoginValue } from '../compoentItem/FlexBox';
+import {setCookie,getCookie,removeCookie} from '../../store/coockie'
+// import cookie from 'react-cookies';
 
 type LoginPropsType = {
   nextPopUpPage?:()=>void;
@@ -15,6 +18,8 @@ type LoginPropsType = {
   savedUserLoginInfo?: (setEmailPasswordValue:TypeOfLoginValue)=> void;
   valueOfUserLoginInfo?:TypeOfLoginValue;
 }
+
+
 
 
 
@@ -38,7 +43,7 @@ function Login({nextPopUpPage,requestType,savedUserLoginInfo,valueOfUserLoginInf
         const passwordConfirmRef = useRef<HTMLInputElement>(null)
         const prepasswordRef = useRef<HTMLInputElement>(null);
         const encodedCheckCodeRef = useRef<HTMLInputElement>(null);
-
+        const location = useLocation();
 
         const [emailValidate,setEmailValidate] = useState<typeVaildation>({touched: false, error: false, message: ''})
         const [prepasswordValidate,setPrepasswordValidate] = useState<typeVaildation>({touched: false, error: false, message: ''})
@@ -127,8 +132,8 @@ function Login({nextPopUpPage,requestType,savedUserLoginInfo,valueOfUserLoginInf
 
             const emailValue = emailRef.current!.value;
             
-            axios.post(`${todoCtx.serverUrl}/api/auth/recreatePassword/${emailValue}`,
-              {encodedCheckCode : "test", checkCode : "test"},{ withCredentials: true })
+            instance.post(`${todoCtx.serverUrl}/api/auth/recreatePassword/${emailValue}`,
+             )
               .then(res => {
                 if(res.status===200){
                   alert('recreatePassword done')
@@ -152,8 +157,8 @@ function Login({nextPopUpPage,requestType,savedUserLoginInfo,valueOfUserLoginInf
             const emailValue = emailRef.current!.value;
             const passwordValue = passwordRef.current!.value;
 
-            axios.post(`${todoCtx.serverUrl}/api/auth/send/check/emailCode/${emailValue}`,
-            {email:emailValue},{ withCredentials: true })
+            instance.post(`${todoCtx.serverUrl}/api/auth/send/check/emailCode/${emailValue}`,
+            {email:emailValue})
             .then(res => {
               if(res.status===200){
                 const encodedCheckCode:string = res.data.body.encodedCheckCode;
@@ -176,8 +181,8 @@ function Login({nextPopUpPage,requestType,savedUserLoginInfo,valueOfUserLoginInf
           else if(requestType === 'updatePassword'){
             const prepassword = prepasswordRef.current!.value;
             const passwordValue = passwordRef.current!.value;
-            axios.patch(`${todoCtx.serverUrl}/api/update/password`,
-            {oldPassword:prepassword,newPassword:passwordValue},{ withCredentials: true })
+            instance.patch(`${todoCtx.serverUrl}/api/update/password`,
+            {oldPassword:prepassword,newPassword:passwordValue})
             .then(res => {
               if(res.status===200){
                 alert('poassword  change done')
@@ -193,8 +198,8 @@ function Login({nextPopUpPage,requestType,savedUserLoginInfo,valueOfUserLoginInf
             console.log(valueOfUserLoginInfo,'??')
             if(valueOfUserLoginInfo){
             const encodedCheckCode = encodedCheckCodeRef.current!.value;
-            axios.post(`${todoCtx.serverUrl}/api/auth/check/email`,
-            {encodedCheckCode:valueOfUserLoginInfo.encodedCheckCode,checkCode:encodedCheckCode},{ withCredentials: true })
+            instance.post(`${todoCtx.serverUrl}/api/auth/check/email`,
+            {encodedCheckCode:valueOfUserLoginInfo.encodedCheckCode,checkCode:encodedCheckCode})
             .then(res => {
               if(res.status===200){
                 alert('validate done')
@@ -207,29 +212,122 @@ function Login({nextPopUpPage,requestType,savedUserLoginInfo,valueOfUserLoginInf
               throw Error
             }
           }
-      };
+        }
+
+
+      // const addAccessTokenInterceptor = (accessToken: string) => {
+      //   console.log('인터셉터')
+      //   instance.interceptors.request.use(
+      //     (config) => {
+      //       config.headers.Authorization = `Bearer ${accessToken}`;
+      //       return config;
+      //     },
+      //     (error) => {
+      //       return Promise.reject(error);
+      //     }
+      //   );
+      // };
+
+      // const addResponseInterceptor = () => {
+      //   instance.interceptors.response.use(
+      //     (response) => {
+      //       return response;
+      //     },
+      //     async (error) => {
+      //       if (error.response.status === 401) {
+      //       removeCookie('accessToken');
+      //       console.log('ㅈㅈㅈㅈ')
+      //       const originalRequest = error.config;
+   
+      //         console.log('ㅌㅌㅌㅌㅌㅌㅌ')
+      //           await fetchNewAccessToken(originalRequest);
+      //           return axios(originalRequest);
+
+      //     }
+      //     else{
+      //         console.error(error)
+      //     }
+      //   }
+      //   );
+      // };
+      
+
+
+
+      // const fetchNewAccessToken = async (originalRequest:any) => {
+      //   console.log('fetchNewAccessToken111');
+
+
+      //     const refreshToken = getCookie('refreshToken')
+      //     console.log(refreshToken)
+      //     if(refreshToken){
+      //       const res = await axios.post(`${todoCtx.serverUrl}/api/auth/recreate/accessToken`,{}, {
+      //         headers:{
+      //           Authorization:`Bearer ${refreshToken}`,
+      //           withCredentials: true
+      //         }
+      //     })
+      //     if (res.status === 200) {
+      //       console.log('fetcsqsqken')
+      //       const accessToken = res.data.body.replace("Bearer ", "");;  // should change depend on adress
+      //       console.log(accessToken,'ㄴㄷㄹㄷㄴㄹㄴㄷㄹㄴㄷㄹㄴㄷ')
+      //       const validateTime = 'sefescds';  // should change depend on adress
+      //       addAccessTokenInterceptor(accessToken);
+      //       addResponseInterceptor();
+      //       addAccessResponseIntoCookie({accessToken,refreshToken,validateTime});
+      //       return axios(originalRequest);
+      //     }
+      //     else if(res.status === 301){
+      //       removeCookie('refreshToken');
+      //       const currentURL = location.pathname;
+      //       todoCtx.unAuthenticateUser(currentURL);
+      //     }
+      //   else{
+      //     throw { code: 500, message: 'Unexpected Message' };
+      //   }
+      //   }
+      //   };
 
 
 
 
       const LoginLogic = (emailValue:string,passwordValue:string)=>{
         console.log('why?')
-        axios.post(`${todoCtx.serverUrl}/api/auth/login`,
-        {email:emailValue,password:passwordValue},{ withCredentials: true })
+        instance.post(`${todoCtx.serverUrl}/api/auth/login`,
+        {email:emailValue,password:passwordValue})
         .then(res => {
           if(res.status===200){
-            console.log('pizzaaa')
-            navigate('/main');
+            const getReferer = window.location.hostname;
+            instance.defaults.headers.common['Refererss'] = '43.202.57.92';
+            const accessToken = res.data.body.accessToken.replace("Bearer ", "");  // should change depend on adress
+            const refreshToken = res.data.body.refreshToken.replace("Bearer ", "");  // should change depend on adress
+            const validateTime = res.data.body.validateTime;  // should change depend on adress
+            console.log('같아야지',accessToken,'ㅇㅇ',refreshToken)
+            addAccessResponseIntoCookie({accessToken,refreshToken,validateTime});
+            // addAccessTokenInterceptor(accessToken);
+            // addResponseInterceptor();
+
+
+            const previousUrl = localStorage.getItem('previousUrl');
+            if(previousUrl){
+              navigate(previousUrl);
+              localStorage.removeItem('previousUrl');
+            }else{
+              console.log('??')
+              navigate('/main');
+            }
           }
         })
+
+
         .catch(error => {
           console.log(`post response: test`, error);
         });
       }
 
       const RegisterLogic = (emailValue:string,passwordValue:string)=>{
-            axios.post(`${todoCtx.serverUrl}/api/auth/signUp`,
-            {email:emailValue,password:passwordValue},{ withCredentials: true })
+        instance.post(`${todoCtx.serverUrl}/api/auth/signUp`,
+            {email:emailValue,password:passwordValue})
             .then(res => {
               if(res.status===200){
                 alert('signup done')
