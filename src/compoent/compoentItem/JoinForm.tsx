@@ -1,6 +1,6 @@
 import Button from '../compoentItem/Button'
 import SocialKakao from '../SocialKakao';
-import SocialGoogle from '../SocialGoogle';
+import SocialGoogle from '../SocialGoogle';
 import SocialNaver from '../SocialNaver';
 
 import style from '../pages/css/Home.module.css';

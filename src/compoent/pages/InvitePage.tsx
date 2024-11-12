@@ -8,7 +8,7 @@
         import {getCookie} from '../../store/coockie'
         import { useNavigate,useParams } from 'react-router-dom';
         import MobileLogin from '../compoentItem/MobileLogin';
-        import SocialGoogle from '../SocialGoogle';
+        import SocialGoogle from '../SocialGoogle';
         import SocialKakao from '../SocialKakao';
         import SocialNaver from '../SocialNaver';
         

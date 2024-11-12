@@ -8,9 +8,6 @@ import JoinForm from '../compoentItem/JoinForm';
 import {getCookie} from '../../store/coockie'
 import { useNavigate,useParams } from 'react-router-dom';
 import MobileLogin from '../compoentItem/MobileLogin';
-import SocialGoogle from '../SocialGoogle';
-import SocialKakao from '../SocialKakao';
-import SocialNaver from '../SocialNaver';
 import { IoMdArrowRoundForward } from "react-icons/io";
 import { fetchedData } from '../../store/LoadedEventExample';
 import { AttenderEmailDTOS,FetchedData,AttenderInfoAuth } from '../../store/types';
