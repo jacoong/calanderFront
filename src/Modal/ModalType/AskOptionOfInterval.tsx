@@ -356,7 +356,7 @@ const AskOptionOfInterval = ({eventValue}:any) => {
         const res = await axios.get(`${SERVERURL}/api/event/load/interval?eventId=${eventId}`);
         if(res.status === 200){
         
-          const data = res.data.body.intervalEvents
+          const data = res.data.body
           const app = dataPutEvents(data,categoryInfo)
           const datesValue = extractDatesValue(app);
           console.log(datesValue,'datesValue')
