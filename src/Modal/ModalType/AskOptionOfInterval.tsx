@@ -28,266 +28,266 @@ const AskOptionOfInterval = ({eventValue}:any) => {
   console.log(eventValue,'eventValue')
     const {EventValue,attenderEmailDTOS,eventId,eventTimeId,categoryInfo} = eventValue;
 
-    const mock = new AxiosMockAdapter(axios, { delayResponse: 1000 }); // 2초 지연 설정
-    mock.onPost(`${SERVERURL}/api/getIntervalEvents`).reply(200, {
-      message: 'Mocked success response',
-      body:{
-        intervalEvents:[
-          {
-            isSingleDate:false,
-            eventId: 3, // 이게 그룹
-            eventTimeId: 1, // 유니크 한값.
-            title: "fse",
-            selectedDays: ["SUNDAY","FRIDAY", "SATURDAY"],
-            description: "fsef",
-            interval: 3,
-            startTime: "202408080130",
-            endTime: "202408091800",
-            categoryId: 4,
-            alarm: [
-                {
-                    alarmId: 5,
-                    alarmOption: {
-                        label: "일주일 전",
-                        value: 10080
-                    },
-                    customAlarmOption: {
-                        alarmNumberInput: 1,
-                        option: {
-                            id: "week",
-                            label: "Week",
-                            value: 10080
-                        }
-                    },
-                    customAlarmState: false,  //간단히 설명해서 true일경우에는 프론트는 customAlarmOption을 사용할것 아닐시 alarmOption을 사용할것
-                    alarmDeleteShowed: false
-                },
-                {
-                    alarmId: 6,
-                    alarmOption: {
-                        label: "일주일 전",
-                        value: 10080
-                    },
-                    customAlarmOption: {
-                        alarmNumberInput: 1,
-                        option: {
-                            id: "week",
-                            label: "Week",
-                            value: 10080
-                        }
-                    },
-                    customAlarmState: true,
-                    alarmDeleteShowed: false
-                }
-            ],
-        attenderEmailDTOS: {
-        attenderInfoAuth:[ 
-        {attenderEmail:"327561@naver.com",
-        role:"GENERATOR", 
-        },
-        {attenderEmail:"attebder@naver.com",
-        role:"ATTENDER", 
-        }, 
-        {
-        attenderEmail:"manager@naver.com",
-        role:"MANAGER", 
-        } ],
-        isSendEmailToAttender: true, // true시 attender들에게 이메일 초대 메일전달
-        isInvitableAnyoneLink: false // true시 링크만 있으면 초대받지 않은 사람도(캘린더 서비스의 유저일경우) 참석가능함
-        }
-        },
-        {
-          isSingleDate:false,
-          eventId: 3, // 이게 그룹
-          eventTimeId: 2, // 유니크 한값.
-          title: "fse",
-          selectedDays: ["SUNDAY","FRIDAY", "SATURDAY"],
-          description: "fsef",
-          interval: 3,
-          startTime: "202408110130",
-          endTime: "202408121800",
-          categoryId: 4,
-          alarm: [
-              {
-                  alarmId: 5,
-                  alarmOption: {
-                      label: "일주일 전",
-                      value: 10080
-                  },
-                  customAlarmOption: {
-                      alarmNumberInput: 1,
-                      option: {
-                          id: "week",
-                          label: "Week",
-                          value: 10080
-                      }
-                  },
-                  customAlarmState: false,  //간단히 설명해서 true일경우에는 프론트는 customAlarmOption을 사용할것 아닐시 alarmOption을 사용할것
-                  alarmDeleteShowed: false
-              },
-              {
-                  alarmId: 6,
-                  alarmOption: {
-                      label: "일주일 전",
-                      value: 10080
-                  },
-                  customAlarmOption: {
-                      alarmNumberInput: 1,
-                      option: {
-                          id: "week",
-                          label: "Week",
-                          value: 10080
-                      }
-                  },
-                  customAlarmState: true,
-                  alarmDeleteShowed: false
-              }
-          ],
-      attenderEmailDTOS: {
-      attenderInfoAuth:[ 
-      {attenderEmail:"327561@naver.com",
-      role:"GENERATOR", 
-      },
-      {attenderEmail:"attebder@naver.com",
-      role:"ATTENDER", 
-      }, 
-      {
-      attenderEmail:"manager@naver.com",
-      role:"MANAGER", 
-      } ],
-      isSendEmailToAttender: true, // true시 attender들에게 이메일 초대 메일전달
-      isInvitableAnyoneLink: false // true시 링크만 있으면 초대받지 않은 사람도(캘린더 서비스의 유저일경우) 참석가능함
-      }
-      },
-        {
-          isSingleDate:false,
-          eventId: 3, // 이게 그룹
-          eventTimeId: 3, // 유니크 한값.
-          title: "fse",
-          selectedDays: ["SUNDAY","FRIDAY", "SATURDAY"],
-          description: "fsef",
-          interval: 3,
-          startTime: "202408190130",
-          endTime: "202408211800",
-          categoryId: 4,
-          alarm: [
-              {
-                  alarmId: 5,
-                  alarmOption: {
-                      label: "일주일 전",
-                      value: 10080
-                  },
-                  customAlarmOption: {
-                      alarmNumberInput: 1,
-                      option: {
-                          id: "week",
-                          label: "Week",
-                          value: 10080
-                      }
-                  },
-                  customAlarmState: false,  //간단히 설명해서 true일경우에는 프론트는 customAlarmOption을 사용할것 아닐시 alarmOption을 사용할것
-                  alarmDeleteShowed: false
-              },
-              {
-                  alarmId: 6,
-                  alarmOption: {
-                      label: "일주일 전",
-                      value: 10080
-                  },
-                  customAlarmOption: {
-                      alarmNumberInput: 1,
-                      option: {
-                          id: "week",
-                          label: "Week",
-                          value: 10080
-                      }
-                  },
-                  customAlarmState: true,
-                  alarmDeleteShowed: false
-              }
-          ],
-      attenderEmailDTOS: {
-      attenderInfoAuth:[ 
-      {attenderEmail:"327561@naver.com",
-      role:"GENERATOR", 
-      },
-      {attenderEmail:"attebder@naver.com",
-      role:"ATTENDER", 
-      }, 
-      {
-      attenderEmail:"manager@naver.com",
-      role:"MANAGER", 
-      } ],
-      isSendEmailToAttender: true, // true시 attender들에게 이메일 초대 메일전달
-      isInvitableAnyoneLink: false // true시 링크만 있으면 초대받지 않은 사람도(캘린더 서비스의 유저일경우) 참석가능함
-      }
-      },
-      {
-        isSingleDate:false,
-        eventId: 3, // 이게 그룹
-        eventTimeId: 4, // 유니크 한값.
-        title: "fse",
-        selectedDays: ["SUNDAY","FRIDAY", "SATURDAY"],
-        description: "fsef",
-        interval: 3,
-        startTime: "202408230130",
-        endTime: "202408251800",
-        categoryId: 4,
-        alarm: [
-            {
-                alarmId: 5,
-                alarmOption: {
-                    label: "일주일 전",
-                    value: 10080
-                },
-                customAlarmOption: {
-                    alarmNumberInput: 1,
-                    option: {
-                        id: "week",
-                        label: "Week",
-                        value: 10080
-                    }
-                },
-                customAlarmState: false,  //간단히 설명해서 true일경우에는 프론트는 customAlarmOption을 사용할것 아닐시 alarmOption을 사용할것
-                alarmDeleteShowed: false
-            },
-            {
-                alarmId: 6,
-                alarmOption: {
-                    label: "일주일 전",
-                    value: 10080
-                },
-                customAlarmOption: {
-                    alarmNumberInput: 1,
-                    option: {
-                        id: "week",
-                        label: "Week",
-                        value: 10080
-                    }
-                },
-                customAlarmState: true,
-                alarmDeleteShowed: false
-            }
-        ],
-    attenderEmailDTOS: {
-    attenderInfoAuth:[ 
-    {attenderEmail:"327561@naver.com",
-    role:"GENERATOR", 
-    },
-    {attenderEmail:"attebder@naver.com",
-    role:"ATTENDER", 
-    }, 
-    {
-    attenderEmail:"manager@naver.com",
-    role:"MANAGER", 
-    } ],
-    isSendEmailToAttender: true, // true시 attender들에게 이메일 초대 메일전달
-    isInvitableAnyoneLink: false // true시 링크만 있으면 초대받지 않은 사람도(캘린더 서비스의 유저일경우) 참석가능함
-    }
-    }
-        ]
-      }
-    }); 
+    // const mock = new AxiosMockAdapter(axios, { delayResponse: 1000 }); // 2초 지연 설정
+    // mock.onPost(`${SERVERURL}/api/getIntervalEvents`).reply(200, {
+    //   message: 'Mocked success response',
+    //   body:{
+    //     intervalEvents:[
+    //       {
+    //         isSingleDate:false,
+    //         eventId: 3, // 이게 그룹
+    //         eventTimeId: 1, // 유니크 한값.
+    //         title: "fse",
+    //         selectedDays: ["SUNDAY","FRIDAY", "SATURDAY"],
+    //         description: "fsef",
+    //         interval: 3,
+    //         startTime: "202408080130",
+    //         endTime: "202408091800",
+    //         categoryId: 4,
+    //         alarm: [
+    //             {
+    //                 alarmId: 5,
+    //                 alarmOption: {
+    //                     label: "일주일 전",
+    //                     value: 10080
+    //                 },
+    //                 customAlarmOption: {
+    //                     alarmNumberInput: 1,
+    //                     option: {
+    //                         id: "week",
+    //                         label: "Week",
+    //                         value: 10080
+    //                     }
+    //                 },
+    //                 customAlarmState: false,  //간단히 설명해서 true일경우에는 프론트는 customAlarmOption을 사용할것 아닐시 alarmOption을 사용할것
+    //                 alarmDeleteShowed: false
+    //             },
+    //             {
+    //                 alarmId: 6,
+    //                 alarmOption: {
+    //                     label: "일주일 전",
+    //                     value: 10080
+    //                 },
+    //                 customAlarmOption: {
+    //                     alarmNumberInput: 1,
+    //                     option: {
+    //                         id: "week",
+    //                         label: "Week",
+    //                         value: 10080
+    //                     }
+    //                 },
+    //                 customAlarmState: true,
+    //                 alarmDeleteShowed: false
+    //             }
+    //         ],
+    //     attenderEmailDTOS: {
+    //     attenderInfoAuth:[ 
+    //     {attenderEmail:"327561@naver.com",
+    //     role:"GENERATOR", 
+    //     },
+    //     {attenderEmail:"attebder@naver.com",
+    //     role:"ATTENDER", 
+    //     }, 
+    //     {
+    //     attenderEmail:"manager@naver.com",
+    //     role:"MANAGER", 
+    //     } ],
+    //     isSendEmailToAttender: true, // true시 attender들에게 이메일 초대 메일전달
+    //     isInvitableAnyoneLink: false // true시 링크만 있으면 초대받지 않은 사람도(캘린더 서비스의 유저일경우) 참석가능함
+    //     }
+    //     },
+    //     {
+    //       isSingleDate:false,
+    //       eventId: 3, // 이게 그룹
+    //       eventTimeId: 2, // 유니크 한값.
+    //       title: "fse",
+    //       selectedDays: ["SUNDAY","FRIDAY", "SATURDAY"],
+    //       description: "fsef",
+    //       interval: 3,
+    //       startTime: "202408110130",
+    //       endTime: "202408121800",
+    //       categoryId: 4,
+    //       alarm: [
+    //           {
+    //               alarmId: 5,
+    //               alarmOption: {
+    //                   label: "일주일 전",
+    //                   value: 10080
+    //               },
+    //               customAlarmOption: {
+    //                   alarmNumberInput: 1,
+    //                   option: {
+    //                       id: "week",
+    //                       label: "Week",
+    //                       value: 10080
+    //                   }
+    //               },
+    //               customAlarmState: false,  //간단히 설명해서 true일경우에는 프론트는 customAlarmOption을 사용할것 아닐시 alarmOption을 사용할것
+    //               alarmDeleteShowed: false
+    //           },
+    //           {
+    //               alarmId: 6,
+    //               alarmOption: {
+    //                   label: "일주일 전",
+    //                   value: 10080
+    //               },
+    //               customAlarmOption: {
+    //                   alarmNumberInput: 1,
+    //                   option: {
+    //                       id: "week",
+    //                       label: "Week",
+    //                       value: 10080
+    //                   }
+    //               },
+    //               customAlarmState: true,
+    //               alarmDeleteShowed: false
+    //           }
+    //       ],
+    //   attenderEmailDTOS: {
+    //   attenderInfoAuth:[ 
+    //   {attenderEmail:"327561@naver.com",
+    //   role:"GENERATOR", 
+    //   },
+    //   {attenderEmail:"attebder@naver.com",
+    //   role:"ATTENDER", 
+    //   }, 
+    //   {
+    //   attenderEmail:"manager@naver.com",
+    //   role:"MANAGER", 
+    //   } ],
+    //   isSendEmailToAttender: true, // true시 attender들에게 이메일 초대 메일전달
+    //   isInvitableAnyoneLink: false // true시 링크만 있으면 초대받지 않은 사람도(캘린더 서비스의 유저일경우) 참석가능함
+    //   }
+    //   },
+    //     {
+    //       isSingleDate:false,
+    //       eventId: 3, // 이게 그룹
+    //       eventTimeId: 3, // 유니크 한값.
+    //       title: "fse",
+    //       selectedDays: ["SUNDAY","FRIDAY", "SATURDAY"],
+    //       description: "fsef",
+    //       interval: 3,
+    //       startTime: "202408190130",
+    //       endTime: "202408211800",
+    //       categoryId: 4,
+    //       alarm: [
+    //           {
+    //               alarmId: 5,
+    //               alarmOption: {
+    //                   label: "일주일 전",
+    //                   value: 10080
+    //               },
+    //               customAlarmOption: {
+    //                   alarmNumberInput: 1,
+    //                   option: {
+    //                       id: "week",
+    //                       label: "Week",
+    //                       value: 10080
+    //                   }
+    //               },
+    //               customAlarmState: false,  //간단히 설명해서 true일경우에는 프론트는 customAlarmOption을 사용할것 아닐시 alarmOption을 사용할것
+    //               alarmDeleteShowed: false
+    //           },
+    //           {
+    //               alarmId: 6,
+    //               alarmOption: {
+    //                   label: "일주일 전",
+    //                   value: 10080
+    //               },
+    //               customAlarmOption: {
+    //                   alarmNumberInput: 1,
+    //                   option: {
+    //                       id: "week",
+    //                       label: "Week",
+    //                       value: 10080
+    //                   }
+    //               },
+    //               customAlarmState: true,
+    //               alarmDeleteShowed: false
+    //           }
+    //       ],
+    //   attenderEmailDTOS: {
+    //   attenderInfoAuth:[ 
+    //   {attenderEmail:"327561@naver.com",
+    //   role:"GENERATOR", 
+    //   },
+    //   {attenderEmail:"attebder@naver.com",
+    //   role:"ATTENDER", 
+    //   }, 
+    //   {
+    //   attenderEmail:"manager@naver.com",
+    //   role:"MANAGER", 
+    //   } ],
+    //   isSendEmailToAttender: true, // true시 attender들에게 이메일 초대 메일전달
+    //   isInvitableAnyoneLink: false // true시 링크만 있으면 초대받지 않은 사람도(캘린더 서비스의 유저일경우) 참석가능함
+    //   }
+    //   },
+    //   {
+    //     isSingleDate:false,
+    //     eventId: 3, // 이게 그룹
+    //     eventTimeId: 4, // 유니크 한값.
+    //     title: "fse",
+    //     selectedDays: ["SUNDAY","FRIDAY", "SATURDAY"],
+    //     description: "fsef",
+    //     interval: 3,
+    //     startTime: "202408230130",
+    //     endTime: "202408251800",
+    //     categoryId: 4,
+    //     alarm: [
+    //         {
+    //             alarmId: 5,
+    //             alarmOption: {
+    //                 label: "일주일 전",
+    //                 value: 10080
+    //             },
+    //             customAlarmOption: {
+    //                 alarmNumberInput: 1,
+    //                 option: {
+    //                     id: "week",
+    //                     label: "Week",
+    //                     value: 10080
+    //                 }
+    //             },
+    //             customAlarmState: false,  //간단히 설명해서 true일경우에는 프론트는 customAlarmOption을 사용할것 아닐시 alarmOption을 사용할것
+    //             alarmDeleteShowed: false
+    //         },
+    //         {
+    //             alarmId: 6,
+    //             alarmOption: {
+    //                 label: "일주일 전",
+    //                 value: 10080
+    //             },
+    //             customAlarmOption: {
+    //                 alarmNumberInput: 1,
+    //                 option: {
+    //                     id: "week",
+    //                     label: "Week",
+    //                     value: 10080
+    //                 }
+    //             },
+    //             customAlarmState: true,
+    //             alarmDeleteShowed: false
+    //         }
+    //     ],
+    // attenderEmailDTOS: {
+    // attenderInfoAuth:[ 
+    // {attenderEmail:"327561@naver.com",
+    // role:"GENERATOR", 
+    // },
+    // {attenderEmail:"attebder@naver.com",
+    // role:"ATTENDER", 
+    // }, 
+    // {
+    // attenderEmail:"manager@naver.com",
+    // role:"MANAGER", 
+    // } ],
+    // isSendEmailToAttender: true, // true시 attender들에게 이메일 초대 메일전달
+    // isInvitableAnyoneLink: false // true시 링크만 있으면 초대받지 않은 사람도(캘린더 서비스의 유저일경우) 참석가능함
+    // }
+    // }
+    //     ]
+    //   }
+    // }); 
 
    
     
@@ -353,7 +353,7 @@ const AskOptionOfInterval = ({eventValue}:any) => {
     const GetIntervalEvents = async()=>{
       console.log('executed!!')
       try{
-        const res = await axios.post(`${SERVERURL}/api/getIntervalEvents`, {eventId:eventId});
+        const res = await axios.get(`${SERVERURL}/api/event/load/interval?eventId=${eventId}`);
         if(res.status === 200){
         
           const data = res.data.body.intervalEvents

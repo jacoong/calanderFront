@@ -18,7 +18,7 @@ type ViewType = CalendarContextType['viewType'];
 
 
 export const fetchCategoryInfo = async ()=>{
-  return [{categoryId:1,categoryColor:"#444444",categoryName: "기본2"},{categoryId:2,categoryColor:"#0000FF",categoryName: "중요"},{categoryId:3,categoryColor:"#008000",categoryName: "운동"},{categoryId:4,categoryColor:"#800080",categoryName: "식사"},{categoryId:5,categoryColor:"#FF0000",categoryName: "공부"},{categoryId:6,categoryColor:"#FFA500",categoryName: "코딩공부"}];
+  // return [{categoryId:1,categoryColor:"#444444",categoryName: "기본2"},{categoryId:2,categoryColor:"#0000FF",categoryName: "중요"},{categoryId:3,categoryColor:"#008000",categoryName: "운동"},{categoryId:4,categoryColor:"#800080",categoryName: "식사"},{categoryId:5,categoryColor:"#FF0000",categoryName: "공부"},{categoryId:6,categoryColor:"#FFA500",categoryName: "코딩공부"}];
  // serverConnect
   try {
     const res = await instance.get(`${SERVERURL}/api/category/load`);
@@ -219,139 +219,139 @@ function MainPage() {
 
 
     const getFetchEventData = async()=>{
-      await delay(300);
-      console.log(year,month,'데이트 벨류')
-      setFetchedEventData([
-      {
-        eventId: 3,
-        eventTimeId: 6, // 해당 eventTimeId는 어제 설명한 반복일정에 필요한 것이므로 살려넣는게 맞는지? 맞다면 이후에 일정 수정, 삭제 할때 해당 eventTimeId 값도 request에 같이 보내는것이 맞는지? 맞다면 명세 수정 부탁
-        title: "fse",
-        selectedDays: ["FRIDAY", "SATURDAY"],
-        description: "fsef",
-        interval: 3,
-        startTime: "202409110130",
-        endTime: "202409121800",
-        categoryId: 3,
-        alarm: [
-            {
-                alarmId: 5,
-                alarmOption: {
-                    label: "일주일 전",
-                    timeValue: 10080
-                },
-                customAlarmOption: {
-                    alarmNumberInput: 1,
-                    option: {
-                        id: "week",
-                        label: "Week",
-                        timeValue: 10080
-                    }
-                },
-                customAlarmState: false,  //간단히 설명해서 true일경우에는 프론트는 customAlarmOption을 사용할것 아닐시 alarmOption을 사용할것
-                alarmDeleteShowed: false
-            },
-            {
-                alarmId: 5,
-                alarmOption: {
-                    label: "일주일 전",
-                    timeValue: 10080
-                },
-                customAlarmOption: {
-                    alarmNumberInput: 1,
-                    option: {
-                        id: "week",
-                        label: "Week",
-                        timeValue: 10080
-                    }
-                },
-                customAlarmState: true,
-                alarmDeleteShowed: false
-            }
-        ],
-attenderEmailDTOS: {
-attenderInfoAuth:[ 
-{attenderEmail:"327561@naver.com",
-role:"GENERATOR", 
-},
-{attenderEmail:"attebder@naver.com",
-role:"ATTENDER", 
-}, 
-{
-attenderEmail:"manager@naver.com",
-role:"MANAEGER", 
-} ],
-isSendEmailToAttender: true, // true시 attender들에게 이메일 초대 메일전달
-isInvitableAnyoneLink: true // true시 링크만 있으면 초대받지 않은 사람도(캘린더 서비스의 유저일경우) 참석가능함
-}
-},
+      console.log('getFetchEventData',year,month)
+//       await delay(300);
+//       setFetchedEventData([
+//       {
+//         eventId: 3,
+//         eventTimeId: 6, // 해당 eventTimeId는 어제 설명한 반복일정에 필요한 것이므로 살려넣는게 맞는지? 맞다면 이후에 일정 수정, 삭제 할때 해당 eventTimeId 값도 request에 같이 보내는것이 맞는지? 맞다면 명세 수정 부탁
+//         title: "fse",
+//         selectedDays: ["FRIDAY", "SATURDAY"],
+//         description: "fsef",
+//         interval: 3,
+//         startTime: "202409110130",
+//         endTime: "202409121800",
+//         categoryId: 3,
+//         alarm: [
+//             {
+//                 alarmId: 5,
+//                 alarmOption: {
+//                     label: "일주일 전",
+//                     timeValue: 10080
+//                 },
+//                 customAlarmOption: {
+//                     alarmNumberInput: 1,
+//                     option: {
+//                         id: "week",
+//                         label: "Week",
+//                         timeValue: 10080
+//                     }
+//                 },
+//                 customAlarmState: false,  //간단히 설명해서 true일경우에는 프론트는 customAlarmOption을 사용할것 아닐시 alarmOption을 사용할것
+//                 alarmDeleteShowed: false
+//             },
+//             {
+//                 alarmId: 5,
+//                 alarmOption: {
+//                     label: "일주일 전",
+//                     timeValue: 10080
+//                 },
+//                 customAlarmOption: {
+//                     alarmNumberInput: 1,
+//                     option: {
+//                         id: "week",
+//                         label: "Week",
+//                         timeValue: 10080
+//                     }
+//                 },
+//                 customAlarmState: true,
+//                 alarmDeleteShowed: false
+//             }
+//         ],
+// attenderEmailDTOS: {
+// attenderInfoAuth:[ 
+// {attenderEmail:"327561@naver.com",
+// role:"GENERATOR", 
+// },
+// {attenderEmail:"attebder@naver.com",
+// role:"ATTENDER", 
+// }, 
+// {
+// attenderEmail:"manager@naver.com",
+// role:"MANAEGER", 
+// } ],
+// isSendEmailToAttender: true, // true시 attender들에게 이메일 초대 메일전달
+// isInvitableAnyoneLink: true // true시 링크만 있으면 초대받지 않은 사람도(캘린더 서비스의 유저일경우) 참석가능함
+// }
+// },
 
-{
-  eventId: 4,
-  eventTimeId: 6, // 해당 eventTimeId는 어제 설명한 반복일정에 필요한 것이므로 살려넣는게 맞는지? 맞다면 이후에 일정 수정, 삭제 할때 해당 eventTimeId 값도 request에 같이 보내는것이 맞는지? 맞다면 명세 수정 부탁
-  title: "fse",
-  selectedDays: ["SUNDAY","FRIDAY", "SATURDAY"],
-  description: "fsef",
-  interval: 3,
-  startTime: "202409130130",
-  endTime: "202409151800",
-  categoryId: 1,
-  alarm: [
-      {
-          alarmId: 5,
-          alarmOption: {
-              label: "일주일 전",
-              value: 10080
-          },
-          customAlarmOption: {
-              alarmNumberInput: 1,
-              option: {
-                  id: "week",
-                  label: "Week",
-                  value: 10080
-              }
-          },
-          customAlarmState: false,  //간단히 설명해서 true일경우에는 프론트는 customAlarmOption을 사용할것 아닐시 alarmOption을 사용할것
-          alarmDeleteShowed: false
-      },
-      {
-          alarmId: 6,
-          alarmOption: {
-              label: "일주일 전",
-              value: 10080
-          },
-          customAlarmOption: {
-              alarmNumberInput: 1,
-              option: {
-                  id: "week",
-                  label: "Week",
-                  value: 10080
-              }
-          },
-          customAlarmState: true,
-          alarmDeleteShowed: false
-      }
-  ],
-attenderEmailDTOS: {
-attenderInfoAuth:[ 
-{attenderEmail:"yuh0812@gmail.com",
-role:"GENERATOR", 
-},
-{attenderEmail:"attebder@naver.com",
-role:"ATTENDER", 
-}, 
-{
-attenderEmail:"manager@naver.com",
-role:"MANAGER", 
-} ],
-isSendEmailToAttender: true, // true시 attender들에게 이메일 초대 메일전달
-isInvitableAnyoneLink: false // true시 링크만 있으면 초대받지 않은 사람도(캘린더 서비스의 유저일경우) 참석가능함
-}
-}
+// {
+//   eventId: 4,
+//   eventTimeId: 6, // 해당 eventTimeId는 어제 설명한 반복일정에 필요한 것이므로 살려넣는게 맞는지? 맞다면 이후에 일정 수정, 삭제 할때 해당 eventTimeId 값도 request에 같이 보내는것이 맞는지? 맞다면 명세 수정 부탁
+//   title: "fse",
+//   selectedDays: ["SUNDAY","FRIDAY", "SATURDAY"],
+//   description: "fsef",
+//   interval: 3,
+//   startTime: "202409130130",
+//   endTime: "202409151800",
+//   categoryId: 1,
+//   alarm: [
+//       {
+//           alarmId: 5,
+//           alarmOption: {
+//               label: "일주일 전",
+//               value: 10080
+//           },
+//           customAlarmOption: {
+//               alarmNumberInput: 1,
+//               option: {
+//                   id: "week",
+//                   label: "Week",
+//                   value: 10080
+//               }
+//           },
+//           customAlarmState: false,  //간단히 설명해서 true일경우에는 프론트는 customAlarmOption을 사용할것 아닐시 alarmOption을 사용할것
+//           alarmDeleteShowed: false
+//       },
+//       {
+//           alarmId: 6,
+//           alarmOption: {
+//               label: "일주일 전",
+//               value: 10080
+//           },
+//           customAlarmOption: {
+//               alarmNumberInput: 1,
+//               option: {
+//                   id: "week",
+//                   label: "Week",
+//                   value: 10080
+//               }
+//           },
+//           customAlarmState: true,
+//           alarmDeleteShowed: false
+//       }
+//   ],
+// attenderEmailDTOS: {
+// attenderInfoAuth:[ 
+// {attenderEmail:"yuh0812@gmail.com",
+// role:"GENERATOR", 
+// },
+// {attenderEmail:"attebder@naver.com",
+// role:"ATTENDER", 
+// }, 
+// {
+// attenderEmail:"manager@naver.com",
+// role:"MANAGER", 
+// } ],
+// isSendEmailToAttender: true, // true시 attender들에게 이메일 초대 메일전달
+// isInvitableAnyoneLink: false // true시 링크만 있으면 초대받지 않은 사람도(캘린더 서비스의 유저일경우) 참석가능함
+// }
+// }
 
 
-      ]
-    );
-    return // serverConnect
+//       ]
+//     );
+    // return // serverConnect
 
                 try {
       const res = await instance.post(`${todoCtx.serverUrl}/api/event/load`,{standardMonth:year,month});

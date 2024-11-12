@@ -42,7 +42,6 @@ const onPrevClick = () => {
     const prevMonth = new Date(
       prevActiveStartDate.getFullYear(),
       prevActiveStartDate.getMonth() - 1,
-      1
     );
     return prevMonth;
   });

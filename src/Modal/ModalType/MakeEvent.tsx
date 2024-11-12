@@ -562,14 +562,14 @@ const daysOfWeek: { label: string; value: string; }[] = [
       
         const createEvent = async () => {
           console.log('createEvent executed',view) 
-          const mock = new AxiosMockAdapter(axios, { delayResponse: 1000 }); // 2초 지연 설정
-          mock.onPost(`${SERVERURL}/api/event/insert`).reply(200, {
-            message: 'Mocked success response',
-          }); 
+          // const mock = new AxiosMockAdapter(axios, { delayResponse: 1000 }); // 2초 지연 설정
+          // mock.onPost(`${SERVERURL}/api/event/insert`).reply(200, {
+          //   message: 'Mocked success response',
+          // }); 
 
-          mock.onPost(`${SERVERURL}/api/invite/send`).reply(200, {
-            message: 'Mocked success response',
-          }); 
+          // mock.onPost(`${SERVERURL}/api/invite/send`).reply(200, {
+          //   message: 'Mocked success response',
+          // }); 
             const eventData = {              
               attenderEmailDTOS:attenderEmailDTOSValue,
               eventId:eventId,
@@ -612,14 +612,14 @@ const daysOfWeek: { label: string; value: string; }[] = [
 
       const editEvent = async (eventData:any) => {
         
-        const mock = new AxiosMockAdapter(axios, { delayResponse: 1000 }); // 2초 지연 설정
-        mock.onPost(`${SERVERURL}/api/event/edit`).reply(200, {
-          message: 'Mocked success response',
-        }); 
+        // const mock = new AxiosMockAdapter(axios, { delayResponse: 1000 }); // 2초 지연 설정
+        // mock.onPost(`${SERVERURL}/api/event/edit`).reply(200, {
+        //   message: 'Mocked success response',
+        // }); 
 
-        mock.onPost(`${SERVERURL}/api/invite/edit`).reply(200, {
-          message: 'Mocked success response',
-        }); 
+        // mock.onPost(`${SERVERURL}/api/invite/edit`).reply(200, {
+        //   message: 'Mocked success response',
+        // }); 
         
 
         if(isSingleDate === false){
@@ -648,10 +648,10 @@ const daysOfWeek: { label: string; value: string; }[] = [
           console.log(err)
           alert(err)
          } 
-         finally {
-          // Mock 해제 (중요): 다른 요청에 영향을 주지 않도록 처리
-          mock.restore();
-        }
+        //  finally {
+        //   // Mock 해제 (중요): 다른 요청에 영향을 주지 않도록 처리
+        //   mock.restore();
+        // }
         }
       } 
 

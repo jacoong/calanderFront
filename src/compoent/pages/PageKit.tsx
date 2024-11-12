@@ -101,14 +101,14 @@ function PageKit() {
       if(refreshToken){
         getUserInfoFunction();
       }else{
-        return // serverConnect
-        // executeUnAuthenticateUser(); //should turn on 
+        // return // serverConnect
+        executeUnAuthenticateUser(); //should turn on 
       }
     }
 
     useEffect(() => {
-      getUserInfoFunction(); //일단 네트워크 연결안되었을떄 임시로 실제는 밑에
-    // isUserHadToken();
+      // getUserInfoFunction(); //serverConnect
+    isUserHadToken();
   }, []);
 
     return(
