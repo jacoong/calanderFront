@@ -6,9 +6,10 @@ interface HoverBorderProps {
     backgroundColor?: string;
     padding?:string
     children?: ReactNode;
+    onClick:any
   }
 
-const HoverBorder = ({ children, backgroundColor='#EAEAEA',padding }:HoverBorderProps) => { // 수정: 함수명의 첫 문자를 대문자로 변경하여 컴포넌트 이름 변경
+const HoverBorder = ({ onClick,children, backgroundColor='#EAEAEA',padding }:HoverBorderProps) => { // 수정: 함수명의 첫 문자를 대문자로 변경하여 컴포넌트 이름 변경
     const [isHover,setIsHover] = useState(false)
 
   const containerStyle = {
@@ -25,7 +26,7 @@ const HoverBorder = ({ children, backgroundColor='#EAEAEA',padding }:HoverBorder
   }
 
   return (
-    <div onMouseEnter={handleOnhover} onMouseLeave={handleOffhover} className={styles.container} style={containerStyle}> 
+    <div onClick={onClick} onMouseEnter={handleOnhover} onMouseLeave={handleOffhover} className={styles.container} style={containerStyle}> 
       {children}
     </div>
   );

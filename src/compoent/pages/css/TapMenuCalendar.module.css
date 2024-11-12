@@ -1,0 +1,26 @@
+.TapMenuCalendar_Container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.TapMenuCalendar_Container__toolContainer__todayLetter{
+    padding: 15px 0;
+}
+.TapMenuCalendar_Container__toolContainer__todayLetter p{
+    font-size: 18px !important;
+    font-weight: 500 !important;
+}
+.TapMenuCalendar_Container__toolContainer{
+    align-items: center;
+    padding: 5px;
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.TapMenuCalendar_Container__toolContainer__arrowController{
+    display: flex;
+}

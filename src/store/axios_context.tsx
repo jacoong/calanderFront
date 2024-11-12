@@ -4,6 +4,8 @@ import {setCookie,getCookie,removeCookie} from './coockie'
 
 
 
+
+
 type typeOfTokens = {
     refreshToken:string,
     validateTime:string,
@@ -21,7 +23,6 @@ export const refreshAxios = axios.create({
   });
 
   export const addAccessTokenInterceptor = (accessToken: string) => {
-    console.log('인터셉터',accessToken)
     instance.interceptors.request.use(
       (config) => {
         config.headers.Authorization = `Bearer ${accessToken}`;
@@ -40,7 +41,7 @@ export const refreshAxios = axios.create({
         return response;
       },
       async (error) => {
-        if (error.response.status === 401) {
+        if (error.response.status === 403 && error.response.data.code === 'EXPIRED_TOKEN') {
         removeCookie('accessToken');
         const originalRequest = error.config;
 
@@ -56,6 +57,7 @@ export const refreshAxios = axios.create({
       else{
           console.error(error)
       }
+
     }
     );
   };
@@ -71,7 +73,7 @@ export const refreshAxios = axios.create({
       })
       if (res.status === 200) {
         console.log('fetcsqsqken')
-        const accessToken = res.data.body.replace("Bearer ", "");;  // should change depend on adress
+        const accessToken = res.data.body.replace("Bearer ", "");  // should change depend on adress
         console.log(accessToken,'ㄴㄷㄹㄷㄴㄹㄴㄷㄹㄴㄷㄹㄴㄷ')
         const validateTime = 'sefescds';  // should change depend on adress
         addAccessTokenInterceptor(accessToken);

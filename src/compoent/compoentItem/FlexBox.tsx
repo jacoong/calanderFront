@@ -6,20 +6,18 @@ import Button from './Button';
 import Login from '../pages/Login'
 import EditProfile from '../compoentItem/EditProfile'
 import {useState,useContext, useEffect} from 'react';
-import {TodosContext,UserType} from '../../store/todo_context'
+import {TodosContext,UserType,typeAction} from '../../store/todo_context'
 import axios from 'axios';
 import Username from '../pages/Username'
 import NewTodos from '../NewTodos';
-import MakeEvent from '../MakeEvent';
-
+import MakeEvent from '../../Modal/ModalType/MakeEvent';
+import AiSubmitForm from '../compoentItem/AiSubmitForm';
+import ClosedButton from './ClosedButton';
+import ColorSelector from '../../Modal/PopUpType/ColorSelector';
 import ToReply from '../compoentItem/ToReply';
 import { BiArrowBack } from "react-icons/bi";
-
-    interface typeAction {
-        isOpen:boolean;
-        type:string|null;
-        value?:typeOfSendTargetReply;
-      }
+import { CiEdit } from "react-icons/ci";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
     export interface typeOfSendTargetReply {
         text:string,profileImg?:string|undefined,writer:string,commentId:string,backgroundImg?:string|undefined
@@ -89,9 +87,22 @@ function FlexBox({popupValue,typeOfImg,sendTargetReply,userInfo,openAndType,dele
       }
 
     const handleClickPopUp = () => {
-        console.log('wwee')
         todoCtx.sendFlexbox({isOpen:false, type:'null'})
     }
+
+    const handlePopOfPopup = () =>{
+        const currentOpenAndType = todoCtx.openAndType
+        if ('popupValue' in currentOpenAndType ) {
+    
+            const currentOpenAndType = todoCtx.openAndType
+            const newObj = { ...currentOpenAndType };
+            // delete newObj.popupValue;
+            // todoCtx.sendFlexbox(newObj);
+        } else {
+            return
+        }
+    }
+
 
     const prventEventBubling = (e: React.MouseEvent) => {
         console.log('preventEvent!')
@@ -99,7 +110,6 @@ function FlexBox({popupValue,typeOfImg,sendTargetReply,userInfo,openAndType,dele
     }
 
     const handleFileChange = (files:(string | File | null)[]) => {
-        console.log('worked!')
         setPreviewImages(files);  // 상위 컴포넌트의 상태를 변경
       };
 
@@ -135,9 +145,7 @@ function FlexBox({popupValue,typeOfImg,sendTargetReply,userInfo,openAndType,dele
         }
 
         const savedUserLoginInfo = (userInfo: TypeOfLoginValue)=>{
-            console.log('why?')
             if(userInfo){
-                console.log(userInfo,'why2')
             setEmailPasswordValue(userInfo);
             }else{
                 return
@@ -168,20 +176,18 @@ function FlexBox({popupValue,typeOfImg,sendTargetReply,userInfo,openAndType,dele
         }
 
 
-      useEffect(()=>{
-        console.log('잇섭',previewImages)
-      },[previewImages])
+
 
     return(
-        openAndType.type === 'popup'
+        openAndType.type === 'popup' 
         ?
         <div className={`${style.popUpMain}`}  onClick={handleClickPopUp}>
 
         </div>
         :
-        <div className={`${style.openMain}`} onClick={['NewTodos', 'MakeEvent','Reply','username','MakeAcount','updatePassword','Login',null,'Edit profile'].includes(openAndType.type) ?  undefined : handleClickPopUp}> 
+        <div className={`${style.openMain}`} onClick={['viewEvent','NewTodos', 'shouldEmailValidate','MakeEvent','Reply','shouldUsername','MakeAcount','updatePassword','Login',null,'Edit profile','categoryDeletePopup','categoryAddPopup'].includes(openAndType.type)  ?  handlePopOfPopup : handleClickPopUp}> 
                 <div className={`${style.openMain__flexBox} ${openAndType.type === 'NewTodos' ? style.post : ''}`}>
-                        <div className={`${style.openMain__flexBox__popUp} ${openAndType.type === 'NewTodos' ? style.post : ''}` } onClick={prventEventBubling}>
+                        <div className={`${style.openMain__flexBox__popUp} ${openAndType.type === 'NewTodos' ? style.post : ''}` } onClick={'popupValue' in todoCtx.openAndType ? undefined : prventEventBubling}>
 
                             { ['NewTodos', 'Reply',null,'Edit profile'].includes(openAndType.type)
                             ?
@@ -190,11 +196,9 @@ function FlexBox({popupValue,typeOfImg,sendTargetReply,userInfo,openAndType,dele
                             <div className={style.openMain__flexBox__popUp__header__nothing}>
                             </div>
                              :
-                             <div className={style.openMain__flexBox__popUp__header__circle} onClick={handleClosed}>
-                                <div className={style.openMain__flexBox__popUp__header__circle__container} >
-                                    <IoCloseOutline/>   
-                                </div>
-                             </div>
+                             <ClosedButton onClick={handleClosed}>
+                             <IoCloseOutline></IoCloseOutline>
+                         </ClosedButton>
     
                              } 
 
@@ -241,11 +245,9 @@ function FlexBox({popupValue,typeOfImg,sendTargetReply,userInfo,openAndType,dele
 
 
                                     <div className={`${style.openMain__flexBox__popUp__header__popUppage}`}>
-                                    <div className={style.openMain__flexBox__popUp__header__circle} onClick={handleClosed}>
-                                        <div className={style.openMain__flexBox__popUp__header__circle__container} >
-                                            <IoCloseOutline/>   
-                                        </div>
-                                    </div>
+                                    <ClosedButton onClick={handleClosed}>
+                                <IoCloseOutline></IoCloseOutline>
+                            </ClosedButton>
                                     <div className={style.openMain__flexBox__popUp__header__logo}>
                                         <img alt={'dd'} src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
                                     </div>
@@ -353,11 +355,9 @@ function FlexBox({popupValue,typeOfImg,sendTargetReply,userInfo,openAndType,dele
                             <div style={currentPopupPage?{transform:`translate(${100-(100*currentPopupPage)}%)`}:{}} className={style.openMain__flexBox__popUp__body}>
                                 
                             <div className={`${style.openMain__flexBox__popUp__header__popUppage}`}>
-                                    <div className={style.openMain__flexBox__popUp__header__circle} onClick={handleClosed}>
-                                        <div className={style.openMain__flexBox__popUp__header__circle__container} >
-                                            <IoCloseOutline/>   
-                                        </div>
-                                    </div>
+                            <ClosedButton onClick={handleClosed}>
+                                <IoCloseOutline></IoCloseOutline>
+                            </ClosedButton>
                                     <div className={style.openMain__flexBox__popUp__header__logo}>
                                         <img alt={'dd'} src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
                                     </div>
@@ -399,9 +399,37 @@ function FlexBox({popupValue,typeOfImg,sendTargetReply,userInfo,openAndType,dele
 
             
                             </div>
-                            
+                            :
+                            (openAndType.type ==='shouldEmailValidate' ?
+                            <>
+
+                                <div className={`${style.openMain__flexBox__popUp__header__popUppage}`}>
+                                <div className={style.openMain__flexBox__popUp__header__circle} onClick={handleClosed}>
+                                    <div className={style.openMain__flexBox__popUp__header__circle__container} >
+                                        {/* <IoCloseOutline/>    */}
+                                    </div>
+                                </div>
+                                <div className={style.openMain__flexBox__popUp__header__logo}>
+                                    <img alt={'dd'} src={process.env.PUBLIC_URL + '/img/Logo.png'}></img>
+                                </div>
+                                <div className={style.openMain__flexBox__popUp__header__nothing}>
+
+                                </div>
+                                </div>
+
+                               <div className={style.openMain__flexBox__popUp__body} style={{flex:0}}>
+    
+      
+
+                                    <div className={style.openMain__flexBox__popUp__body__container}>
+                                
+                                        <h1>Input your mail code</h1>
+                                        <Login valueOfUserLoginInfo={emailPasswordValue} nextPopUpPage={nextPopUpPage} requestType={'encodedCheckCode'}></Login>
+                                        </div>
+                                    </div>
+                            </>
                                 :
-                            (openAndType.type === 'username' ?
+                            (openAndType.type === 'shouldUsername' ?
                             <div className={style.openMain__flexBox__popUp__Post_body}>
                             <h1>Register Your Name!</h1>
                             <Username handleUNsubmit={handleUNsubmit}></Username>
@@ -410,28 +438,30 @@ function FlexBox({popupValue,typeOfImg,sendTargetReply,userInfo,openAndType,dele
                             (openAndType.type === 'MakeEvent' ?
                             <div className={style.openMain__flexBox__popUp__NewTodos_body}>
                             <div className={`${style.openMain__flexBox__popUp__header__popUppage}`}>
-                                   <div className={style.openMain__flexBox__popUp__header__circle} onClick={handleClosed}>
+                                   {/* <div className={style.openMain__flexBox__popUp__header__circle} onClick={handleClosed}>
                                        <div className={style.openMain__flexBox__popUp__header__circle__container} >
                                            <IoCloseOutline/>   
                                        </div>
-                                   </div>
+                                   </div> */}
+                                 <ClosedButton onClick={handleClosed}>
+                                <IoCloseOutline></IoCloseOutline>
+                            </ClosedButton>
                                    <div className={style.openMain__flexBox__popUp__header__logo}>
                                    </div>
                                    <div className={style.openMain__flexBox__popUp__header__nothing}>
 
                                    </div>
                             </div>
-                            <MakeEvent></MakeEvent>
+                            <MakeEvent valueOfEvent={openAndType.value}></MakeEvent>
                            </div>
                                 :
                             (openAndType.type === 'updatePassword' ?
                             <div className={style.openMain__flexBox__popUp__NewTodos_body}>
                             <div className={`${style.openMain__flexBox__popUp__header__popUppage}`}>
-                                   <div className={style.openMain__flexBox__popUp__header__circle} onClick={handleClosed}>
-                                       <div className={style.openMain__flexBox__popUp__header__circle__container} >
-                                           <IoCloseOutline/>   
-                                       </div>
-                                   </div>
+                            <ClosedButton onClick={handleClosed}>
+                                <IoCloseOutline></IoCloseOutline>
+                            </ClosedButton>
+        
                                    <div className={style.openMain__flexBox__popUp__header__logo}>
                                    <h1>update Password</h1>
                                    </div>
@@ -442,32 +472,14 @@ function FlexBox({popupValue,typeOfImg,sendTargetReply,userInfo,openAndType,dele
                             <Login requestType={'updatePassword'}></Login>
                            </div>
                                 :
-                            (openAndType.type === "AIPlanMaker" ?
-
-                            <div className={style.openMain__flexBox__popUp__NewTodos_body}>
-                            <div className={`${style.openMain__flexBox__popUp__header__popUppage}`}>
-                                   <div className={style.openMain__flexBox__popUp__header__circle} onClick={handleClosed}>
-                                       <div className={style.openMain__flexBox__popUp__header__circle__container} >
-                                           <IoCloseOutline/>   
-                                       </div>
-                                   </div>
-                                   <div className={style.openMain__flexBox__popUp__header__logo}>
-                                   <h1>AI Plan Maker</h1>
-                                   </div>
-                                   <div className={style.openMain__flexBox__popUp__header__nothing}>
-
-                                   </div>
-                                   </div>
-                            {/* <MakeEvent requestType={'updatePassword'}></MakeEvent> */}
-                           </div>
-                                :
+                      
                             (openAndType.type === 'Edit' ?
                             <div className={style.openMain__flexBox__popUp__Edit_body}>
                             <h1>Edit Post?</h1>
                             <p>This can’t be undone and it will be <br/> 
                             edited from your profile, the<br/> timeline of any accounts that follow<br/>you, and from search results.</p>
                                 {/* sendTargetReply?:{text:string,profileImg:string,author:string} */}
-                            <NewTodos preinfoComment={sendTargetReply} handleUNsubmit={handleUNsubmit} userImg={userInfo?.profileImg}></NewTodos>
+                            {/* <NewTodos preinfoComment={sendTargetReply} handleUNsubmit={handleUNsubmit} userImg={userInfo?.profileImg}></NewTodos> */}
                             </div>
                                 :
                             (openAndType.type === 'Delete' ?
@@ -479,11 +491,61 @@ function FlexBox({popupValue,typeOfImg,sendTargetReply,userInfo,openAndType,dele
                             {/* <button onClick={handleDeleteTodo}>delete</button> */}
                            </div>
         
-                            :
-                            (openAndType.type === 'Edit profile' ?
-                            <EditProfile onFileChange={handleFileChange} sendTargetReply={sendTargetReply!}></EditProfile>
+                            // :
+                            // (openAndType.type === 'Edit profile' ?
+                            // <EditProfile onFileChange={handleFileChange} sendTargetReply={sendTargetReply!}></EditProfile>
                            :
+                           (openAndType.type === 'categoryDeletePopup' ?
+                           <div className={style.openMain__flexBox__popUp__NewTodos_body}>
+                                 <div className={`${style.openMain__flexBox__popUp__header__popUppage}`}>
+                                   {/* <div className={style.openMain__flexBox__popUp__header__circle} onClick={handleClosed}>
+                                       <div className={style.openMain__flexBox__popUp__header__circle__container} >
+                                           <IoCloseOutline/>   
+                                       </div>
+                                   </div> */}
+                                 <ClosedButton onClick={handleClosed}>
+                                <IoCloseOutline></IoCloseOutline>
+                            </ClosedButton>
+                                   <div className={style.openMain__flexBox__popUp__header__logo}>
+                                   </div>
+                                   <div className={style.openMain__flexBox__popUp__header__nothing}>
+
+                                   </div>
+                            </div>
+                            <div className={style.openMain__flexBox__popUp__category_delete}>
+                            <div className={style.openMain__flexBox__popUp__category_delete__p}>
+                           <h1>{`정말로 ${openAndType.value}을 `}
+                           삭제하시겠습니까?</h1>
+                           <p>카테고리에 포함되어 있는 일정은 기본 카테고리와 병합되며 
+                           <br/>이후로는 되돌릴 수 없습니다.</p>
+                           </div>
+                           <Button background_color={'b-red'} color={'white'} handleClick={handleDeleteTodo}>Delete</Button>
+                           {/* <button onClick={handleDeleteTodo}>delete</button> */}
+                          </div>
+                          </div>
+                          :
+                          (openAndType.type === 'categoryAddPopup' ?
+                          <div className={style.openMain__flexBox__popUp__NewTodos_body}>
+                                <div className={`${style.openMain__flexBox__popUp__header__popUppage}`}>
+                                  {/* <div className={style.openMain__flexBox__popUp__header__circle} onClick={handleClosed}>
+                                      <div className={style.openMain__flexBox__popUp__header__circle__container} >
+                                          <IoCloseOutline/>   
+                                      </div>
+                                  </div> */}
+                                <ClosedButton onClick={handleClosed}>
+                               <IoCloseOutline></IoCloseOutline>
+                           </ClosedButton>
+                                  <div className={style.openMain__flexBox__popUp__header__logo}>
+                                  </div>
+                                  <div className={style.openMain__flexBox__popUp__header__nothing}>
+
+                                  </div>
+                           </div>
+                                <ColorSelector isAddOrEdit={'add'} independantPopup={true}></ColorSelector>
+                         </div>
+                         :
                             null
+                            )
                             )
                             )
                             )
@@ -492,6 +554,8 @@ function FlexBox({popupValue,typeOfImg,sendTargetReply,userInfo,openAndType,dele
                             )
                             )
                             )
+                            
+                                       
                             }
 
                         </div>

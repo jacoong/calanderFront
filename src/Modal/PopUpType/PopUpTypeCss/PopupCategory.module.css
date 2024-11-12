@@ -1,0 +1,60 @@
+
+
+.LabelPopUpContainer{
+    z-index: 100;
+    margin-top: 1rem;
+    height: auto;
+    max-height: 0;
+    position:relative;
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    animation: popupAppear 0.2s forwards;
+    flex-wrap: wrap;
+}
+
+@keyframes popupAppear {
+    0% {
+        max-height: 0;
+    }
+    100% {
+        max-height: 100%;
+    }
+  }
+
+
+
+  .LabelPopUpContainer__bar{
+    display: flex;
+    flex: 1 1 calc(20%);
+    align-items: center;
+    padding:1rem 0rem ;
+    transition: 0.3s background-color ease-in-out ;
+    font-weight: 700;
+    box-sizing: border-box;
+    cursor:pointer;
+    justify-content: center;
+    max-width: 60px;
+    
+}
+
+.LabelPopUpContainer__bar__label{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+
+.LabelPopUpContainer__bar p{
+    text-decoration: none;
+    color:black;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.LabelPopUpContainer__bar:hover{
+    background-color: #EAEAEA;
+}

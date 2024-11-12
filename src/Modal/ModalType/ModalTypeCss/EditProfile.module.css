@@ -1,0 +1,66 @@
+/* ModalLayer.module.css */
+.container {
+  width: 100%;
+  margin: 0.75rem 0; /* Tailwind's my-3 */
+}
+
+.form {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.imageContainer {
+  width: 9rem; /* Tailwind's w-36 */
+  height: 9rem; /* Tailwind's h-36 */
+}
+
+.label {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px; /* Tailwind's rounded-full */
+  border: 1px solid #d1d5db; /* Tailwind's border-customGray */
+}
+
+.icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: all 0.5s; /* Tailwind's transition duration-500 */
+}
+
+.iconDark {
+  color: #a3a3a3; /* Tailwind's text-customgray */
+}
+
+.iconLight {
+  color: #d1d5db; /* Tailwind's text-customGray */
+}
+
+.iconHover {
+  color: #3b82f6; /* Tailwind's hover:text-customBlue */
+}
+
+.button {
+  width: 100%;
+  color: white;
+}
+
+.buttonDisabled {
+  background-color: #9ca3af; /* Tailwind's bg-gary */
+  cursor: not-allowed;
+}

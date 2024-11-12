@@ -1,0 +1,19 @@
+.openMain__flexBox__popUp__category_delete{
+    align-items: center;
+    width: 350px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.openMain__flexBox__popUp__category_delete__p{
+}
+
+.openMain__flexBox__popUp__category_delete__p h1{
+    margin-bottom: 10px;
+}
+
+.openMain__flexBox__popUp__category_delete__p p{
+    color: red;
+}

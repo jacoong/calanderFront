@@ -1,0 +1,32 @@
+.openMain__flexBox__popUp__header__circle{
+    /* min-width: 56px; */
+    min-height: 32px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    /* z-index:100; */
+    margin-left: 0.5rem;
+}
+
+.openMain__flexBox__popUp__header__circle__container{
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease-in-out;
+}
+
+
+
+.openMain__flexBox__popUp__header__circle svg{
+    font-size: 25px;
+}
+
+
+
+.openMain__flexBox__popUp__header__circle__container:hover{
+background-color: #E7E7E8;
+cursor: pointer;
+}

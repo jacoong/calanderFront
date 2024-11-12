@@ -13,26 +13,10 @@ interface TypeOfFunction {
 }
 
 
-const popupWidth = 500;
-const popupHeight = 700;
-
-const popupX = (window.screen.width / 2) - (popupWidth / 2);
-// 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
-
-const popupY= (window.screen.height / 2) - (popupHeight / 2);
-
 function JoinForm({handleMakeAcount,handleLogin,handleClosed}:TypeOfFunction) {
 
 
 
-    const handleClick = () =>{
-        console.log('not yeT!')
-    }
-
-    const handleSignUpGoogleClick = () =>{
-        window.location.href = 'http://43.202.57.92/oauth2/authorization/google'
-        
-    } 
 
 return(
             <>

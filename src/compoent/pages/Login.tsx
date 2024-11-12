@@ -2,26 +2,22 @@ import {TodosContext} from '../../store/todo_context'
 import {useContext,useEffect,useState,useRef} from 'react';
 import { useNavigate,useLocation } from 'react-router-dom'; // If yo
 import style from './css/Login.module.css';
-import {useSendIdPwInfo} from '../customHook'
+import {useSendIdPwInfo} from '../../hook/customHook'
 import Button from '../compoentItem/Button';
 import {emailValidator,passwordValidator,prepasswordValidator,confirmPasswordValidator,encodedCheckCodeValidator} from '../validator'
 import FlashMessage from '../compoentItem/FlashMessage';
 import axios from 'axios'
 import { refreshAxios, instance,addResponseInterceptor,addAccessTokenInterceptor,addAccessResponseIntoCookie } from '../../store/axios_context';
-import { TypeOfLoginValue } from '../compoentItem/FlexBox';
+// import { TypeOfLoginValue } from '../compoentItem/ModalCompeont';
 import {setCookie,getCookie,removeCookie} from '../../store/coockie'
 // import cookie from 'react-cookies';
 
 type LoginPropsType = {
   nextPopUpPage?:()=>void;
   requestType:'login' | 'register' | 'recreatePassword' | 'updatePassword' | 'encodedCheckCode';
-  savedUserLoginInfo?: (setEmailPasswordValue:TypeOfLoginValue)=> void;
-  valueOfUserLoginInfo?:TypeOfLoginValue;
+  savedUserLoginInfo?: (setEmailPasswordValue:any)=> void;
+  valueOfUserLoginInfo?:any;
 }
-
-
-
-
 
 type RequestTypeOnly = LoginPropsType['requestType'];
 
@@ -34,12 +30,6 @@ function Login({nextPopUpPage,requestType,savedUserLoginInfo,valueOfUserLoginInf
           message: string
         }
 
-
-        // const savedencodedCheckCode:any = localStorage.getItem('userDataKey');
-        // localStorage.clear();
-        // localStorage.setItem('userDataKey', );
-        // const passwordRef = useRef<HTMLInputElement>(null);
-        // const emailRef = useRef<HTMLInputElement>(null);
         const passwordConfirmRef = useRef<HTMLInputElement>(null)
         const prepasswordRef = useRef<HTMLInputElement>(null);
         const encodedCheckCodeRef = useRef<HTMLInputElement>(null);
@@ -157,8 +147,8 @@ function Login({nextPopUpPage,requestType,savedUserLoginInfo,valueOfUserLoginInf
             const emailValue = emailRef.current!.value;
             const passwordValue = passwordRef.current!.value;
 
-            instance.post(`${todoCtx.serverUrl}/api/auth/send/check/emailCode/${emailValue}`,
-            {email:emailValue})
+            axios.post(`${todoCtx.serverUrl}/api/auth/send/check/emailCode/${emailValue}`,
+            {email:emailValue},)
             .then(res => {
               if(res.status===200){
                 const encodedCheckCode:string = res.data.body.encodedCheckCode;
@@ -213,99 +203,21 @@ function Login({nextPopUpPage,requestType,savedUserLoginInfo,valueOfUserLoginInf
             }
           }
         }
-
-
-      // const addAccessTokenInterceptor = (accessToken: string) => {
-      //   console.log('인터셉터')
-      //   instance.interceptors.request.use(
-      //     (config) => {
-      //       config.headers.Authorization = `Bearer ${accessToken}`;
-      //       return config;
-      //     },
-      //     (error) => {
-      //       return Promise.reject(error);
-      //     }
-      //   );
-      // };
-
-      // const addResponseInterceptor = () => {
-      //   instance.interceptors.response.use(
-      //     (response) => {
-      //       return response;
-      //     },
-      //     async (error) => {
-      //       if (error.response.status === 401) {
-      //       removeCookie('accessToken');
-      //       console.log('ㅈㅈㅈㅈ')
-      //       const originalRequest = error.config;
-   
-      //         console.log('ㅌㅌㅌㅌㅌㅌㅌ')
-      //           await fetchNewAccessToken(originalRequest);
-      //           return axios(originalRequest);
-
-      //     }
-      //     else{
-      //         console.error(error)
-      //     }
-      //   }
-      //   );
-      // };
-      
-
-
-
-      // const fetchNewAccessToken = async (originalRequest:any) => {
-      //   console.log('fetchNewAccessToken111');
-
-
-      //     const refreshToken = getCookie('refreshToken')
-      //     console.log(refreshToken)
-      //     if(refreshToken){
-      //       const res = await axios.post(`${todoCtx.serverUrl}/api/auth/recreate/accessToken`,{}, {
-      //         headers:{
-      //           Authorization:`Bearer ${refreshToken}`,
-      //           withCredentials: true
-      //         }
-      //     })
-      //     if (res.status === 200) {
-      //       console.log('fetcsqsqken')
-      //       const accessToken = res.data.body.replace("Bearer ", "");;  // should change depend on adress
-      //       console.log(accessToken,'ㄴㄷㄹㄷㄴㄹㄴㄷㄹㄴㄷㄹㄴㄷ')
-      //       const validateTime = 'sefescds';  // should change depend on adress
-      //       addAccessTokenInterceptor(accessToken);
-      //       addResponseInterceptor();
-      //       addAccessResponseIntoCookie({accessToken,refreshToken,validateTime});
-      //       return axios(originalRequest);
-      //     }
-      //     else if(res.status === 301){
-      //       removeCookie('refreshToken');
-      //       const currentURL = location.pathname;
-      //       todoCtx.unAuthenticateUser(currentURL);
-      //     }
-      //   else{
-      //     throw { code: 500, message: 'Unexpected Message' };
-      //   }
-      //   }
-      //   };
-
-
-
-
       const LoginLogic = (emailValue:string,passwordValue:string)=>{
-        console.log('why?')
+        console.log('LoginLogic?')
         instance.post(`${todoCtx.serverUrl}/api/auth/login`,
         {email:emailValue,password:passwordValue})
         .then(res => {
           if(res.status===200){
             const getReferer = window.location.hostname;
-            instance.defaults.headers.common['Refererss'] = '43.202.57.92';
+            instance.defaults.headers.common['Refererss'] = '15.164.214.114';
             const accessToken = res.data.body.accessToken.replace("Bearer ", "");  // should change depend on adress
             const refreshToken = res.data.body.refreshToken.replace("Bearer ", "");  // should change depend on adress
             const validateTime = res.data.body.validateTime;  // should change depend on adress
             console.log('같아야지',accessToken,'ㅇㅇ',refreshToken)
             addAccessResponseIntoCookie({accessToken,refreshToken,validateTime});
-            // addAccessTokenInterceptor(accessToken);
-            // addResponseInterceptor();
+            addAccessTokenInterceptor(accessToken);
+            addResponseInterceptor();
 
 
             const previousUrl = localStorage.getItem('previousUrl');
@@ -342,12 +254,7 @@ function Login({nextPopUpPage,requestType,savedUserLoginInfo,valueOfUserLoginInf
 
 
           return (
-
-           
-
               <div className={style.loginbox}>
-
-
 
                   {requestType ===  'recreatePassword'? 
                         

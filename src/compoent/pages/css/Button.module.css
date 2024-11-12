@@ -1,16 +1,17 @@
 .button{
     width:17rem;
-    background-color: rgb(29,155,240,1);
+    /* background-color: rgb(29,155,240,1); */
     color: white;
     border: solid #dadce0 0.5px;
-    padding: 14px 0; /* 좌우 패딩값 조정 */
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px; /* border-radius 값 조정 */
     cursor: pointer;
     font-weight:bold; 
+    transition: background-color 0.5s ease-in-out;
 }
+
 
 .button:focus{
     background-color: #d2e3fc;
@@ -37,6 +38,10 @@ font-weight: bolder;
     color:rgb(29,155,240,1);
 }
 
+.b-darkGary{
+    background-color: #86898C;
+    transition: background-color 0.3s ease-in-out;
+}
 
 .b-blue{
  background-color: rgb(29,155,240,1);
@@ -66,7 +71,7 @@ font-weight: bolder;
 }
 
 
-.b-gary{
+.b-gray{
     background-color: gray ;
     transition: background-color 0.3s ease-in-out;
     cursor: default;
@@ -93,6 +98,16 @@ font-weight: bolder;
 }
 
 
+.b-kakao{
+    background-color: #FAE100;
+    transition: background-color 0.3s ease-in-out;
+   }
+
+.b-naver{
+background-color: #04CD5C;
+transition: background-color 0.3s ease-in-out;
+}
+
 .small{
     width: 4.5rem;
     padding:7px 0px;
@@ -108,3 +123,6 @@ font-weight: bolder;
 
 
 
+.button:disabled{
+    cursor: default;
+}

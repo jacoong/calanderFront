@@ -1,0 +1,104 @@
+.colorSelectorContainer {
+    right: -280px;
+    bottom:-250px;
+    position: absolute;
+    z-index:100;
+    display: flex;
+    flex-wrap: wrap;
+    width: 246px;
+    margin: auto;
+    z-index: 100;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    border-radius: 15px;
+    padding: 15px;
+  }
+
+.independantPopupContainer{
+  width:400px;
+}
+
+  .colorSelectorContainer__input{
+    font-size: 16px;
+    border: 0;
+    display: block;
+    width: 100%;
+    height: 32px;
+    margin-bottom: 1em;
+    box-sizing: border-box;
+    transition: .1s;
+    background-color: #F1F3F4;
+    padding: 10px;
+    outline: none;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .colorSelectorContainer__input.invalid{
+    border-bottom: 1px solid #FF0002;
+  }
+
+
+  .colorSelectorContainer__input.success{
+    border-bottom: 1px solid #1B9BF0;
+  }
+
+
+  .colorSeletorField{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .colorItem {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  
+  .colorItem:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .colorSelectorContainer__button{
+    padding-top: 10px;
+    width: 100%;
+    display:flex;
+    justify-content: end;
+  }
+
+
+  .selectedColorContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .selectedColorCircle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: 10px;
+  }
+
+
+  .messageBox {
+    width: auto;
+    background-color: #F1F3F4;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    height: 14px;
+  }
+  
+  .errorMessage {
+    color: #FF0002;
+    font-size: 14px;
+  }
+  
+  .successMessage {
+    color: #1B9BF0;
+    font-size: 14px;
+  }

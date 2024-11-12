@@ -45,7 +45,7 @@ const FlashMessage = ({handleOnclick}:aaaaa) => {
         ?
         <div className={style.container}>
             <div className={style.container__msgBox}>
-            <p>{todoCtx.RsgLogMsg}</p>
+            {/* <p>{todoCtx.RsgLogMsg}</p> */}
             </div>
         </div>
         :

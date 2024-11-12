@@ -1,0 +1,42 @@
+.container {
+    width:auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0.25rem 0.25rem 0 0.5rem; /* Tailwind's px-1 pt-2 */
+    background-color: white; /* Tailwind's bg-white */
+  }
+  
+  .bgDark {
+    background-color: #1f2937; /* Tailwind's bg-hovercustomBlack */
+  }
+  
+  .bgLight {
+    background-color: white; /* Tailwind's bg-white */
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box; /* Tailwind's box-border */
+  }
+  
+  .placeholder {
+    width: 2rem; /* Tailwind's w-8 */
+  }
+  
+  .content {
+    padding: 0.75rem; /* Tailwind's p-3 */
+  }
+  
+  .centerMessage {
+    text-align: center;
+  }
+  
+
+  .renderButtons{
+    display: flex;
+    justify-content: space-between;
+  }

@@ -5,10 +5,8 @@
 
 .NewTodos__body{
     width: 100%;
-    box-sizing: border-box;
-    padding: 15px;
-    min-width: 400px;
     display: flex;
+    min-height: 50px;
 }
 
 .NewTodos__body__container{
@@ -41,23 +39,29 @@
 }
 
 .NewTodos__body__main_container__detail{
-    line-height: 1.2;
+    line-height: 1.4;
 }
 .NewTodos__body__main_container__detail textarea{
     width: 100%;
-    height: 7rem;
     overflow: hidden;
-    padding: 2px 0;
-    font-size: 23px;
+    padding: 10px 0;
+    font-size: 20px;
     border: none;
     border-bottom: 0.5px solid #EFF3F4;
     outline: none;
     resize: none;
+    transition: border-bottom 0.5s ease-in-out;
+}
+
+
+.NewTodos__body__main_container__detail textarea:focus{
+    border-bottom: 2px solid #2196F3;
+    background-color: antiquewhite;
 }
 
 .NewTodos__body__main_container__detail textarea::placeholder{
     font-weight: 400;
-    font-size: 23px;
+    font-size: 20px;
 }
 
 

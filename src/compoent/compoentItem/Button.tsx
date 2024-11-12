@@ -3,6 +3,9 @@ import style from '../pages/css/Button.module.css'
 type ButtonType = {
     Background_color?:string;
     width?:string;
+    margin?:string;
+    height?:string;
+    padding?:string;
     bolder?:string;
     color?:string;
     borderRadius?:string;
@@ -14,12 +17,15 @@ type ButtonType = {
 };
 
 
-const Button =({bolder='thin', borderRadius='24px', type,background_color='b-blue',width='300px',color="black",handleClick,disabled= false,children}:ButtonType) => {
+const Button =({margin,bolder='thin', padding='14px',borderRadius='24px', type,background_color='b-blue',width='300px',color="black",handleClick,disabled= false,children}:ButtonType) => {
 
     const buttonStyle={
+        padding:padding,
         width:width,
         borderRadius:borderRadius,
-        color:color
+        color:color,
+        margin:margin
+        
     }
 
 return (

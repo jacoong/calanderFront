@@ -1,0 +1,67 @@
+.copyLink {
+    height: 36px;
+    width: 300px;
+    display: flex;
+    max-width: 250px;
+  }
+  
+  .copyLinkInput {
+    margin-right: 6px;
+    flex-grow: 1;
+    padding: 0 8px;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+  }
+  
+  .copyLinkInput:focus {
+    outline-color: rgb(29, 155, 240, 1);
+  }
+  
+
+  .copyLinkButton{
+    position: relative;
+  }
+  .copyLinkButton__button {
+    border-radius: 6px;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: #333333;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .copyLinkButton__button:hover {
+    background-color: #E7E7E8;
+  }
+
+  .copyLinkButton__button svg{
+    font-size: 23px;
+  }
+
+  .copyLinkButton__message{
+    position: absolute;
+    background-color: #111826;
+    right: 0;
+    padding: 0 8px;
+    height: 36px;
+    bottom: 40px;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    width: auto;
+    white-space: nowrap;
+  }
+
+
+  .copyLinkButton__message p{
+    color:white;
+    font-size: 15px;
+  }

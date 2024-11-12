@@ -1,0 +1,92 @@
+.calendarBody{
+    position: relative;
+    width:100%;
+    display:flex;
+    justify-Content:center;
+}
+
+
+.calendarBody__paragraph{
+    position:relative;
+
+}
+
+.calendarBody__dateContainer{
+    position:absolute;
+    width:100%;
+    height:100%;
+    display: flex;
+    align-items: center;
+}
+
+.calendarBody__dateContainer__left{
+    position:absolute;
+    width:30px;
+    height: 26.19px;
+    left:0;
+}
+
+.calendarBody__dateContainer__right{
+    position:absolute;
+    width:30px;
+    height: 26.19px;
+    right:0;
+}
+
+
+.calendarBody__dateContainer__left.start{
+    border-radius: 50%;
+}
+
+.calendarBody__dateContainer__right.end{
+    border-radius: 50%;
+}
+
+.calendarBody__dateContainer__left.marked{
+    background-color: lightblue;
+}
+
+.calendarBody__dateContainer__right.marked{
+    background-color: lightblue;
+}
+
+
+
+.formBody{
+    min-width:200px;
+}
+
+.formBody__title{
+    font-size:25px;
+}
+
+.formBody__formGroup{
+    padding:1rem;
+}
+
+.formBody__formGroup__belowContainer{
+    width:90%;
+    margin:0 auto;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.formBody__formGroup__belowContainer__intervalColor{
+    background-color: lightblue;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.formBody__formGroup__belowContainer__intervalExplaintion{
+    text-align: center;
+}
+
+.formBody__formGroup__belowContainer__intervalExplaintion p{
+    font-size: 8px;
+}
+
+.buttom__container{
+    width:100%;
+}

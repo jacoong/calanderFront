@@ -1,0 +1,31 @@
+.timePicker {
+  font-family: Arial, sans-serif;
+  display: flex;
+  position: relative;
+  height: 50px;
+  align-items: center;
+}
+
+.select {
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  max-height: 200px; /* 최대 높이 추가 */
+}
+
+.select:hover {
+  border-color: #999;
+}
+
+.select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.dash {
+  padding: 0 10px;
+  align-self: center;
+}

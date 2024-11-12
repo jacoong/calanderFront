@@ -11,7 +11,7 @@ const SocialKakao = ()=>
     }
     return(
     <>
-        <Button handleClick={handleLogin} background_color={'b-white'} color={'black'}>Join with kakao</Button>
+        <Button handleClick={handleLogin} background_color={'b-kakao'} color={'black'}>Join with kakao</Button>
     </>
     )
 }

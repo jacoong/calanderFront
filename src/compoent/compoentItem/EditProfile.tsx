@@ -1,17 +1,17 @@
 import style from '../pages/css/FlexBox.module.css';
 import { TbCameraUp } from "react-icons/tb";
-import {typeOfSendTargetReply} from './FlexBox';
+// import {typeOfSendTargetReply} from './ModalCompeont';
 import { useRef,useContext,useState, useEffect } from 'react';
 import {TodosContext} from '../../store/todo_context'
 
 interface typeOfEditProfile {
-    sendTargetReply:typeOfSendTargetReply;
+    // sendTargetReply:typeOfSendTargetReply;
     onFileChange: (files:(string |File| null)[]) => void; 
   }
 
 
 
-function EditProfile({sendTargetReply,onFileChange}:typeOfEditProfile) {
+function EditProfile({onFileChange}:typeOfEditProfile) {
 
     const todoCtx = useContext(TodosContext);
 
@@ -104,17 +104,17 @@ function EditProfile({sendTargetReply,onFileChange}:typeOfEditProfile) {
           //     });
           // }
 
-          useEffect(()=>{
-            if(todoCtx.userInfo){
-                const userInfo = todoCtx.userInfo.userInfo;
-                console.log(todoCtx.userInfo);
-                const profileImgUrl = userInfo.profileImg ? `https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/public/profileImg/${userInfo.profileImg}` : '';
-                const backgroundImgUrl = userInfo.backgroundImg ? `https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/public/backgroundImg/${userInfo.backgroundImg}` : '';
-                setPreviewImages([backgroundImgUrl, profileImgUrl]);
-            }else{
-              return
-            }
-          },[todoCtx.userInfo])
+          // useEffect(()=>{
+          //   if(todoCtx.userInfo){
+          //       const userInfo = todoCtx.userInfo.userInfo;
+          //       console.log(todoCtx.userInfo);
+          //       const profileImgUrl = userInfo.profileImg ? `https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/public/profileImg/${userInfo.profileImg}` : '';
+          //       const backgroundImgUrl = userInfo.backgroundImg ? `https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/public/backgroundImg/${userInfo.backgroundImg}` : '';
+          //       setPreviewImages([backgroundImgUrl, profileImgUrl]);
+          //   }else{
+          //     return
+          //   }
+          // },[todoCtx.userInfo])
 
   return (
     <>

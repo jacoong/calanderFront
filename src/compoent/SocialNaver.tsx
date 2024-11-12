@@ -22,7 +22,7 @@ const SocialNaver = ()=>
 
     return(
     <>
-        <Button handleClick={handleLogin} background_color={'b-white'} color={'black'}>Join with Naver</Button>
+        <Button handleClick={handleLogin} background_color={'b-naver'} color={'black'}>Join with Naver</Button>
     </>
     )
 }

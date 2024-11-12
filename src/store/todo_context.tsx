@@ -1,10 +1,8 @@
 import React, { ReactNode,useState,createContext } from 'react';
 import axios, { AxiosResponse }  from "axios";
-import Todo from '../model/Todo';
 import {useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
-import {typeOfSendTargetReply} from '../compoent/compoentItem/FlexBox'
-
+import {CalendarContextType} from './types'
 
 
 export interface UserType {
@@ -17,50 +15,26 @@ export interface UserType {
 }
 
 
-// type typeUserInfo = {
-//     _id: string,
-//     email: string,
-//     password: string,
-//     username: null|string,
-//     __v: number
-// }
-
-interface typeCommentInfo {
-  author:string;
-  content:string;
-  profileImg:string;
-  writer:string;
-  parentId?:string;
-  _id:string;
-  comments?:string[];
-  replies?:string[];
-}
+type ViewType = CalendarContextType['viewType'];
 
 export interface typeAction {
-  isOpen:boolean;
+  isOpen?:any;
   type:string|null;
-  DeleteFunction?():void;
-  value?:typeOfSendTargetReply;
-  popupValue?:any;//need to change
+  value?:any;
 }
 
 type TodosContextObj = {
-  items: Todo[];
-  ReplyList:any[];
-  addTodo: (text: string,parentId?:string,commentId?:string) => void;
-  RegisterOrLogin: (type:string,user:UserType) => void;
-  deleteTodo: (commentId:string,parentId?:string) => void;
   handleLogOut: () => void;
+  handleAuthenticationUpdate:(role:string,numberOfArray:string)=> any;
   ErrorMsg:any;
   unAuthenticateUser: (referer:string) => any;
-  userInfo:any;
-  RsgLogMsg:string;
-  sendFlexbox: (data:typeAction) => void;
-  openAndType:typeAction;
-  editTodo:(data:typeOfSendTargetReply,updatedEdit:string) =>void;
-  getUpdatedApi:(usename:string|undefined) => Promise<AxiosResponse>;
-  reLoadUserInfo:()=>void;
+  sendFlexbox: (data:any) => void;
+  openAndType:any;
   serverUrl:string;
+  callCalendarDataApi:()=>void;
+  onSelectDay:(date: Date, type:ViewType) => void;
+  selectedDate: Date | null;
+  updateViewType:(viewType:ViewType)=>void;
 };
 
 const initialUserInfo = {
@@ -74,22 +48,17 @@ const initialUserInfo = {
 
 export const TodosContext = createContext<TodosContextObj>(
     {
-        items:[],
-        ReplyList:[],
-        addTodo: ()=>{},
-        RegisterOrLogin: ()=>{},
-        deleteTodo: ()=>{},
+      handleAuthenticationUpdate:()=>{},
         handleLogOut: ()=>{},
         ErrorMsg:{},
         unAuthenticateUser:() => {},
-        userInfo:initialUserInfo,
-        RsgLogMsg:'',
         sendFlexbox: () => {},
-        openAndType:  {isOpen:false,type:null},
-        editTodo:()=>{},
-        getUpdatedApi: () => new Promise((resolve, reject) => {}),
-        reLoadUserInfo:()=>{},
-        serverUrl:''
+        openAndType:  {type:null,value:null},
+        serverUrl:'',
+        callCalendarDataApi:()=>{},
+        onSelectDay: ()=>{},
+        selectedDate: null,
+        updateViewType:()=>{}
     }
 )
 
@@ -99,12 +68,12 @@ export const TodosContext = createContext<TodosContextObj>(
 const TodosContextProvider = ({ children }: {children: ReactNode}) => {
 
   const SERVERURL = process.env.REACT_APP_SERVER_URL as string;
-  const [TodosLists,setTodos] = useState<Todo[]>([]);
-  const [ReplyList,setReplyList] = useState<typeCommentInfo[]>([]); //should touch
-  const [userInfo,setUserInfo] = useState(null)
   const [ErrorMsg,setErrorMsg] = useState<any>()
+  const [AuthenticationUpdate,setAuthenticationUpdate] = useState<any>()
   const [RsgLogMsg,setRsgLogMsg] = useState<string>('')
-  const [openAndType,setOpenAndType] = useState<typeAction>({isOpen:false,type:null});
+  const [openAndType,setOpenAndType] = useState<any>({type:null,value:null});
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
 
   const navigate = useNavigate();
 
@@ -113,40 +82,11 @@ const TodosContextProvider = ({ children }: {children: ReactNode}) => {
   //   reLoadUserInfo();
   // },[]);
 
-  const reLoadUserInfo =async()=>{
-    console.log('reLoadUserInfo 실행');
-    const savedData:any = localStorage.getItem('userDataKey');
-    if (savedData && savedData !== 'undefined') {
-      const userId = JSON.parse(savedData);
-      const loadUserInfo = async () => {
-        try {
-          const userData = await callUserApi(userId);
-          console.log('wpqkf',userData);
-          setUserInfo(userData);
-        } catch (error) {
-          // Handle error here
-        }
-      };
-      loadUserInfo();
-    }else{
-      await getSessionInfo();
-    }
-  }
 
 
-  const  getSessionInfo =async()=>{
-    const res = await axios.get(`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/user/getSession/userinfo` ,{ withCredentials: true })
-    if(res.status === 201){
-      const userInfo = res.data.userInfo;
-      setUserInfo(userInfo);
-      localStorage.setItem('userDataKey', JSON.stringify(userInfo._id));
-        navigate('/main');}
-    else if(res.status === 200){
-      return console.log('no session data of user')
-    }else{
-      alert('error when getSessionInfo function');
-    }
-  }
+
+
+
 
 
   useEffect(()=>{
@@ -155,7 +95,7 @@ const TodosContextProvider = ({ children }: {children: ReactNode}) => {
     }, 3000);
   },[RsgLogMsg])
 
-  const sendFlexbox = async (typeOfpopUp:typeAction) => {
+  const sendFlexbox = async (typeOfpopUp:any) => {
     console.log('sendFlexbox executed')
     setOpenAndType(typeOfpopUp);
   };
@@ -164,147 +104,65 @@ const TodosContextProvider = ({ children }: {children: ReactNode}) => {
     console.log('unAuthenticateUser executed');
     localStorage.setItem('previousUrl', previousUrl);
     navigate('/');
-    sendFlexbox({isOpen:true,type:'Login'})
+    sendFlexbox({type:'Login',value:null})
   };
 
-  const getCommentInfo = async(Id:string,skip?:number,commentId?:string) => {
 
-    try {
-      console.log('please!!',Id ,skip, commentId)
-        let Result
-          if(commentId){
-            Result = commentId;
-          } else{
-            Result = Id;
-          }
-    const res = await axios.get(`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/api/main/reply/${Result}/${skip}` ,{ withCredentials: true })
-    if(res.status === 200){
-        const userInfo = res.data;
-        console.log('peterLetgo',userInfo.data);
-        const data = userInfo.data;
-        const type = userInfo.type;
 
-        if(type==='comment'){
-          const replyInfo = data.comments;
-          console.log(replyInfo,'오마에와')
-          if(skip){
-            return setReplyList(preArray => [...preArray,...replyInfo]);
-          }else{
-          return setReplyList(replyInfo);
-        }
-        }
-        else if(type==='reply'){
-          const replyInfo = data.replies;
-          console.log('replyInfo')
-          if(skip){
-          return setReplyList(preArray => [...preArray,...replyInfo]);
-        }else{
-          return setReplyList(replyInfo);
-        }
-        }
+  const callCalendarDataApi = async () => {
+    console.log('callCalendarDataApi Run')
+  };
 
-    }else{
-        alert('error while processing getCommentInfo')
+
+  const isSameDay = (date1: Date, date2: Date) => {
+    return (
+      date1.getFullYear() === date2.getFullYear() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getDate() === date2.getDate()
+    );
+  };
+
+
+  const onSelectDay = (date: Date, type:ViewType) => {
+    // setSelectedDate(date)
+    if(isSameDay(date, new Date())){
+          const viewTypeValue = `/${type}`;
+          navigate(`/main${viewTypeValue}`)
+        return
     }
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1; // getMonth() returns 0-11, so add 1
+      const day = date.getDate();
+      const dateSegment = `/main/${type}/${year}/${month}/${day}`;
+      // const newUrl = window.location.pathname.replace(/\/(day|week|month)\/\d{4}\/\d{1,2}\/\d{1,2}/, '') + dateSegment;
+    //  window.history.pushState({ path: newUrl }, '', newUrl);
+    navigate(dateSegment)
+     return
 
-    }catch(err){
-        console.log(err)
-    }
-
-}
-
-  const callCommentApi = async (skip?:number) => {
-    console.log(`comment callApi executed/${skip}`)
-    // setTimeout(async () => {
-    return axios.get(`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/api/main/${skip}`)
-    .then((res) => {
-      if(res){
-        console.log('check1',res.data); //[....]
-        const infoarray:Todo[]= res.data;
-        if(skip){
-          return setTodos(preArray => [...preArray,...infoarray].map((item:Todo) => new Todo(item._id)));
-        }else{
-          return setTodos(infoarray.map((item:Todo) => new Todo(item._id)));
-        }
-      }
-    })
-    .catch((err) => {
-      ErrorMessage(err.response.data);     
-    })
-  // }, 5000);
+    // else{
+    //   setViewType(type);
+    //   const year = date.getFullYear();
+    //   const month = date.getMonth() + 1; // getMonth() returns 0-11, so add 1
+    //   const day = date.getDate();
+    //   const dateSegment = `/main/${type}/${year}/${month}/${day}`;
+    //   const newUrl = window.location.pathname.replace(/\/(day|week|month)\/\d{4}\/\d{1,2}\/\d{1,2}/, '') + dateSegment;
+    //   navigate(dateSegment)
+    // }
   };
+  
+  const updateViewType = (viewType:ViewType) =>{
+    // const currentUrl = window.location.pathname;
+    // if(selectedDate === null){
+    //   const newUrl = currentUrl.replace(/\/(day|week|month)\//, `/${viewType}/`);
+    //   navigate(newUrl);
+    // }else{
+      // const newUrl = currentUrl.replace(/\/(day|week|month)\//, `/${viewType}/`);
+      // navigate(newUrl);
+    // }
+  }
 
 
 
-  const callUserApi = async (userId:string) => {
-    console.log('user callApi executed')
-
-    return axios.get(`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/user/main/${userId}`)
-    .then((res) => {
-      if(res){
-        const userData =res.data;
-        console.log('thisisis',userData.username);
-        console.log('call userApi after updated!')
-        return userData
-      }
-    })
-    .catch((err) => {
-      ErrorMessage(err.response.data);
-    })
-  };
-  const newDateforDb = async(todoText:string) =>(
-    axios.post(`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/api/main`,{
-      todoText:todoText
-    })
-    .then((res) => {
-      if(res.status===200){
-      setRsgLogMsg(res.data.message)
-      }else if(res.status===401){
-        setRsgLogMsg(res.data.message)
-        //  window.location.href = res.data.redirect; // '/'로 리다이렉트
-        
-      }
-      console.log('갈게')
-      callCommentApi()
-      .then(()=>{
-        console.log('sucess from updated data from backend')
-      })
-      .catch((err)=>{
-        console.log('error from updated data from backend',err)
-      })
-    })
-    .catch((err) => {
-      ErrorMessage(err.response.data);
-    })
-  )
-  const newReplyCommentforDb = async(todoText:string,parentId:string,commentId?:string) =>(
-    new Promise<void>((resolve,reject)=>{
-      axios.post(`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/api/main/reply`,{
-        todoText:todoText,
-        parentId:parentId,
-      })
-      .then((res) => {
-        if(res.status===200){
-        resolve();
-        setRsgLogMsg(res.data.message);
-        }else if(res.status===401){
-        reject();
-        setRsgLogMsg(res.data.message);
-        }
-        // callCommentApi();
-        getCommentInfo(parentId!,undefined,commentId)
-        .then(()=>{
-          console.log('sucess from updated data from backend')
-        })
-        .catch((err)=>{
-          console.log('error from updated data from backend',err)
-        })
-      })
-      .catch((err) => {
-        ErrorMessage(err.response.data);
-      })
-    })
-  )
   const handleLogOut = async() => (
   axios.get('https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/user/logOut')
   .then((response) => {
@@ -319,6 +177,7 @@ const TodosContextProvider = ({ children }: {children: ReactNode}) => {
   .catch((err) => {
     ErrorMessage(err.response.data);
   }))
+
   const sendRegisterUser = async(user:UserType) =>(
     axios.post(`${SERVERURL}/api/auth/signUp`,user,{ withCredentials: true })
     .then((response) => {
@@ -334,192 +193,40 @@ const TodosContextProvider = ({ children }: {children: ReactNode}) => {
       ErrorMessage(err);
     })
   )
-  const sendLoginUser = async(user:UserType) =>(
-    axios.post(`${SERVERURL}/api/auth/login`,user)
-    .then((response) => {
-      if(response.status === 200){
-        alert(response.data.message)
-        // const userInfo = response.data.userInfo
-        // localStorage.setItem('userDataKey', JSON.stringify(userInfo._id));
-        // console.log('important',userInfo);
-        // setUserInfo(userInfo);
-        //   navigate('/main');
-      }
-      // else if(response.status === 201){
-      //   return setRsgLogMsg(response.data);
-      // }
-    })
-    .catch((err) => {
-      ErrorMessage(err);
-    })
-  )
-
-  const sendRecreatePassword = async(user:UserType) =>{
-    // axios.post('https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/user/register',user)
-    // .then((response) => {
-    //   console.log('processing register data')
-    //     if(response.status === 200){
-    //       sendLoginUser(user);
-    //       console.log('successful automatic Login')
-    //     }
-    // })
-    // .catch((err) => {
-    //   ErrorMessage(err.response.data);
-    // })
-    const data = user;
-    return data
-  }
 
 
-  const deleteDateforDb = async(commentid:string,parentId?:string) =>(
-      new Promise<void>((resolve, reject)=>{
-      axios.delete(`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/api/main/${commentid}`)
-      .then((res) => {
-        if(res.status === 200){
-          const type = (res.data.type)
-          if(type){
-            resolve()
-          }else{
-            reject()
-          }
-          if(type === 'reply'){
-              getCommentInfo(parentId!,0) // id from 
-              .then(()=>{
-                return setRsgLogMsg(res.data.message);
-              })
-              .catch((err)=>{
-                console.log('failed from updated data from backend',err)
-              }
-  
-              )
-            }
-          else{
-              callCommentApi()
-              .then(()=>{
-                console.log('sucess from updated data from backend')
-              })
-              .catch((err)=>{
-                console.log('failed from updated data from backend',err)
-              })
-          }
-          return setRsgLogMsg(res.data.message);
-        }
-        else if(res.status === 401){
-          return setRsgLogMsg(res.data.message);
-        }
-      })
-      .catch((err) => {
-        ErrorMessage(err);
-      })
-    })
-  )
+
+
     const ErrorMessage = (data:object) =>{
       console.log(data)
       setErrorMsg(data)
     }
-    const editTodo = async(data:typeOfSendTargetReply,updateText:string) => {
-      new Promise<void>((resolve, reject)=>{
-        axios.patch(`https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/api/main/edit/${data.commentId}`, {updateText})
-        .then((res) => {
-          if(res.status === 200){
-            const type = (res.data.type)
-            if(type){
-              resolve()
-            }else{
-              reject()
-            }
-            if(type === 'reply'){
-                const parentId = res.data.parentId;
-                getCommentInfo(parentId!,0) // id from 
-                .then(()=>{
-                  return setRsgLogMsg(res.data.message);
-                })
-                .catch((err)=>{
-                  console.log('failed from updated data from backend',err)
-                }
-    
-                )
-              }
-            else{
-                callCommentApi()
-                .then(()=>{
-                  console.log('sucess from updated data from backend')
-                })
-                .catch((err)=>{
-                  console.log('failed from updated data from backend',err)
-                })
-            }
-            return setRsgLogMsg(res.data.message);
-          }
-          else if(res.status === 401){
-            return setRsgLogMsg(res.data.message);
-          }
-        })
-        .catch((err) => {
-          ErrorMessage(err);
-        })
-      })
-    }
-    const addHandleTodo = async(todoText:string,parentId?:string,commentId?:string) => {
-        console.log('addhandletodo');
-        if(parentId){
-          await newReplyCommentforDb(todoText,parentId,commentId)
-        }else{
-          await newDateforDb(todoText)
-        }
-    }
+   
 
-    const RegisterOrLogin = async(type:string,user:UserType) => {
-      if(type==="Register"){
-        console.log(user,'one step more')
-        await sendRegisterUser(user)
-      }else if(type ==="Login"){
-        await sendLoginUser(user)
-      }else if(type ==='RecreatePassword'){
-        await sendRecreatePassword(user)
-      }else{
-        return
-      }
-  }
+
   
-    const deleteTodo = async(commentId:string,parentId?:string) => {
-        console.log('deleteDateforDb')
-        console.log(commentId,parentId)
-        if(parentId){
-          await deleteDateforDb(commentId,parentId!)
-        }else{
-          await deleteDateforDb(commentId)
-        }
-    }
 
 
-  const getUpdatedApi = async(username:string|undefined)=>{
-    const url = `https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/user/Follow/${username}`
-    // axios.get()의 결과를 반환합니다.
-    return axios.get(url,{ withCredentials: true });
-}
 
-    useEffect(()=>{
-      console.log('TodosLists',TodosLists)
-    },[TodosLists])
+    const handleAuthenticationUpdate = (role:string,numberOfArray:string) => {
+      setAuthenticationUpdate({'role':role,'numberOfArray':numberOfArray})
+      return
+  }
+
+
 
     const contextValue: TodosContextObj = {
-        items: TodosLists,
-        ReplyList:ReplyList,
-        addTodo: addHandleTodo,
-        deleteTodo: deleteTodo,
         ErrorMsg: ErrorMsg,
-        RegisterOrLogin:RegisterOrLogin,
+        handleAuthenticationUpdate:handleAuthenticationUpdate,
         handleLogOut:handleLogOut,
         unAuthenticateUser:unAuthenticateUser,
-        userInfo:userInfo,
-        RsgLogMsg:RsgLogMsg,
         openAndType:openAndType,
         sendFlexbox:sendFlexbox,
-        editTodo:editTodo,
-        getUpdatedApi:getUpdatedApi,
-        reLoadUserInfo:reLoadUserInfo,
-        serverUrl:process.env.REACT_APP_SERVER_URL as string
+        serverUrl:process.env.REACT_APP_SERVER_URL as string,
+        callCalendarDataApi:callCalendarDataApi,
+        onSelectDay:onSelectDay,
+        selectedDate:selectedDate, 
+        updateViewType:updateViewType
       };
 
       return (

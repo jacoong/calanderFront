@@ -1,0 +1,45 @@
+.openMain__flexBox__popUp__NewTodos_body{
+    width: 400px;
+    background-color: aqua;
+    position: absolute;
+    height: auto;
+    z-index: 1;
+}
+
+.openMain__flexBox__popUp__header__popUppage{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    position: absolute;
+}
+
+
+
+.openMain__flexBox__popUp__header__title{
+    width: 100%;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.openMain__flexBox__popUp__header__logo img{
+    width: 55px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    bottom: 5px;
+}
+
+.openMain__flexBox__popUp__header__logo h1{
+    font-weight: 900;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+}
+
+
+.openMain__flexBox__popUp__header__nothing{
+    width: 45px;
+    height: 30px;
+}

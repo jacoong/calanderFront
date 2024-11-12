@@ -47,46 +47,46 @@ function Username({ handleUNsubmit }: UsernameProps) {
     }
 
 
-    const handleFileChange = (event:React.ChangeEvent<HTMLInputElement>) => {
-      // 선택된 파일 처리 로직
-      const selectedFile = event.target.files?.[0];
+    // const handleFileChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+    //   // 선택된 파일 처리 로직
+    //   const selectedFile = event.target.files?.[0];
   
-      if (selectedFile) {
-        const reader = new FileReader();
+    //   if (selectedFile) {
+    //     const reader = new FileReader();
   
-        reader.onloadend = () => {
-          // 읽기가 완료되면 img의 src 속성에 data URL을 설정
-          setPreviewImage(reader.result);
-        };
-        reader.readAsDataURL(selectedFile);
-      }
+    //     reader.onloadend = () => {
+    //       // 읽기가 완료되면 img의 src 속성에 data URL을 설정
+    //       setPreviewImage(reader.result);
+    //     };
+    //     reader.readAsDataURL(selectedFile);
+    //   }
 
-    }
+    // }
 
-    const handleUserName = async(e:React.FormEvent<HTMLFormElement>) =>{
-        e.preventDefault();        
+    // const handleUserName = async(e:React.FormEvent<HTMLFormElement>) =>{
+    //     e.preventDefault();        
 
-        let usernameRefValue = usernameRef.current!.value;
-        const file = fileRef.current?.files?.[0];
-        const formData = new FormData();
-        const userId = JSON.parse(savedData);
+    //     let usernameRefValue = usernameRef.current!.value;
+    //     const file = fileRef.current?.files?.[0];
+    //     const formData = new FormData();
+    //     const userId = JSON.parse(savedData);
 
-        if (formData && file){
-          formData.append('profileImg', file);
-        }else{
-          formData.append('profileImg', 'default');
-        }
-          formData.append('username', usernameRefValue);
-          formData.append('id',userId)
+    //     if (formData && file){
+    //       formData.append('profileImg', file);
+    //     }else{
+    //       formData.append('profileImg', 'default');
+    //     }
+    //       formData.append('username', usernameRefValue);
+    //       formData.append('id',userId)
         
-          try{
-            axiosPost(formData)
-            usernameRefValue =  ""
-            }
-            catch{
-              navigate('/')
-            }
-        }
+    //       try{
+    //         axiosPost(formData)
+    //         usernameRefValue =  ""
+    //         }
+    //         catch{
+    //           navigate('/')
+    //         }
+    //     }
         // const userId = todoCtx.userInfo._id;
     
     const handleUsername =async(e:React.FormEvent<HTMLFormElement>)=> {
@@ -106,20 +106,20 @@ function Username({ handleUNsubmit }: UsernameProps) {
       })
     }
 
-    const axiosPost= async(data:any) =>{
-        axios.post('https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/user/register/usernameImg',data ,{ withCredentials: true })
-          .then((res) => {
-              if(res.status === 201){
-                  alert('need to use username!')
-              }else if(res.status === 200){
-                return handleUNsubmit!(res.data.result)
-              }
-          })
-          .catch((err:Error) => {
-            alert(err);
-            navigate('/')
-          });
-      }
+    // const axiosPost= async(data:any) =>{
+    //     axios.post('https://firstdatebhyunwu-3f2a47c92258.herokuapp.com/user/register/usernameImg',data ,{ withCredentials: true })
+    //       .then((res) => {
+    //           if(res.status === 201){
+    //               alert('need to use username!')
+    //           }else if(res.status === 200){
+    //             return handleUNsubmit!(res.data.result)
+    //           }
+    //       })
+    //       .catch((err:Error) => {
+    //         alert(err);
+    //         navigate('/')
+    //       });
+    //   }
 
     return(
         <>  
@@ -134,7 +134,7 @@ function Username({ handleUNsubmit }: UsernameProps) {
               {/* <form  onSubmit={(e) => handleUserName(e)} encType='multipart/form-data'> */}
               <form  onSubmit={(e) => handleUsername(e)}>
                 <div  className={style.loginbox__imageUpload}>
-                <input id='imageFile' ref={fileRef} type="file" name="myFile" onChange={handleFileChange}/>
+                <input id='imageFile' ref={fileRef} type="file" name="myFile"/>
                   <div className={style.loginbox__imageUpload__imgfield}>
                     <label htmlFor='imageFile'>
                       {previewImage ?

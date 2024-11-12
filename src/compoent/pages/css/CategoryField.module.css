@@ -1,0 +1,28 @@
+
+.categoryContainer{
+    width: 100%;
+    background-color: transparent;
+    transition: 0.3s background-color ease-in-out;
+    cursor: pointer;
+}
+
+.categoryContainer:hover{
+    background-color: #F6F6F6;
+}
+
+.categoryContainer__paddingContainer{
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.categoryContainer__paddingContainer__menuContainer{
+    display: flex;
+    justify-content: end;
+}
+
+.categoryContainer__arrow{
+
+}

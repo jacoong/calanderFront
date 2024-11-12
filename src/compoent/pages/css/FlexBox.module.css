@@ -35,12 +35,11 @@
 
 .openMain__flexBox__popUp{
     border-radius: 13px;
-    min-width: 510px;
     background-color: white;
     opacity: 1;
     display: flex;
     flex-direction: column;
-    padding: 0 20px;
+    padding: 5px 5px;
     position: relative;
     z-index: 50;
 }
@@ -80,36 +79,7 @@
     box-sizing: border-box;
 }
 
-.openMain__flexBox__popUp__header__circle{
-    min-width: 56px;
-    min-height: 32px;
-    display: flex;
-    /* justify-content: center; */
-    align-items: center;
-}
 
-.openMain__flexBox__popUp__header__circle__container{
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s ease-in-out;
-}
-
-
-
-.openMain__flexBox__popUp__header__circle svg{
-    font-size: 25px;
-}
-
-
-
-.openMain__flexBox__popUp__header__circle__container:hover{
-background-color: #E7E7E8;
-cursor: pointer;
-}
 
 .openMain__flexBox__popUp__header__title{
     width: 100%;
@@ -351,4 +321,34 @@ object-fit: cover;
 .openMain__flexBox__popUp__Login_body__container__paragraph p{
 font-size: 25px;
 margin-bottom: 10px;
+}
+
+.openMain__flexBox__popUp__header__circle{
+    display: flex;
+}
+
+.openMain__flexBox__popUp__header__circle__container svg{
+    font-size: 20px;
+    
+}
+
+.openMain__flexBox__popUp__category_delete{
+    align-items: center;
+    width: 350px;
+    height: 200px;
+    padding:10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.openMain__flexBox__popUp__category_delete__p{
+}
+
+.openMain__flexBox__popUp__category_delete__p h1{
+    margin-bottom: 10px;
+}
+
+.openMain__flexBox__popUp__category_delete__p p{
+    color: red;
 }
