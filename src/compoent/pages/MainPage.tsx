@@ -18,8 +18,8 @@ type ViewType = CalendarContextType['viewType'];
 
 
 export const fetchCategoryInfo = async ()=>{
-  return [{categoryId:1,categoryColor:"#444444",categoryName: "기본2"},{categoryId:2,categoryColor:"#0000FF",categoryName: "중요"},{categoryId:3,categoryColor:"#008000",categoryName: "운동"},{categoryId:4,categoryColor:"#800080",categoryName: "식사"},{categoryId:5,categoryColor:"#FF0000",categoryName: "공부"},{categoryId:6,categoryColor:"#FFA500",categoryName: "코딩공부"}];
- // serverConnect
+//   return [{categoryId:1,categoryColor:"#444444",categoryName: "기본2"},{categoryId:2,categoryColor:"#0000FF",categoryName: "중요"},{categoryId:3,categoryColor:"#008000",categoryName: "운동"},{categoryId:4,categoryColor:"#800080",categoryName: "식사"},{categoryId:5,categoryColor:"#FF0000",categoryName: "공부"},{categoryId:6,categoryColor:"#FFA500",categoryName: "코딩공부"}];
+//  // serverConnect
   try {
     const res = await instance.get(`${SERVERURL}/api/category/load`);
       if (res.status === 200) {
@@ -95,23 +95,16 @@ function MainPage() {
       // }
     };
     
-    // useEffect(() => {
-    //   if (year && month && day) {
-    //     const parsedDate = new Date(Number(year), Number(month) - 1, Number(day));
-    //     setDateValue(parsedDate);
-    //     getFetchEventData();
-    //   }else if(!year &&){
 
-    //   }
-    // }, [year, month, day]);
 
     function dateToRightFormatAdress(year:string|undefined,month:string|undefined,day:string|undefined) {
       // Date 객체 생성
       const date = new Date();
       // 년, 월, 일을 추출하여 원하는 형식으로 변환
+      console.log(date)
       const defaultyear = date.getFullYear();
       const defaultmonth = ('0' + (date.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 +1
-      const defaultday = ('1');
+      const defaultday = (date.getDate());
       console.log(defaultyear,defaultmonth,defaultday)
       console.log(year,month,day)
       console.log({'yearValue':year??defaultyear,'monthValue':month??defaultmonth,'dayValue':day??defaultday})
@@ -210,7 +203,7 @@ function MainPage() {
 
 
     const getFetchEventData = async()=>{
-    return // serverConnect
+    // return // serverConnect
     const {yearValue,monthValue,dayValue} = dateToRightFormatAdress(year,month,day);
 
                 try {
@@ -267,7 +260,9 @@ function MainPage() {
     },[])
 
 
-
+    useEffect(() => {
+      getFetchEventData();
+    }, [dateValue]);
 
 
 
