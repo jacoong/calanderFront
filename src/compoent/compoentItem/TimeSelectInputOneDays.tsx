@@ -19,7 +19,7 @@ const TimeSelectInputOneDays = ({start,end,handleStartEventTime,handleEndEventTi
     const [isSameDate, setIsSameDate] = useState<boolean>(true);
     
 
-
+    console.log(start,end,'aa')
 
 
 

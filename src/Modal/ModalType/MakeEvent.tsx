@@ -35,7 +35,7 @@ import useModal from "../../hook/useModal";
 import {titleValidator} from '../../compoent/validator'
 import TimeSelectInputOneDays from '../../compoent/compoentItem/TimeSelectInputOneDays';
 import { Alert } from '@mui/material';
-import {fetchedData,dataPutEvents} from '../../store/LoadedEventExample';
+import {fetchedData,dataPutEvents,formatDateToYYYYMMDDHH} from '../../store/LoadedEventExample';
 import useBackButton from '../../hook/useBackButton';
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import {useMock} from '../../hook/useMock';
@@ -549,8 +549,8 @@ const daysOfWeek: { label: string; value: string; }[] = [
 
             const EventValue = {
                 title:titleValue,
-                startTime:startTime,
-                endTime:endTime,
+                startTime:formatDateToYYYYMMDDHH(startTime),
+                endTime:formatDateToYYYYMMDDHH(endTime),
                 selectedDays:selectedDaysValue,
                 interval:recurrenceValue,
                 description:descriptionValue,
@@ -561,7 +561,7 @@ const daysOfWeek: { label: string; value: string; }[] = [
             // todoCtx.callCalendarDataApi();
       
         const createEvent = async () => {
-          console.log('createEvent executed',view) 
+          console.log('createEvent executed',EventValue) 
           // const mock = new AxiosMockAdapter(axios, { delayResponse: 1000 }); // 2초 지연 설정
           // mock.onPost(`${SERVERURL}/api/event/insert`).reply(200, {
           //   message: 'Mocked success response',
@@ -577,7 +577,7 @@ const daysOfWeek: { label: string; value: string; }[] = [
 
 
             try {
-              const res = await axios.post(`${todoCtx.serverUrl}/api/event/insert`,EventValue);
+              const res = await instance.post(`${todoCtx.serverUrl}/api/event/insert`,EventValue);
                 if (res.status === 200) {
                     alert('success')
                     createInvite(eventData);

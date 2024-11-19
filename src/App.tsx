@@ -67,7 +67,7 @@ return(
                   <Route element={<PageKit/>}>
                       <Route path="/main" element={<MainPage/>}/>
                       <Route path="/main/:viewType" element={<MainPage/>}/>
-                      <Route path="/main/:viewType?/:year/:month/:day" element={<MainPage/>}/>
+                      <Route path="/main/:viewType?/:year?/:month?/:day?" element={<MainPage/>}/>
                       {/* <Route path="/:username" element={<UserPage/>}/>
                       <Route path="/:username/status/:commentId" element={<PostPage/>}/> */}
                   </Route>

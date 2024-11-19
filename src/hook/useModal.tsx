@@ -26,11 +26,11 @@ function useModal() {
         isForce: value?.isForce ?? false, // 명시되지 않았다면 기본값 false
         potalSpot: value?.isPotal ? (value?.potalSpot || value?.typeOfPopup) : null,
         modal: {
-          width:value?.width ?? 'auto',
+          width:value?.modal?.width ?? 'auto',
           eventId:value?.modal?.eventId ?? null,
           eventTimeId:value?.modal?.eventTimeId ?? null,
           category:value?.modal?.category ?? null,
-          height:value?.height ?? 'auto',
+          height:value?.modal?.height ?? 'auto',
           isFull: value?.modal?.isFull ?? false,
           isCenterMessage:value?.modal?.isCenterMessage ?? null,
           navButtonOption: {

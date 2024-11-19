@@ -112,7 +112,6 @@ export interface ModalOptions {
 export interface ModalValue {
   isPotal: boolean;
   isForce: boolean;
-  isFull:boolean;
   modal?: ModalOptions;  // optional로 `modal`을 포함
   [key: string]: any;    // 추가 속성을 허용
 }
