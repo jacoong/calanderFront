@@ -108,14 +108,14 @@ const MakeEvent = ({value}:any) => {
   const { eventId, isSingleDate, eventTimeId, startTime, title, alarm, endTime, interval, description, isDisplayOfDay, view, categoryValue, currentCategoryValue, generatorEmail, selectedDays = [], attenderEmailDTOS = [] } = value;
 
 
-   const eventDetails = useMemo(() => {
-    return { eventId, isSingleDate, eventTimeId, startTime, title, alarm, endTime, interval, description, isDisplayOfDay, view, categoryValue, currentCategoryValue, generatorEmail, selectedDays, attenderEmailDTOS };
-  }, [
-    value.eventId, value.isSingleDate, value.eventTimeId, value.startTime, value.title, value.alarm, value.endTime, value.interval, value.description,
-    value.isDisplayOfDay, value.view, value.categoryValue, value.currentCategoryValue, value.generatorEmail, value.selectedDays, value.attenderEmailDTOS
-  ]);
+  //  const eventDetails = useMemo(() => {
+  //   return { eventId, isSingleDate, eventTimeId, startTime, title, alarm, endTime, interval, description, isDisplayOfDay, view, categoryValue, currentCategoryValue, generatorEmail, selectedDays, attenderEmailDTOS };
+  // }, [
+  //   value.eventId, value.isSingleDate, value.eventTimeId, value.startTime, value.title, value.alarm, value.endTime, value.interval, value.description,
+  //   value.isDisplayOfDay, value.view, value.categoryValue, value.currentCategoryValue, value.generatorEmail, value.selectedDays, value.attenderEmailDTOS
+  // ]);
 
-  console.log(value,eventId,eventTimeId)
+  // console.log(value,eventId,eventTimeId)
 
 
 const daysOfWeek: { label: string; value: string; }[] = [
@@ -579,12 +579,18 @@ const daysOfWeek: { label: string; value: string; }[] = [
             try {
               const res = await instance.post(`${todoCtx.serverUrl}/api/event/insert`,EventValue);
                 if (res.status === 200) {
-                    alert('success')
-                    createInvite(eventData);
+                    console.log('make Event success')
+                    const result = createInvite(eventData);
+                    if(result!==undefined){
+                      closeModal(0);
+                    }else{
+                      console.log('invite Request Error')
+                      throw Error;
+                    }
                  // todoCtx.callCalendarDataApi();
                   return
                 }else if(res.status === 401){
-                    alert('wrong')
+                  console.log('make Event failed')
                     // todoCtx.callCalendarDataApi();
                   return
                 }
